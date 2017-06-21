@@ -17,25 +17,12 @@
 
 public void ReadConfig()
 {
-	if(g_smKnifeModelIndex != null) delete g_smKnifeModelIndex;
-	g_smKnifeModelIndex = new StringMap();
 	if(g_smWeaponIndex != null) delete g_smWeaponIndex;
 	g_smWeaponIndex = new StringMap();
 	if(g_smWeaponDefIndex != null) delete g_smWeaponDefIndex;
 	g_smWeaponDefIndex = new StringMap();
 	if(g_smLanguageIndex != null) delete g_smLanguageIndex;
 	g_smLanguageIndex = new StringMap();
-	
-	g_smKnifeModelIndex.SetValue("weapon_knife_karambit", 476);
-	g_smKnifeModelIndex.SetValue("weapon_knife_m9_bayonet", 479);
-	g_smKnifeModelIndex.SetValue("weapon_bayonet", 467);
-	g_smKnifeModelIndex.SetValue("weapon_knife_survival_bowie", 488);
-	g_smKnifeModelIndex.SetValue("weapon_knife_butterfly", 491);
-	g_smKnifeModelIndex.SetValue("weapon_knife_flip", 470);
-	g_smKnifeModelIndex.SetValue("weapon_knife_push", 494);
-	g_smKnifeModelIndex.SetValue("weapon_knife_tactical", 482);
-	g_smKnifeModelIndex.SetValue("weapon_knife_falchion", 485);
-	g_smKnifeModelIndex.SetValue("weapon_knife_gut", 473);
 	
 	for (int i = 0; i < sizeof(g_WeaponClasses); i++)
 	{

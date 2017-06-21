@@ -232,9 +232,6 @@ public void SetWeaponProps(int client, int entity)
 			if(g_iEnableStatTrak == 1)
 				SetEntProp(entity, Prop_Send, "m_nFallbackStatTrak", g_iStatTrak[client][index] == 0 ? -1 : g_iKnifeStatTrakMode == 0 ? GetTotalKnifeStatTrakCount(client) : g_iStatTrakCount[client][index]);
 			SetEntProp(entity, Prop_Send, "m_iEntityQuality", 3);
-			int modelIndex;
-			g_smKnifeModelIndex.GetValue(weaponClass, modelIndex);
-			SetEntProp(entity, Prop_Send, "m_nModelIndex", modelIndex);
 		}
 		if (g_iEnableNameTag == 1 && strlen(g_NameTag[client][index]) > 0)
 			SetEntDataString(entity, FindSendPropInfo("CBaseAttributableItem", "m_szCustomName"), g_NameTag[client][index], 128);

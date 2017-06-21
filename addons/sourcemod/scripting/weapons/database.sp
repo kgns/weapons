@@ -53,7 +53,7 @@ public void T_GetPlayerDataCallback(Database database, DBResultSet results, cons
 		{
 			if(results.FetchRow())
 			{
-				for(int i = 3, j = 0; j < sizeof(g_WeaponClasses); i += 5, j++) 
+				for(int i = 2, j = 0; j < sizeof(g_WeaponClasses); i += 5, j++) 
 				{
 					g_iSkins[client][j] = results.FetchInt(i);
 					g_fFloatValue[client][j] = results.FetchFloat(i + 1);
@@ -61,7 +61,7 @@ public void T_GetPlayerDataCallback(Database database, DBResultSet results, cons
 					g_iStatTrakCount[client][j] = results.FetchInt(i + 3);
 					results.FetchString(i + 4, g_NameTag[client][j], 128);
 				}
-				g_iKnife[client] = results.FetchInt(2);
+				g_iKnife[client] = results.FetchInt(1);
 			}
 		}
 	}
@@ -105,7 +105,7 @@ public void SQLConnectCallback(Database database, const char[] error, any data)
 		
 		int index = 0;
 
-		index += FormatEx(createQuery[index], sizeof(createQuery) - index, "CREATE TABLE IF NOT EXISTS %sweapons (steamid varchar(32) NOT NULL PRIMARY KEY, first_seen timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), knife int(4) NOT NULL DEFAULT '0', awp int(4) NOT NULL DEFAULT '0', awp_float decimal(3,2) NOT NULL DEFAULT '0.0', awp_trak int(1) NOT NULL DEFAULT '0', awp_trak_count int(10) NOT NULL DEFAULT '0', awp_tag varchar(256) NOT NULL DEFAULT '', ak47 int(4) NOT NULL DEFAULT '0', ak47_float decimal(3,2) NOT NULL DEFAULT '0.0', ak47_trak int(1) NOT NULL DEFAULT '0', ak47_trak_count int(10) NOT NULL DEFAULT '0', ak47_tag varchar(256) NOT NULL DEFAULT '', m4a1 int(4) NOT NULL DEFAULT '0', m4a1_float decimal(3,2) NOT NULL DEFAULT '0.0', m4a1_trak int(1) NOT NULL DEFAULT '0', m4a1_trak_count int(10) NOT NULL DEFAULT '0', m4a1_tag varchar(256) NOT NULL DEFAULT '', m4a1_silencer int(4)", g_TablePrefix);
+		index += FormatEx(createQuery[index], sizeof(createQuery) - index, "CREATE TABLE IF NOT EXISTS %sweapons (steamid varchar(32) NOT NULL PRIMARY KEY, knife int(4) NOT NULL DEFAULT '0', awp int(4) NOT NULL DEFAULT '0', awp_float decimal(3,2) NOT NULL DEFAULT '0.0', awp_trak int(1) NOT NULL DEFAULT '0', awp_trak_count int(10) NOT NULL DEFAULT '0', awp_tag varchar(256) NOT NULL DEFAULT '', ak47 int(4) NOT NULL DEFAULT '0', ak47_float decimal(3,2) NOT NULL DEFAULT '0.0', ak47_trak int(1) NOT NULL DEFAULT '0', ak47_trak_count int(10) NOT NULL DEFAULT '0', ak47_tag varchar(256) NOT NULL DEFAULT '', m4a1 int(4) NOT NULL DEFAULT '0', m4a1_float decimal(3,2) NOT NULL DEFAULT '0.0', m4a1_trak int(1) NOT NULL DEFAULT '0', m4a1_trak_count int(10) NOT NULL DEFAULT '0', m4a1_tag varchar(256) NOT NULL DEFAULT '', m4a1_silencer int(4)", g_TablePrefix);
 
 		index += FormatEx(createQuery[index], sizeof(createQuery) - index, " NOT NULL DEFAULT '0', m4a1_silencer_float decimal(3,2) NOT NULL DEFAULT '0.0', m4a1_silencer_trak int(1) NOT NULL DEFAULT '0', m4a1_silencer_trak_count int(10) NOT NULL DEFAULT '0', m4a1_silencer_tag varchar(256) NOT NULL DEFAULT '', deagle int(4) NOT NULL DEFAULT '0', deagle_float decimal(3,2) NOT NULL DEFAULT '0.0', deagle_trak int(1) NOT NULL DEFAULT '0', deagle_trak_count int(10) NOT NULL DEFAULT '0', deagle_tag varchar(256) NOT NULL DEFAULT '', usp_silencer int(4) NOT NULL DEFAULT '0', usp_silencer_float decimal(3,2) NOT NULL DEFAULT '0.0', usp_silencer_trak int(1) NOT NULL DEFAULT '0', usp_silencer_trak_count int(10) NOT NULL DEFAULT '0', usp_silencer_tag varchar(256) NOT NULL DEFAULT '', hkp2000 int(4) NOT NULL DEFAULT '0', hkp2000_float decimal(3,2) NOT NULL DEFAULT '0.0', hkp2000_trak int(1) NOT NULL DEFAULT '0', hkp2000_trak_count int(10) NOT NULL DEFAULT '0', hkp2000_tag varchar(256) NOT NULL DEFAULT '', glock int(4) NOT NULL DEFAULT '0', glock_float decimal(3,2) NOT NULL DEFAULT '0.0', glock_trak int(1) ");
 

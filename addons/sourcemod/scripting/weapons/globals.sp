@@ -31,8 +31,7 @@ int g_iWeaponDefIndex[] = {
 /*36*/ 514, /*37*/ 515, /*38*/ 505, /*39*/ 516, /*40*/ 509, /*41*/ 512, /*42*/ 506
 };
 
-const int MAX_WEAPONS = 50;
-const int MAX_LANG = 20;
+const int MAX_LANG = 40;
 
 Database db = null;
 
@@ -77,5 +76,4 @@ Menu menuWeapons[MAX_LANG][sizeof(g_WeaponClasses)];
 
 StringMap g_smWeaponIndex;
 StringMap g_smWeaponDefIndex;
-StringMap g_smKnifeModelIndex;
 StringMap g_smLanguageIndex;
