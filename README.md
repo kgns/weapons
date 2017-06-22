@@ -25,3 +25,8 @@ Eklentiyi compile edebilmek için gerekli:
 
 - https://github.com/komashchenko/PTaH/blob/master/PTaH.inc
 
+--------------------
+
+There is also a small java utility I coded to create config files when new skins arrive or for different languages:
+
+https://github.com/kaganus/CSGOItemParserForWeaponsPlugin
