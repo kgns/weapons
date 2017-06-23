@@ -37,6 +37,9 @@ Database db = null;
 
 char configPath[PLATFORM_MAX_PATH];
 
+ConVar g_Cvar_DBConnection;
+char g_DBConnection[32];
+
 ConVar g_Cvar_TablePrefix;
 char g_TablePrefix[10];
 

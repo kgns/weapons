@@ -102,6 +102,7 @@ public void SQLConnectCallback(Database database, const char[] error, any data)
 	{
 		db = database;
 		char createQuery[10240];
+		char dbIdentifier[10];
 		
 		int index = 0;
 
@@ -123,7 +124,13 @@ public void SQLConnectCallback(Database database, const char[] error, any data)
 		
 		index += FormatEx(createQuery[index], sizeof(createQuery) - index, "int(10) NOT NULL DEFAULT '0', bayonet_tag varchar(256) NOT NULL DEFAULT '', knife_survival_bowie int(4) NOT NULL DEFAULT '0', knife_survival_bowie_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_survival_bowie_trak int(1) NOT NULL DEFAULT '0', knife_survival_bowie_trak_count int(10) NOT NULL DEFAULT '0', knife_survival_bowie_tag varchar(256) NOT NULL DEFAULT '', knife_butterfly int(4) NOT NULL DEFAULT '0', knife_butterfly_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_butterfly_trak int(1) NOT NULL DEFAULT '0', knife_butterfly_trak_count int(10) NOT NULL DEFAULT '0', knife_butterfly_tag varchar(256) NOT NULL DEFAULT '', knife_flip int(4) NOT NULL DEFAULT '0', knife_flip_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_flip_trak int(1) NOT NULL DEFAULT '0', knife_flip_trak_count int(10) NOT NULL DEFAULT '0', knife_flip_tag varchar(256) NOT NULL DEFAULT '', knife_push int(4) NOT NULL DEFAULT '0', knife_push_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_push_trak int(1) NOT NULL DEFAULT '0', knife_push_trak_count int(10) ");
 		
-		index += FormatEx(createQuery[index], sizeof(createQuery) - index, "NOT NULL DEFAULT '0', knife_push_tag varchar(256) NOT NULL DEFAULT '', knife_tactical int(4) NOT NULL DEFAULT '0', knife_tactical_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_tactical_trak int(1) NOT NULL DEFAULT '0', knife_tactical_trak_count int(10) NOT NULL DEFAULT '0', knife_tactical_tag varchar(256) NOT NULL DEFAULT '', knife_falchion int(4) NOT NULL DEFAULT '0', knife_falchion_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_falchion_trak int(1) NOT NULL DEFAULT '0', knife_falchion_trak_count int(10) NOT NULL DEFAULT '0', knife_falchion_tag varchar(256) NOT NULL DEFAULT '', knife_gut int(4) NOT NULL DEFAULT '0', knife_gut_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_gut_trak int(1) NOT NULL DEFAULT '0', knife_gut_trak_count int(10) NOT NULL DEFAULT '0', knife_gut_tag varchar(256) NOT NULL DEFAULT '') ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+		index += FormatEx(createQuery[index], sizeof(createQuery) - index, "NOT NULL DEFAULT '0', knife_push_tag varchar(256) NOT NULL DEFAULT '', knife_tactical int(4) NOT NULL DEFAULT '0', knife_tactical_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_tactical_trak int(1) NOT NULL DEFAULT '0', knife_tactical_trak_count int(10) NOT NULL DEFAULT '0', knife_tactical_tag varchar(256) NOT NULL DEFAULT '', knife_falchion int(4) NOT NULL DEFAULT '0', knife_falchion_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_falchion_trak int(1) NOT NULL DEFAULT '0', knife_falchion_trak_count int(10) NOT NULL DEFAULT '0', knife_falchion_tag varchar(256) NOT NULL DEFAULT '', knife_gut int(4) NOT NULL DEFAULT '0', knife_gut_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_gut_trak int(1) NOT NULL DEFAULT '0', knife_gut_trak_count int(10) NOT NULL DEFAULT '0', knife_gut_tag varchar(256) NOT NULL DEFAULT '')");
+		
+		db.Driver.GetIdentifier(dbIdentifier, sizeof(dbIdentifier));
+		if (StrEqual(dbIdentifier, "mysql"))
+		{
+			 index += FormatEx(createQuery[index], sizeof(createQuery) - index, " ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+		}
 		
 		db.Query(T_CreateTableCallback, createQuery, _, DBPrio_High);
 	}

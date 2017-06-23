@@ -44,6 +44,7 @@ public void OnPluginStart()
 {
 	LoadTranslations("weapons.phrases");
 	
+	g_Cvar_DBConnection = CreateConVar("sm_weapons_db_connection", "storage-local", "Database connection name in databases.cfg to use");
 	g_Cvar_TablePrefix = CreateConVar("sm_weapons_table_prefix", "", "Prefix for database table (example: 'xyz_')");
 	g_Cvar_ChatPrefix = CreateConVar("sm_weapons_chat_prefix", "[wasdzone]", "Prefix for chat messages");
 	g_Cvar_KnifeStatTrakMode = CreateConVar("sm_weapons_knife_stattrak_mode", "0", "0: All knives show the same StatTrak counter (total knife kills) 1: Each type of knife shows its own separate StatTrak counter");
@@ -55,8 +56,9 @@ public void OnPluginStart()
 	AutoExecConfig(true, "weapons");
 	
 	GetConVarString(g_Cvar_TablePrefix, g_TablePrefix, sizeof(g_TablePrefix));
+	GetConVarString(g_Cvar_DBConnection, g_DBConnection, sizeof(g_DBConnection));
 	
-	Database.Connect(SQLConnectCallback, "weapons");
+	Database.Connect(SQLConnectCallback, g_DBConnection);
 	
 	RegConsoleCmd("buyammo1", CommandWeaponSkins);
 	RegConsoleCmd("sm_ws", CommandWeaponSkins);
