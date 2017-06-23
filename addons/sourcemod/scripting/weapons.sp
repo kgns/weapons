@@ -36,7 +36,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns - wasdzone",
 	description = "All in one custom weapon management",
-	version = "1.0.0",
+	version = "1.0.2",
 	url = "http://www.wasdzone.com"
 };
 
@@ -243,35 +243,31 @@ public void SetWeaponProps(int client, int entity)
 
 void RefreshWeapon(int client, int index, bool defaultKnife = false)
 {
-	bool equiptaser = false;
-	for(int i = 0; i < 3; i++)
+	int size = GetEntPropArraySize(client, Prop_Send, "m_hMyWeapons");
+	
+	for (int i = 0; i < size; i++)
 	{
-		int weapon = GetPlayerWeaponSlot(client, i);
-		if (weapon > -1)
+		int weapon = GetEntPropEnt(client, Prop_Send, "m_hMyWeapons", i);
+		if (IsValidWeapon(weapon))
 		{
-			int weaponIndex = GetWeaponIndex(weapon);
-			if ((weaponIndex == index && !defaultKnife) || (i == CS_SLOT_KNIFE && (defaultKnife || IsKnifeClass(g_WeaponClasses[index]))))
+			bool isKnife = IsKnife(weapon);
+			if ((!defaultKnife && GetWeaponIndex(weapon) == index) || (isKnife && (defaultKnife || IsKnifeClass(g_WeaponClasses[index]))))
 			{
 				int clip = -1;
 				int ammo = -1;
 				int offset = -1;
-				while (weapon > -1)
-				{
-					if (GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex") == 31)
-						equiptaser = true;
 					
-					if (i != CS_SLOT_KNIFE)
-					{
-						offset = FindDataMapInfo(client, "m_iAmmo") + (GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType") * 4);
-						ammo = GetEntData(client, offset);
-						clip = GetEntProp(weapon, Prop_Send, "m_iClip1");
-					}
-					RemovePlayerItem(client, weapon);
-					AcceptEntityInput(weapon, "Kill");
-					weapon = GetPlayerWeaponSlot(client, i);
+				if (!isKnife)
+				{
+					offset = FindDataMapInfo(client, "m_iAmmo") + (GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType") * 4);
+					ammo = GetEntData(client, offset);
+					clip = GetEntProp(weapon, Prop_Send, "m_iClip1");
 				}
 				
-				if (i != CS_SLOT_KNIFE)
+				RemovePlayerItem(client, weapon);
+				AcceptEntityInput(weapon, "KillHierarchy");
+				
+				if (!isKnife)
 				{
 					weapon = GivePlayerItem(client, g_WeaponClasses[index]);
 					if (offset != -1)
@@ -292,10 +288,8 @@ void RefreshWeapon(int client, int index, bool defaultKnife = false)
 				}
 				else
 				{
-					weapon = GivePlayerItem(client, "weapon_knife");
+					GivePlayerItem(client, "weapon_knife");
 				}
-				if (equiptaser) GivePlayerItem(client, "weapon_taser");
-				break;
 			}
 		}
 	}

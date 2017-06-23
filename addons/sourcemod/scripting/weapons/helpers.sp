@@ -96,9 +96,7 @@ stock bool IsKnife(int entity)
 {
 	char classname[32];
 	GetWeaponClass(entity, classname, sizeof(classname));
-	if (StrContains(classname, "knife") > -1 || StrContains(classname, "bayonet") > -1)
-		return true;
-	return false;
+	return IsKnifeClass(classname);
 }
 
 stock int DefIndexByClass(char[] class)

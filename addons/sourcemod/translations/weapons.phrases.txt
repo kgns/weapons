@@ -3,371 +3,297 @@
 	"WSMenuTitle"
 	{
 		"en"	"Weapon Skins Menu"
-		"tr"	"Silah Skinleri Menüsü"
 	}
 	"ChooseKnife"
 	{
 		"en"	"★ Change Knife ★"
-		"tr"	"★ Bıçak Değiştir ★"
 	}
 	"ConfigAllWeapons"
 	{
 		"en"	"Configure all weapons"
-		"tr"	"Tüm silahları ayarla"
 	}
 	"KnifeMenuTitle"
 	{
 		"en"	"★ Knife Selection ★"
-		"tr"	"★ Bıçak Seçenekleri ★"
 	}
 	"AllWeaponsMenuTitle"
 	{
 		"en"	"All Weapons"
-		"tr"	"Tüm Silahlar"
 	}
 	"Increase"
 	{
 		"en"	"Increase by %d%%"
-		"tr"	"%d%% Yükselt"
 	}
 	"Decrease"
 	{
 		"en"	"Decrease by %d%%"
-		"tr"	"%d%% Düşür"
 	}
 	"NameTagInfo"
 	{
 		"en"	"Use !nametag <tag> command to set a name tag for your current weapon"
-		"tr"	"Kullandığınız silaha isim etiketi eklemek için !nametag <etiket> komudunu kullanın"
 	}
 	"NameTagColor"
 	{
 		"en"	"Set Name Tag Color"
-		"tr"	"İsim Etiketi Rengi Belirle"
 	}
 	"NameTagDisabled"
 	{
 		"en"	"Name tag usage is disabled at the moment."
-		"tr"	"İsim etiketi kullanımı şu an kapalı."
 	}
 	"NameTagNeedsParams"
 	{
 		"en"	"Usage: !nametag <tag>"
-		"tr"	"Kullanım: !nametag <etiket>"
 	}
 	"ChooseLanguage"
 	{
 		"en"	"Select language for skin names:"
-		"tr"	"Skin isimleri için dil seçin:"
 	}
 	"ChooseColor"
 	{
 		"en"	"Choose a color:"
-		"tr"	"Renk seçin:"
 	}
 	"DefaultColor"
 	{
 		"en"	"Default"
-		"tr"	"Normal (Renksiz)"
 	}
 	"DefaultSkin"
 	{
 		"en"	"Default"
-		"tr"	"Normal (Skinsiz)"
 	}
 	"RandomSkin"
 	{
 		"en"	"Random"
-		"tr"	"Rastgele"
 	}
 	"Black"
 	{
 		"en"	"Black"
-		"tr"	"Siyah"
 	}
 	"Grey"
 	{
 		"en"	"Grey"
-		"tr"	"Gri"
 	}
 	"Red"
 	{
 		"en"	"Red"
-		"tr"	"Kırmızı"
 	}
 	"Green"
 	{
 		"en"	"Green"
-		"tr"	"Yeşil"
 	}
 	"Blue"
 	{
 		"en"	"Blue"
-		"tr"	"Mavi"
 	}
 	"DeleteNameTag"
 	{
 		"en"	"Delete Name Tag"
-		"tr"	"İsim Etiketini Sil"
 	}
 	"OwnKnife"
 	{
 		"en"	"★ Your own knife"
-		"tr"	"★ Kendi bıçağın"
 	}
 	"SetSkin"
 	{
 		"en"	"Choose Skin"
-		"tr"	"Skin Seç"
 	}
 	"SetFloat"
 	{
 		"en"	"Weapon Condition: "
-		"tr"	"Silah Yenilik Durumu: "
 	}
 	"StatTrak"
 	{
 		"en"	"StatTrak™: "
-		"tr"	"StatTrak™: "
 	}
 	"SetNameTag"
 	{
 		"en"	"Name Tag: "
-		"tr"	"İsim Etiketi: "
 	}
 	"On"
 	{
 		"en"	"ON"
-		"tr"	"AÇIK"
 	}
 	"Off"
 	{
 		"en"	"OFF"
-		"tr"	"KAPALI"
 	}
 	"weapon_galilar"
 	{
 		"en"	"Galil AR"
-		"tr"	"Galil AR"
 	}
 	"weapon_awp"
 	{
 		"en"	"AWP"
-		"tr"	"AWP"
 	}
 	"weapon_m4a1"
 	{
 		"en"	"M4A4"
-		"tr"	"M4A4"
 	}
 	"weapon_m4a1_silencer"
 	{
 		"en"	"M4A1-S"
-		"tr"	"M4A1-S"
 	}
 	"weapon_cz75a"
 	{
 		"en"	"CZ75-Auto"
-		"tr"	"CZ75-Auto"
 	}
 	"weapon_revolver"
 	{
 		"en"	"Revolver"
-		"tr"	"Revolver"
 	}
 	"weapon_deagle"
 	{
 		"en"	"Desert Eagle"
-		"tr"	"Desert Eagle"
 	}
 	"weapon_g3sg1"
 	{
 		"en"	"G3SG1"
-		"tr"	"G3SG1"
 	}
 	"weapon_scar20"
 	{
 		"en"	"SCAR-20"
-		"tr"	"SCAR-20"
 	}
 	"weapon_sawedoff"
 	{
 		"en"	"Sawed-Off"
-		"tr"	"Sawed-Off"
 	}
 	"weapon_negev"
 	{
 		"en"	"Negev"
-		"tr"	"Negev"
 	}
 	"weapon_ssg08"
 	{
 		"en"	"SSG 08"
-		"tr"	"SSG 08"
 	}
 	"weapon_sg556"
 	{
 		"en"	"SG 553"
-		"tr"	"SG 553"
 	}
 	"weapon_nova"
 	{
 		"en"	"Nova"
-		"tr"	"Nova"
 	}
 	"weapon_xm1014"
 	{
 		"en"	"XM1014"
-		"tr"	"XM1014"
 	}
 	"weapon_p90"
 	{
 		"en"	"P90"
-		"tr"	"P90"
 	}
 	"weapon_p250"
 	{
 		"en"	"P250"
-		"tr"	"P250"
 	}
 	"weapon_fiveseven"
 	{
 		"en"	"Five-SeveN"
-		"tr"	"Five-SeveN"
 	}
 	"weapon_aug"
 	{
 		"en"	"AUG"
-		"tr"	"AUG"
 	}
 	"weapon_elite"
 	{
 		"en"	"Dual Berettas"
-		"tr"	"Dual Berettas"
 	}
 	"weapon_m249"
 	{
 		"en"	"M249"
-		"tr"	"M249"
 	}
 	"weapon_mac10"
 	{
 		"en"	"MAC-10"
-		"tr"	"MAC-10"
 	}
 	"weapon_mag7"
 	{
 		"en"	"MAG-7"
-		"tr"	"MAG-7"
 	}
 	"weapon_mp7"
 	{
 		"en"	"MP7"
-		"tr"	"MP7"
 	}
 	"weapon_mp9"
 	{
 		"en"	"MP9"
-		"tr"	"MP9"
 	}
 	"weapon_tec9"
 	{
 		"en"	"Tec-9"
-		"tr"	"Tec-9"
 	}
 	"weapon_ump45"
 	{
 		"en"	"UMP-45"
-		"tr"	"UMP-45"
 	}
 	"weapon_ak47"
 	{
 		"en"	"AK-47"
-		"tr"	"AK-47"
 	}
 	"weapon_bizon"
 	{
 		"en"	"PP-Bizon"
-		"tr"	"PP-Bizon"
 	}
 	"weapon_usp_silencer"
 	{
 		"en"	"USP-S"
-		"tr"	"USP-S"
 	}
 	"weapon_hkp2000"
 	{
 		"en"	"P2000"
-		"tr"	"P2000"
 	}
 	"weapon_famas"
 	{
 		"en"	"FAMAS"
-		"tr"	"FAMAS"
 	}
 	"weapon_glock"
 	{
 		"en"	"Glock-18"
-		"tr"	"Glock-18"
 	}
 	"weapon_bayonet"
 	{
 		"en"	"★ Bayonet"
-		"tr"	"★ Bayonet"
 	}
 	"weapon_knife_gut"
 	{
 		"en"	"★ Gut Knife"
-		"tr"	"★ Kancalı Bıçak"
 	}
 	"weapon_knife_flip"
 	{
 		"en"	"★ Flip Knife"
-		"tr"	"★ Sustalı Bıçak"
 	}
 	"weapon_knife_m9_bayonet"
 	{
 		"en"	"★ M9 Bayonet"
-		"tr"	"★ M9 Bayonet"
 	}
 	"weapon_knife_karambit"
 	{
 		"en"	"★ Karambit"
-		"tr"	"★ Karambit"
 	}
 	"weapon_knife_tactical"
 	{
 		"en"	"★ Huntsman Knife"
-		"tr"	"★ Avcı Bıçağı"
 	}
 	"weapon_knife_butterfly"
 	{
 		"en"	"★ Butterfly Knife"
-		"tr"	"★ Kelebek Bıçak"
 	}
 	"weapon_knife_falchion"
 	{
 		"en"	"★ Falchion Knife"
-		"tr"	"★ Pala Bıçağı"
 	}
 	"weapon_knife_push"
 	{
 		"en"	"★ Shadow Daggers"
-		"tr"	"★ Gölge Hançerler"
 	}
 	"weapon_knife_survival_bowie"
 	{
 		"en"	"★ Bowie Knife"
-		"tr"	"★ Bowie Bıçağı"
 	}
 	"weapon_knife_t"
 	{
 		"en"	"Knife"
-		"tr"	"Bıçak"
 	}
 	"weapon_knife"
 	{
 		"en"	"Knife"
-		"tr"	"Bıçak"
 	}
 }

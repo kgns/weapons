@@ -524,12 +524,14 @@ Menu CreateMainMenu(int client)
 	{
 		char weaponClass[32];
 		char weaponName[32];
-		for(int i = 0; i < 3; i++)
+		
+		int size = GetEntPropArraySize(client, Prop_Send, "m_hMyWeapons");
+	
+		for (int i = 0; i < size; i++)
 		{
-			int weaponEntity = GetPlayerWeaponSlot(client, i);
-			if(weaponEntity != -1)
+			int weaponEntity = GetEntPropEnt(client, Prop_Send, "m_hMyWeapons", i);
+			if(weaponEntity != -1 && GetWeaponClass(weaponEntity, weaponClass, sizeof(weaponClass)))
 			{
-				GetWeaponClass(weaponEntity, weaponClass, sizeof(weaponClass));
 				Format(weaponName, sizeof(weaponName), "%T", weaponClass, client);
 				menu.AddItem(weaponClass, weaponName, (i == CS_SLOT_KNIFE && g_iKnife[client] == 0) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 			}
