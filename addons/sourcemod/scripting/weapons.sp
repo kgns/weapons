@@ -55,11 +55,6 @@ public void OnPluginStart()
 	
 	AutoExecConfig(true, "weapons");
 	
-	GetConVarString(g_Cvar_TablePrefix, g_TablePrefix, sizeof(g_TablePrefix));
-	GetConVarString(g_Cvar_DBConnection, g_DBConnection, sizeof(g_DBConnection));
-	
-	Database.Connect(SQLConnectCallback, g_DBConnection);
-	
 	RegConsoleCmd("buyammo1", CommandWeaponSkins);
 	RegConsoleCmd("sm_ws", CommandWeaponSkins);
 	RegConsoleCmd("buyammo2", CommandKnife);
@@ -72,8 +67,13 @@ public void OnPluginStart()
 	PTaH(PTaH_GiveNamedItem, Hook, GiveNamedItem);
 }
 
-public void OnMapStart()
+public void OnConfigsExecuted()
 {
+	GetConVarString(g_Cvar_DBConnection, g_DBConnection, sizeof(g_DBConnection));
+	GetConVarString(g_Cvar_TablePrefix, g_TablePrefix, sizeof(g_TablePrefix));
+	
+	Database.Connect(SQLConnectCallback, g_DBConnection);
+	
 	g_Cvar_ChatPrefix.GetString(g_ChatPrefix, sizeof(g_ChatPrefix));
 	g_iKnifeStatTrakMode = g_Cvar_KnifeStatTrakMode.IntValue;
 	g_iEnableFloat = g_Cvar_EnableFloat.IntValue;
