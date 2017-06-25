@@ -133,7 +133,7 @@ public Action StatTrakMenuTimer(Handle timer, int client)
 
 Menu CreateFloatMenu(int client)
 {
-	char buffer[20];
+	char buffer[60];
 	Menu menu = new Menu(FloatMenuHandler);
 	
 	float fValue = g_fFloatValue[client][g_iIndex[client]];
@@ -513,7 +513,7 @@ public int MainMenuHandler(Menu menu, MenuAction action, int client, int selecti
 
 Menu CreateMainMenu(int client)
 {
-	char buffer[30];
+	char buffer[60];
 	Menu menu = new Menu(MainMenuHandler, MENU_ACTIONS_DEFAULT);
 	
 	menu.SetTitle("%T", "WSMenuTitle", client);
@@ -545,7 +545,7 @@ Menu CreateKnifeMenu(int client)
 	Menu menu = new Menu(KnifeMenuHandler);
 	menu.SetTitle("%T", "KnifeMenuTitle", client);
 	
-	char buffer[30];
+	char buffer[60];
 	Format(buffer, sizeof(buffer), "%T", "OwnKnife", client);
 	menu.AddItem("0", buffer, g_iKnife[client] != 0 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_karambit", client);
