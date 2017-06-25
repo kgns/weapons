@@ -36,7 +36,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns - wasdzone",
 	description = "All in one custom weapon management",
-	version = "1.0.3",
+	version = "1.0.4",
 	url = "http://www.wasdzone.com"
 };
 
