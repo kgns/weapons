@@ -73,9 +73,6 @@ public void GiveNamedItem(int client, const char[] classname, const CEconItemVie
 
 public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float &damage, int &damagetype, int &weapon, float damageForce[3], float damagePosition[3])
 {
-	if (g_iEnableStatTrak == 0)
-		return Plugin_Continue;
-		
 	if (float(GetClientHealth(victim)) - damage > 0.0)
 		return Plugin_Continue;
 		
