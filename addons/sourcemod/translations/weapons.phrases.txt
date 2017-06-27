@@ -40,6 +40,10 @@
 	{
 		"en"	"Name tag usage is disabled at the moment."
 	}
+	"DontSpamNameTag"
+	{
+		"en"	"Wait a little more before using !nametag again."
+	}
 	"NameTagNeedsParams"
 	{
 		"en"	"Usage: !nametag <tag>"

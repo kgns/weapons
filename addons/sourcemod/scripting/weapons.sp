@@ -119,6 +119,11 @@ public Action CommandNameTag(int client, int args)
 		ReplyToCommand(client, "%s %T", g_ChatPrefix, "NameTagDisabled", client);
 		return Plugin_Handled;
 	}
+	if(GetTime() - g_iNameTagTime[client] < 2)
+	{
+		ReplyToCommand(client, "%s %T", g_ChatPrefix, "DontSpamNameTag", client);
+		return Plugin_Handled;
+	}
 	if(args < 1)
 	{
 		ReplyToCommand(client, "%s %T", g_ChatPrefix, "NameTagNeedsParams", client);
@@ -151,6 +156,8 @@ public Action CommandNameTag(int client, int args)
 				RemoveWeaponPrefix(weaponClass, weaponName, sizeof(weaponName));
 				Format(updateFields, sizeof(updateFields), "%s_tag = '%s'", weaponName, escaped);
 				UpdatePlayerData(client, updateFields);
+				
+				g_iNameTagTime[client] = GetTime();
 			}
 		}
 	}

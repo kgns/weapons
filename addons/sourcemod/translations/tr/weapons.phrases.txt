@@ -40,6 +40,10 @@
 	{
 		"tr"	"İsim etiketi kullanımı şu an kapalı."
 	}
+	"DontSpamNameTag"
+	{
+		"tr"	"Art arda !nametag kullanmadan önce biraz bekleyin."
+	}
 	"NameTagNeedsParams"
 	{
 		"tr"	"Kullanım: !nametag <etiket>"

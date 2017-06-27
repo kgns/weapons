@@ -40,6 +40,10 @@
 	{
 		"fr"	"L'utilisation de l'étiquette est désactivée pour le moment."
 	}
+	"DontSpamNameTag"
+	{
+		"fr"	"Attendez un peu plus avant d'utiliser !nametag à nouveau."
+	}
 	"NameTagNeedsParams"
 	{
 		"fr"	"Utiliser: !nametag <tag>"

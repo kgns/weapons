@@ -40,6 +40,10 @@
 	{
 		"pt"	"Uso de nametags desativado de momento."
 	}
+	"DontSpamNameTag"
+	{
+		"pt"	"Aguarde um pouco mais antes de usar !nametag novamente."
+	}
 	"NameTagNeedsParams"
 	{
 		"pt"	"Uso: !nametag <nome>"
