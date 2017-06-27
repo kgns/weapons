@@ -137,8 +137,6 @@ public Action CommandNameTag(int client, int args)
 		int entity = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 		if (entity != -1)
 		{
-			char weaponClass[32];
-			GetWeaponClass(entity, weaponClass, sizeof(weaponClass));
 			int index = GetWeaponIndex(entity);
 			
 			if (index > -1)
@@ -153,6 +151,8 @@ public Action CommandNameTag(int client, int args)
 				char escaped[257];
 				db.Escape(nameTag, escaped, sizeof(escaped));
 				char weaponName[32];
+				char weaponClass[32];
+				GetWeaponClass(entity, weaponClass, sizeof(weaponClass));
 				RemoveWeaponPrefix(weaponClass, weaponName, sizeof(weaponName));
 				Format(updateFields, sizeof(updateFields), "%s_tag = '%s'", weaponName, escaped);
 				UpdatePlayerData(client, updateFields);
@@ -220,8 +220,6 @@ public void OnClientDisconnect(int client)
 
 public void SetWeaponProps(int client, int entity)
 {
-	char weaponClass[32];
-	GetWeaponClass(entity, weaponClass, sizeof(weaponClass));
 	int index = GetWeaponIndex(entity);
 	if (index > -1 && g_iSkins[client][index] != 0)
 	{
@@ -229,7 +227,7 @@ public void SetWeaponProps(int client, int entity)
 		SetEntProp(entity, Prop_Send, "m_nFallbackPaintKit", g_iSkins[client][index] == -1 ? GetRandomSkin(client, index) : g_iSkins[client][index]);
 		SetEntPropFloat(entity, Prop_Send, "m_flFallbackWear", g_iEnableFloat == 0 || g_fFloatValue[client][index] == 0.0 ? 0.000001 : g_fFloatValue[client][index] == 1.0 ? 0.999999 : g_fFloatValue[client][index]);
 		SetEntProp(entity, Prop_Send, "m_nFallbackSeed", GetRandomInt(0, 8192));
-		if(!IsKnifeClass(weaponClass))
+		if(!IsKnife(entity))
 		{
 			if(g_iEnableStatTrak == 1)
 			{

@@ -72,10 +72,14 @@ stock bool IsValidClient(int client)
 stock int GetWeaponIndex(int entity)
 {
 	char class[32];
-	GetWeaponClass(entity, class, sizeof(class));
-	int index;
-	if(g_smWeaponIndex.GetValue(class, index))
-		return index;
+	if(GetWeaponClass(entity, class, sizeof(class)))
+	{
+		int index;
+		if(g_smWeaponIndex.GetValue(class, index))
+		{
+			return index;
+		}
+	}
 	return -1;
 }
 
@@ -95,8 +99,9 @@ stock bool IsKnifeClass(const char[] classname)
 stock bool IsKnife(int entity)
 {
 	char classname[32];
-	GetWeaponClass(entity, classname, sizeof(classname));
-	return IsKnifeClass(classname);
+	if(GetWeaponClass(entity, classname, sizeof(classname)))
+		return IsKnifeClass(classname);
+	return false;
 }
 
 stock int DefIndexByClass(char[] class)
