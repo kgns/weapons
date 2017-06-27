@@ -259,12 +259,14 @@ void RefreshWeapon(int client, int index, bool defaultKnife = false)
 				int clip = -1;
 				int ammo = -1;
 				int offset = -1;
+				int reserve = -1;
 					
 				if (!isKnife)
 				{
 					offset = FindDataMapInfo(client, "m_iAmmo") + (GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType") * 4);
 					ammo = GetEntData(client, offset);
 					clip = GetEntProp(weapon, Prop_Send, "m_iClip1");
+					reserve = GetEntProp(weapon, Prop_Send, "m_iPrimaryReserveAmmoCount");
 				}
 				
 				RemovePlayerItem(client, weapon);
@@ -273,37 +275,39 @@ void RefreshWeapon(int client, int index, bool defaultKnife = false)
 				if (!isKnife)
 				{
 					weapon = GivePlayerItem(client, g_WeaponClasses[index]);
-					if (offset != -1)
+					if (clip != -1)
 					{
-						if (clip != -1)
-						{
-							SetEntProp(weapon, Prop_Send, "m_iClip1", clip);
-						}
-						if (ammo != -1)
-						{
-							DataPack pack;
-							CreateDataTimer(0.1, ReserveAmmoTimer, pack);
-							pack.WriteCell(client);
-							pack.WriteCell(offset);
-							pack.WriteCell(ammo);
-						}
+						SetEntProp(weapon, Prop_Send, "m_iClip1", clip);
+					}
+					if (reserve != -1)
+					{
+						SetEntProp(weapon, Prop_Send, "m_iPrimaryReserveAmmoCount", reserve);
+					}
+					if (offset != -1 && ammo != -1)
+					{
+						DataPack pack;
+						CreateDataTimer(0.1, ReserveAmmoTimer, pack);
+						pack.WriteCell(client);
+						pack.WriteCell(offset);
+						pack.WriteCell(ammo);
 					}
 				}
 				else
 				{
 					GivePlayerItem(client, "weapon_knife");
 				}
+				break;
 			}
 		}
 	}
 }
 
-public Action ReserveAmmoTimer(Handle timer, Handle pack)
+public Action ReserveAmmoTimer(Handle timer, DataPack pack)
 {
 	ResetPack(pack);
-	int clientIndex = ReadPackCell(pack);
-	int offset = ReadPackCell(pack);
-	int ammo = ReadPackCell(pack);
+	int clientIndex = pack.ReadCell();
+	int offset = pack.ReadCell();
+	int ammo = pack.ReadCell();
 	
 	if(IsClientInGame(clientIndex))
 	{

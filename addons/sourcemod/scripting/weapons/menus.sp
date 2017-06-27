@@ -38,7 +38,11 @@ public int WeaponsMenuHandler(Menu menu, MenuAction action, int client, int sele
 				
 				RefreshWeapon(client, index);
 				
-				menu.DisplayAt(client, GetMenuSelectionPosition(), MENU_TIME_FOREVER);
+				DataPack pack;
+				CreateDataTimer(0.5, WeaponsMenuTimer, pack);
+				pack.WriteCell(menu);
+				pack.WriteCell(client);
+				pack.WriteCell(GetMenuSelectionPosition());
 			}
 		}
 		case MenuAction_DisplayItem:
@@ -70,6 +74,19 @@ public int WeaponsMenuHandler(Menu menu, MenuAction action, int client, int sele
 		}
 	}
 	return 0;
+}
+
+public Action WeaponsMenuTimer(Handle timer, DataPack pack)
+{
+	ResetPack(pack);
+	Menu menu = pack.ReadCell();
+	int clientIndex = pack.ReadCell();
+	int menuSelectionPosition = pack.ReadCell();
+	
+	if(IsClientInGame(clientIndex))
+	{
+		menu.DisplayAt(clientIndex, menuSelectionPosition, MENU_TIME_FOREVER);
+	}
 }
 
 public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selection)
@@ -215,12 +232,12 @@ public int FloatMenuHandler(Menu menu, MenuAction action, int client, int select
 	}
 }
 
-public Action FloatTimer(Handle timer, Handle pack)
+public Action FloatTimer(Handle timer, DataPack pack)
 {
 
 	ResetPack(pack);
-	int clientIndex = ReadPackCell(pack);
-	int index = ReadPackCell(pack);
+	int clientIndex = pack.ReadCell();
+	int index = pack.ReadCell();
 	
 	if(IsClientInGame(clientIndex))
 	{
