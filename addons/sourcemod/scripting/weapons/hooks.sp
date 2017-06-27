@@ -53,13 +53,15 @@ public void GiveNamedItem(int client, const char[] classname, const CEconItemVie
 				g_smWeaponDefIndex.GetValue(g_WeaponClasses[g_iKnife[client]], defIndex);
 				char knifeClassName[32];
 				GetWeaponClass(entity, knifeClassName, sizeof(knifeClassName));
-				if(!StrEqual(knifeClassName, g_WeaponClasses[g_iKnife[client]]))
+				CEconItemView playerItem = PTaH_GetItemInLoadout(client, GetClientTeam(client), 0);
+				int playerKnifeDefIndex = playerItem.GetItemDefinition().GetDefinitionIndex();
+				if(!StrEqual(knifeClassName, g_WeaponClasses[g_iKnife[client]]) || defIndex == playerKnifeDefIndex)
 				{
 					float origin[3], angles[3];
 					GetClientAbsOrigin(client, origin);
 					GetClientAbsAngles(client, angles);
 					RemovePlayerItem(client, entity);
-					AcceptEntityInput(entity, "Kill");
+					AcceptEntityInput(entity, "KillHierarchy");
 					entity = PTaH_SpawnItemFromDefIndex(defIndex, origin, angles);
 				}
 				EquipPlayerWeapon(client, entity);
