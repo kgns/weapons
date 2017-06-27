@@ -117,3 +117,10 @@ public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float
 	UpdatePlayerData(attacker, updateFields);
 	return Plugin_Continue;
 }
+
+public bool WeaponCanUse(int client, int weapon, bool pickup)
+{
+	if (IsValidClient(client) && IsKnife(weapon))
+		return true;
+	return pickup;
+}
