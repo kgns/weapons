@@ -65,7 +65,7 @@ public void OnPluginStart()
 	
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
 	PTaH(PTaH_GiveNamedItem, Hook, GiveNamedItem);
-	//PTaH(PTaH_WeaponCanUse, Hook, WeaponCanUse);
+	PTaH(PTaH_WeaponCanUse, Hook, WeaponCanUse);
 }
 
 public void OnConfigsExecuted()
