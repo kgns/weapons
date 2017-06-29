@@ -117,6 +117,6 @@ public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float
 
 public bool WeaponCanUse(int client, int iEnt, bool pickup)
 {
-	if(IsValidEdict(iEnt) && IsValidEntity(iEnt) && GetEntProp(iEnt, Prop_Send, "m_iItemDefinitionIndex") > 500) return true;
+	if(IsValidEdict(iEnt) && IsValidEntity(iEnt) && GetEntProp(iEnt, Prop_Send, "m_iItemDefinitionIndex") >= 500) return true;
 	return pickup;
 }
