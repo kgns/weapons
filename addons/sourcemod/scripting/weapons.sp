@@ -36,7 +36,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns - wasdzone",
 	description = "All in one custom weapon management",
-	version = "1.0.6",
+	version = "1.0.7",
 	url = "http://www.wasdzone.com"
 };
 
@@ -65,7 +65,6 @@ public void OnPluginStart()
 	
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
 	PTaH(PTaH_GiveNamedItem, Hook, GiveNamedItem);
-	PTaH(PTaH_WeaponCanUse, Hook, WeaponCanUse);
 }
 
 public void OnConfigsExecuted()
@@ -73,7 +72,18 @@ public void OnConfigsExecuted()
 	GetConVarString(g_Cvar_DBConnection, g_DBConnection, sizeof(g_DBConnection));
 	GetConVarString(g_Cvar_TablePrefix, g_TablePrefix, sizeof(g_TablePrefix));
 	
-	Database.Connect(SQLConnectCallback, g_DBConnection);
+	if(g_DBConnectionOld[0] != EOS && strcmp(g_DBConnectionOld, g_DBConnection) != 0 && db != null)
+	{
+		delete db;
+		db = null;
+	}
+	
+	if(db == null)
+	{
+		Database.Connect(SQLConnectCallback, g_DBConnection);
+	}
+	
+	strcopy(g_DBConnectionOld, sizeof(g_DBConnectionOld), g_DBConnection);
 	
 	g_Cvar_ChatPrefix.GetString(g_ChatPrefix, sizeof(g_ChatPrefix));
 	g_iKnifeStatTrakMode = g_Cvar_KnifeStatTrakMode.IntValue;
@@ -91,7 +101,7 @@ public Action CommandWeaponSkins(int client, int args)
 	{
 		CreateMainMenu(client).Display(client, MENU_TIME_FOREVER);
 	}
-	return Plugin_Continue;
+	return Plugin_Handled;
 }
 
 public Action CommandKnife(int client, int args)
@@ -100,7 +110,7 @@ public Action CommandKnife(int client, int args)
 	{
 		CreateKnifeMenu(client).Display(client, MENU_TIME_FOREVER);
 	}
-	return Plugin_Continue;
+	return Plugin_Handled;
 }
 
 public Action CommandWSLang(int client, int args)
@@ -109,7 +119,7 @@ public Action CommandWSLang(int client, int args)
 	{
 		CreateLanguageMenu(client).Display(client, MENU_TIME_FOREVER);
 	}
-	return Plugin_Continue;
+	return Plugin_Handled;
 }
 
 public Action CommandNameTag(int client, int args)
@@ -161,7 +171,7 @@ public Action CommandNameTag(int client, int args)
 			}
 		}
 	}
-	return Plugin_Continue;
+	return Plugin_Handled;
 }
 
 public void OnClientPutInServer(int client)
@@ -191,6 +201,10 @@ public void OnClientPostAdminCheck(int client)
 			temp[index] = '\0';
 		}
 		g_iSteam32[client] = StringToInt(temp);
+		CEconItemView playerItem = PTaH_GetItemInLoadout(client, CS_TEAM_T, 0);
+		g_iPlayerKnifeDefIndex[0][client] = playerItem.GetItemDefinition().GetDefinitionIndex();
+		playerItem = PTaH_GetItemInLoadout(client, CS_TEAM_CT, 0);
+		g_iPlayerKnifeDefIndex[1][client] = playerItem.GetItemDefinition().GetDefinitionIndex();
 		GetPlayerData(client);
 		QueryClientConVar(client, "cl_language", ConVarCallBack);
 	}
