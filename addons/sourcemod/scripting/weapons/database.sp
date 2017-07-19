@@ -142,4 +142,15 @@ public void T_CreateTableCallback(Database database, DBResultSet results, const 
 	{
 		LogError("Create table failed! %s", error);
 	}
+	else
+	{
+		for(int i = 1; i <= MaxClients; i++)
+		{
+			if(IsClientConnected(i))
+			{
+				OnClientPutInServer(i);
+				OnClientPostAdminCheck(i);
+			}
+		}
+	}
 }

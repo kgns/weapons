@@ -53,9 +53,8 @@ public void GiveNamedItem(int client, const char[] classname, const CEconItemVie
 				g_smWeaponDefIndex.GetValue(g_WeaponClasses[g_iKnife[client]], defIndex);
 				char knifeClassName[32];
 				GetWeaponClass(entity, knifeClassName, sizeof(knifeClassName));
-				CEconItemView playerItem = PTaH_GetItemInLoadout(client, GetClientTeam(client), 0);
-				int playerKnifeDefIndex = playerItem.GetItemDefinition().GetDefinitionIndex();
-				if(!StrEqual(knifeClassName, g_WeaponClasses[g_iKnife[client]]) || defIndex == playerKnifeDefIndex)
+				int playerTeam = GetClientTeam(client);
+				if(!StrEqual(knifeClassName, g_WeaponClasses[g_iKnife[client]]) || (CS_TEAM_T <= playerTeam <= CS_TEAM_CT && defIndex == g_iPlayerKnifeDefIndex[playerTeam - 2][client]))
 				{
 					float origin[3], angles[3];
 					GetClientAbsOrigin(client, origin);
@@ -113,10 +112,4 @@ public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float
 	Format(updateFields, sizeof(updateFields), "%s_trak_count = %d", weaponName, g_iStatTrakCount[attacker][index]);
 	UpdatePlayerData(attacker, updateFields);
 	return Plugin_Continue;
-}
-
-public bool WeaponCanUse(int client, int weapon, bool pickup)
-{
-	if(IsValidEdict(weapon) && IsValidEntity(weapon) && GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex") >= 500) return true;
-	return pickup;
 }

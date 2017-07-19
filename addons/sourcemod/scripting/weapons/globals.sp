@@ -39,6 +39,7 @@ char configPath[PLATFORM_MAX_PATH];
 
 ConVar g_Cvar_DBConnection;
 char g_DBConnection[32];
+char g_DBConnectionOld[32];
 
 ConVar g_Cvar_TablePrefix;
 char g_TablePrefix[10];
@@ -73,6 +74,8 @@ int g_iNameTagTime[MAXPLAYERS+1] = { 0, ... };
 int g_iSteam32[MAXPLAYERS+1] = { 0, ... };
 
 int g_iKnife[MAXPLAYERS+1] = { 0, ... };
+
+int g_iPlayerKnifeDefIndex[2][MAXPLAYERS+1];
 
 char g_Language[MAX_LANG][32];
 int g_iClientLanguage[MAXPLAYERS+1];
