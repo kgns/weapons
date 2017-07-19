@@ -101,7 +101,7 @@ public Action CommandWeaponSkins(int client, int args)
 	{
 		CreateMainMenu(client).Display(client, MENU_TIME_FOREVER);
 	}
-	return Plugin_Continue;
+	return Plugin_Handled;
 }
 
 public Action CommandKnife(int client, int args)
@@ -110,7 +110,7 @@ public Action CommandKnife(int client, int args)
 	{
 		CreateKnifeMenu(client).Display(client, MENU_TIME_FOREVER);
 	}
-	return Plugin_Continue;
+	return Plugin_Handled;
 }
 
 public Action CommandWSLang(int client, int args)
@@ -119,7 +119,7 @@ public Action CommandWSLang(int client, int args)
 	{
 		CreateLanguageMenu(client).Display(client, MENU_TIME_FOREVER);
 	}
-	return Plugin_Continue;
+	return Plugin_Handled;
 }
 
 public Action CommandNameTag(int client, int args)
@@ -171,7 +171,7 @@ public Action CommandNameTag(int client, int args)
 			}
 		}
 	}
-	return Plugin_Continue;
+	return Plugin_Handled;
 }
 
 public void OnClientPutInServer(int client)
