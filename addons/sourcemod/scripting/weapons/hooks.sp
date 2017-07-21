@@ -33,7 +33,7 @@ public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &it
 	{
 		if (g_iKnife[client] != 0 && IsKnifeClass(classname) && !StrEqual(classname, g_WeaponClasses[g_iKnife[client]]))
 		{
-			Format(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
+			strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
 			return Plugin_Changed;
 		}
 	}
