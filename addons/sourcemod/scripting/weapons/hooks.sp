@@ -27,7 +27,7 @@ public void UnhookPlayer(int client)
 		SDKUnhook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
 }
 
-public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, bool &ignoredCEconItemView);
+public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, bool &ignoredCEconItemView)
 {
 	if (IsValidClient(client))
 	{
@@ -35,7 +35,9 @@ public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &it
 		{
 			int playerTeam = GetClientTeam(client);
 			if(CS_TEAM_T <= playerTeam <= CS_TEAM_CT)
+			{
 				ignoredCEconItemView = g_iPlayerKnifeDefIndex[playerTeam - 2][client] != 42 && g_iPlayerKnifeDefIndex[playerTeam - 2][client] != 59;
+			}
 			Format(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
 			return Plugin_Changed;
 		}
