@@ -27,12 +27,15 @@ public void UnhookPlayer(int client)
 		SDKUnhook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
 }
 
-public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item)
+public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, bool &ignoredCEconItemView);
 {
 	if (IsValidClient(client))
 	{
-		if (g_iKnife[client] != 0 && IsKnifeClass(classname) && !StrEqual(classname, g_WeaponClasses[g_iKnife[client]]))
+		if (g_iKnife[client] != 0 && IsKnifeClass(classname))
 		{
+			int playerTeam = GetClientTeam(client);
+			if(CS_TEAM_T <= playerTeam <= CS_TEAM_CT)
+				ignoredCEconItemView = g_iPlayerKnifeDefIndex[playerTeam - 2][client] != 42 && g_iPlayerKnifeDefIndex[playerTeam - 2][client] != 59;
 			Format(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
 			return Plugin_Changed;
 		}
@@ -42,31 +45,9 @@ public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &it
 
 public void GiveNamedItem(int client, const char[] classname, const CEconItemView item, int entity)
 {
-	if (entity > -1 && IsValidClient(client))
+	if (IsValidClient(client) && IsValidEntity(entity))
 	{
-		int index;
-		if (g_smWeaponIndex.GetValue(classname, index))
-		{
-			if (IsKnifeClass(classname))
-			{
-				int defIndex;
-				g_smWeaponDefIndex.GetValue(g_WeaponClasses[g_iKnife[client]], defIndex);
-				char knifeClassName[32];
-				GetWeaponClass(entity, knifeClassName, sizeof(knifeClassName));
-				int playerTeam = GetClientTeam(client);
-				if(!StrEqual(knifeClassName, g_WeaponClasses[g_iKnife[client]]) || (CS_TEAM_T <= playerTeam <= CS_TEAM_CT && defIndex == g_iPlayerKnifeDefIndex[playerTeam - 2][client]))
-				{
-					float origin[3], angles[3];
-					GetClientAbsOrigin(client, origin);
-					GetClientAbsAngles(client, angles);
-					RemovePlayerItem(client, entity);
-					AcceptEntityInput(entity, "KillHierarchy");
-					entity = PTaH_SpawnItemFromDefIndex(defIndex, origin, angles);
-				}
-				EquipPlayerWeapon(client, entity);
-			}
-			SetWeaponProps(client, entity);
-		}
+		SetWeaponProps(client, entity);
 	}
 }
 
