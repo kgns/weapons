@@ -49,6 +49,10 @@ public void GiveNamedItem(int client, const char[] classname, const CEconItemVie
 {
 	if (IsValidClient(client) && IsValidEntity(entity))
 	{
+		if (IsKnifeClass(classname))
+		{
+			EquipPlayerWeapon(client, entity);
+		}
 		SetWeaponProps(client, entity);
 	}
 }
