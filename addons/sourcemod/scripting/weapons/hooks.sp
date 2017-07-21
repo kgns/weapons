@@ -38,7 +38,7 @@ public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &it
 			{
 				ignoredCEconItemView = g_iPlayerKnifeDefIndex[playerTeam - 2][client] != 42 && g_iPlayerKnifeDefIndex[playerTeam - 2][client] != 59;
 			}
-			Format(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
+			strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
 			return Plugin_Changed;
 		}
 	}
