@@ -36,6 +36,11 @@ public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &it
 			int playerTeam = GetClientTeam(client);
 			if(CS_TEAM_T <= playerTeam <= CS_TEAM_CT)
 			{
+				if(g_iPlayerKnifeDefIndex[playerTeam - 2][client] == 0)
+				{
+					CEconItemView playerItem = PTaH_GetItemInLoadout(client, playerTeam, 0);
+					g_iPlayerKnifeDefIndex[playerTeam - 2][client] = playerItem.GetItemDefinition().GetDefinitionIndex();
+				}
 				ignoredCEconItemView = g_iPlayerKnifeDefIndex[playerTeam - 2][client] != 42 && g_iPlayerKnifeDefIndex[playerTeam - 2][client] != 59;
 			}
 			strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
@@ -49,11 +54,15 @@ public void GiveNamedItem(int client, const char[] classname, const CEconItemVie
 {
 	if (IsValidClient(client) && IsValidEntity(entity))
 	{
-		if (IsKnifeClass(classname))
+		int index;
+		if (g_smWeaponIndex.GetValue(classname, index))
 		{
-			EquipPlayerWeapon(client, entity);
+			if (IsKnifeClass(classname))
+			{
+				EquipPlayerWeapon(client, entity);
+			}
+			SetWeaponProps(client, entity);
 		}
-		SetWeaponProps(client, entity);
 	}
 }
 
