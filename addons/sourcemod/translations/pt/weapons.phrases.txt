@@ -6,67 +6,67 @@
 	}
 	"ChooseKnife"
 	{
-		"pt"	"★ Escolhe a tua faca ★"
+		"pt"	"★ Mudar Suas Facas ★"
 	}
 	"ConfigAllWeapons"
 	{
-		"pt"	"Configurar todas as armas"
+		"pt"	"Configurar Todas As Armas"
 	}
 	"KnifeMenuTitle"
 	{
-		"pt"	"★ Escolha a sua faca ★"
+		"pt"	"★ Seleção De Facas ★"
 	}
 	"AllWeaponsMenuTitle"
 	{
-		"pt"	"Todas as armas"
+		"pt"	"Todas As Armas"
 	}
 	"Increase"
 	{
-		"pt"	"Aumentar em %d%%"
+		"pt"	"Aumentar %d%%"
 	}
 	"Decrease"
 	{
-		"pt"	"Diminuir em %d%%"
+		"pt"	"Diminuir %d%%"
 	}
 	"NameTagInfo"
 	{
-		"pt"	"Usa !nametag <nome> para dares uma nametag na tua arma atual."
+		"pt"	"Use !nametag <tag> para escolher uma name tag para sua arma atual!"
 	}
 	"NameTagColor"
 	{
-		"pt"	"Escolhe a cor da tua nametag"
+		"pt"	"Escolher cor da name tag"
 	}
 	"NameTagDisabled"
 	{
-		"pt"	"Uso de nametags desativado de momento."
+		"pt"	"O uso da name tag está desabilitado no momento."
 	}
 	"DontSpamNameTag"
 	{
-		"pt"	"Aguarde um pouco mais antes de usar !nametag novamente."
+		"pt"	"Aguarde um pouco até usar !nametag."
 	}
 	"NameTagNeedsParams"
 	{
-		"pt"	"Uso: !nametag <nome>"
+		"pt"	"Use: !nametag <tag>"
 	}
 	"ChooseLanguage"
 	{
-		"pt"	"Seleciona a linguagem das skins:"
+		"pt"	"Escolha uma linguagem para as suas skins:"
 	}
 	"ChooseColor"
 	{
-		"pt"	"Escolhe uma cor:"
+		"pt"	"Escolha uma cor:"
 	}
 	"DefaultColor"
 	{
-		"pt"	"Default"
+		"pt"	"Padrão"
 	}
 	"DefaultSkin"
 	{
-		"pt"	"Default"
+		"pt"	"Padrão"
 	}
 	"RandomSkin"
 	{
-		"pt"	"Aleatorio"
+		"pt"	"Aleatório"
 	}
 	"Black"
 	{
@@ -74,11 +74,11 @@
 	}
 	"Grey"
 	{
-		"pt"	"Cinzento"
+		"pt"	"Cinza"
 	}
 	"Red"
 	{
-		"pt"	"Vermelho"
+		"pt"	"Encarnado"
 	}
 	"Green"
 	{
@@ -90,19 +90,19 @@
 	}
 	"DeleteNameTag"
 	{
-		"pt"	"Apagar nametag"
+		"pt"	"Apagar Name Tag"
 	}
 	"OwnKnife"
 	{
-		"pt"	"★ A tua propria faca"
+		"pt"	"★ Sua própia faca"
 	}
 	"SetSkin"
 	{
-		"pt"	"Escolher skin"
+		"pt"	"Escolha uma skin"
 	}
 	"SetFloat"
 	{
-		"pt"	"Estado da arma: "
+		"pt"	"Condição da arma: "
 	}
 	"StatTrak"
 	{
@@ -142,7 +142,7 @@
 	}
 	"weapon_revolver"
 	{
-		"pt"	"Revolver"
+		"pt"	"Revólver R8"
 	}
 	"weapon_deagle"
 	{
@@ -158,7 +158,7 @@
 	}
 	"weapon_sawedoff"
 	{
-		"pt"	"Sawed-Off"
+		"pt"	"Cano curto"
 	}
 	"weapon_negev"
 	{
@@ -198,7 +198,7 @@
 	}
 	"weapon_elite"
 	{
-		"pt"	"Dual Berettas"
+		"pt"	"Berettas Duplas"
 	}
 	"weapon_m249"
 	{
@@ -254,19 +254,19 @@
 	}
 	"weapon_bayonet"
 	{
-		"pt"	"★ Bayonet"
+		"pt"	"★ Baioneta"
 	}
 	"weapon_knife_gut"
 	{
-		"pt"	"★ Gut Knife"
+		"pt"	"★ Gut Hook"
 	}
 	"weapon_knife_flip"
 	{
-		"pt"	"★ Flip Knife"
+		"pt"	"★ Canivete"
 	}
 	"weapon_knife_m9_bayonet"
 	{
-		"pt"	"★ M9 Bayonet"
+		"pt"	"★ Baioneta M9"
 	}
 	"weapon_knife_karambit"
 	{
@@ -274,23 +274,23 @@
 	}
 	"weapon_knife_tactical"
 	{
-		"pt"	"★ Huntsman Knife"
+		"pt"	"★ Faca de caçador"
 	}
 	"weapon_knife_butterfly"
 	{
-		"pt"	"★ Butterfly Knife"
+		"pt"	"★ Canivete borboleta"
 	}
 	"weapon_knife_falchion"
 	{
-		"pt"	"★ Falchion Knife"
+		"pt"	"★ Canivete Falchion"
 	}
 	"weapon_knife_push"
 	{
-		"pt"	"★ Shadow Daggers"
+		"pt"	"★ Adagas Sombrias"
 	}
 	"weapon_knife_survival_bowie"
 	{
-		"pt"	"★ Bowie Knife"
+		"pt"	"★ Faca Bowie"
 	}
 	"weapon_knife_t"
 	{
