@@ -40,6 +40,10 @@
 	{
 		"hu"	"Névcédula használata le van tiltva."
 	}
+	"DontSpamNameTag"
+	{
+		"hu"	"Várnod kell mi előtt újra használnád a !nametag -et."
+	}
 	"NameTagNeedsParams"
 	{
 		"hu"	"Használat: !nametag <név>"
