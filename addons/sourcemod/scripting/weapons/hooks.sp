@@ -33,16 +33,7 @@ public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &it
 	{
 		if (g_iKnife[client] != 0 && IsKnifeClass(classname))
 		{
-			int playerTeam = GetClientTeam(client);
-			if(CS_TEAM_T <= playerTeam <= CS_TEAM_CT)
-			{
-				if(g_iPlayerKnifeDefIndex[playerTeam - 2][client] == 0)
-				{
-					CEconItemView playerItem = PTaH_GetItemInLoadout(client, playerTeam, 0);
-					g_iPlayerKnifeDefIndex[playerTeam - 2][client] = playerItem.GetItemDefinition().GetDefinitionIndex();
-				}
-				ignoredCEconItemView = g_iPlayerKnifeDefIndex[playerTeam - 2][client] != 42 && g_iPlayerKnifeDefIndex[playerTeam - 2][client] != 59;
-			}
+			ignoredCEconItemView = true;
 			strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
 			return Plugin_Changed;
 		}
