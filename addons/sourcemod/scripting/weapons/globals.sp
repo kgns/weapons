@@ -75,8 +75,6 @@ int g_iSteam32[MAXPLAYERS+1] = { 0, ... };
 
 int g_iKnife[MAXPLAYERS+1] = { 0, ... };
 
-int g_iPlayerKnifeDefIndex[2][MAXPLAYERS+1];
-
 char g_Language[MAX_LANG][32];
 int g_iClientLanguage[MAXPLAYERS+1];
 Menu menuWeapons[MAX_LANG][sizeof(g_WeaponClasses)];

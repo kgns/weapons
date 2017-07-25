@@ -36,7 +36,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns - wasdzone",
 	description = "All in one custom weapon management",
-	version = "1.0.7",
+	version = "1.0.8",
 	url = "http://www.wasdzone.com"
 };
 
@@ -201,10 +201,6 @@ public void OnClientPostAdminCheck(int client)
 			temp[index] = '\0';
 		}
 		g_iSteam32[client] = StringToInt(temp);
-		CEconItemView playerItem = PTaH_GetItemInLoadout(client, CS_TEAM_T, 0);
-		g_iPlayerKnifeDefIndex[0][client] = playerItem.GetItemDefinition().GetDefinitionIndex();
-		playerItem = PTaH_GetItemInLoadout(client, CS_TEAM_CT, 0);
-		g_iPlayerKnifeDefIndex[1][client] = playerItem.GetItemDefinition().GetDefinitionIndex();
 		GetPlayerData(client);
 		QueryClientConVar(client, "cl_language", ConVarCallBack);
 	}
