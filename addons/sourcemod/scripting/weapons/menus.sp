@@ -550,7 +550,7 @@ Menu CreateMainMenu(int client)
 			if(weaponEntity != -1 && GetWeaponClass(weaponEntity, weaponClass, sizeof(weaponClass)))
 			{
 				Format(weaponName, sizeof(weaponName), "%T", weaponClass, client);
-				menu.AddItem(weaponClass, weaponName, (i == CS_SLOT_KNIFE && g_iKnife[client] == 0) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
+				menu.AddItem(weaponClass, weaponName, (IsKnifeClass(weaponClass) && g_iKnife[client] == 0) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 			}
 		}
 	}
