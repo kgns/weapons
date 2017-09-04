@@ -34,10 +34,10 @@
 public Plugin myinfo = 
 {
 	name = "Weapons & Knives",
-	author = "kgns - wasdzone",
+	author = "kgns | pluginal.com",
 	description = "All in one custom weapon management",
-	version = "1.0.10",
-	url = "http://www.wasdzone.com"
+	version = "1.0.11",
+	url = "https://pluginal.com"
 };
 
 public void OnPluginStart()
@@ -61,7 +61,6 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_knife", CommandKnife);
 	RegConsoleCmd("sm_nametag", CommandNameTag);
 	RegConsoleCmd("sm_wslang", CommandWSLang);
-	//RegConsoleCmd("sm_reportdata", CommandReportData);
 	
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
 	PTaH(PTaH_GiveNamedItem, Hook, GiveNamedItem);
@@ -329,48 +328,3 @@ public Action ReserveAmmoTimer(Handle timer, DataPack pack)
 		SetEntData(clientIndex, offset, ammo, 4, true);
 	}
 }
-
-/*
-public void ReportEconData(int client, const CEconItemView item)
-{
-	PrintToConsole(client, "GetDefinitionIndex: %d", item.GetItemDefinition().GetDefinitionIndex());
-	PrintToConsole(client, "GetCustomPaintKitIndex: %d", item.GetCustomPaintKitIndex());
-	PrintToConsole(client, "GetCustomPaintKitWear: %f", item.GetCustomPaintKitWear());
-	PrintToConsole(client, "GetCustomPaintKitSeed: %d", item.GetCustomPaintKitSeed());
-	PrintToConsole(client, "GetStatTrakKill: %d", item.GetStatTrakKill());
-	PrintToConsole(client, "GetQuality: %d", item.GetQuality());
-	PrintToConsole(client, "GetAccountID: %d", item.GetAccountID());
-	PrintToConsole(client, "GetOrigin: %d", item.GetOrigin());
-	PrintToConsole(client, "GetFlags: %d", item.GetFlags());
-	PrintToConsole(client, "GetRarity: %d", item.GetRarity());
-	char tag[128];
-	item.GetCustomName(tag, sizeof(tag));
-	PrintToConsole(client, "GetCustomName: %s", tag);
-	PrintToConsole(client, "IsCustomItemView: %d", item.IsCustomItemView());
-}
-
-public void ReportWeaponData(int client, int entity)
-{
-	PrintToConsole(client, "m_iItemIDLow: %d", GetEntProp(entity, Prop_Send, "m_iItemIDLow"));
-	PrintToConsole(client, "m_nFallbackPaintKit: %d", GetEntProp(entity, Prop_Send, "m_nFallbackPaintKit"));
-	PrintToConsole(client, "m_flFallbackWear: %f", GetEntPropFloat(entity, Prop_Send, "m_flFallbackWear"));
-	PrintToConsole(client, "m_nFallbackSeed: %d", GetEntProp(entity, Prop_Send, "m_nFallbackSeed"));
-	PrintToConsole(client, "m_nFallbackStatTrak: %d", GetEntProp(entity, Prop_Send, "m_nFallbackStatTrak"));
-	PrintToConsole(client, "m_iEntityQuality: %d", GetEntProp(entity, Prop_Send, "m_iEntityQuality"));
-	PrintToConsole(client, "m_iAccountID: %d", GetEntProp(entity, Prop_Send, "m_iAccountID"));
-	PrintToConsole(client, "m_OriginalOwnerXuidLow: %d", GetEntProp(entity, Prop_Send, "m_OriginalOwnerXuidLow"));
-	PrintToConsole(client, "m_nModelIndex: %d", GetEntProp(entity, Prop_Send, "m_nModelIndex"));
-	PrintToConsole(client, "m_nViewModelIndex: %d", GetEntProp(entity, Prop_Send, "m_nViewModelIndex"));
-	PrintToConsole(client, "m_hOwnerEntity: %d", GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity"));
-	PrintToConsole(client, "m_hPrevOwner: %d", GetEntPropEnt(entity, Prop_Send, "m_hPrevOwner"));
-	PrintToConsole(client, "m_iPrimaryReserveAmmoCount: %d", GetEntProp(entity, Prop_Send, "m_iPrimaryReserveAmmoCount"));
-	PrintToConsole(client, "m_iClip1: %d", GetEntProp(entity, Prop_Send, "m_iClip1"));
-}
-
-public Action CommandReportData(int client, int args)
-{
-	int activeWeaponClient = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-	ReportWeaponData(client, activeWeaponClient);
-	ReportEconData(client, PTaH_GetEconItemViewFromWeapon(activeWeaponClient));
-}
-*/
