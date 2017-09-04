@@ -49,6 +49,7 @@ public void GiveNamedItem(int client, const char[] classname, const CEconItemVie
 		{
 			if (IsKnifeClass(classname))
 			{
+				/*
 				int defIndex;
 				g_smWeaponDefIndex.GetValue(g_WeaponClasses[g_iKnife[client]], defIndex);
 				char knifeClassName[32];
@@ -64,6 +65,7 @@ public void GiveNamedItem(int client, const char[] classname, const CEconItemVie
 					AcceptEntityInput(entity, "KillHierarchy");
 					entity = PTaH_SpawnItemFromDefIndex(defIndex, origin, angles);
 				}
+				*/
 				EquipPlayerWeapon(client, entity);
 			}
 			SetWeaponProps(client, entity);
