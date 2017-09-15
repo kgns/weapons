@@ -21,12 +21,13 @@ void GetPlayerData(int client)
 	GetClientAuthId(client, AuthId_Steam2, steamid, sizeof(steamid), true);
 	char query[255];
 	FormatEx(query, sizeof(query), "SELECT * FROM %sweapons WHERE steamid = '%s'", g_TablePrefix, steamid);
-	db.Query(T_GetPlayerDataCallback, query, client);
+	db.Query(T_GetPlayerDataCallback, query, GetClientUserId(client));
 }
 
-public void T_GetPlayerDataCallback(Database database, DBResultSet results, const char[] error, int client)
+public void T_GetPlayerDataCallback(Database database, DBResultSet results, const char[] error, int userid)
 {
-	if(IsValidClient(client))
+	int clientIndex = GetClientOfUserId(userid);
+	if(IsValidClient(clientIndex))
 	{
 		if (results == null)
 		{
@@ -35,19 +36,21 @@ public void T_GetPlayerDataCallback(Database database, DBResultSet results, cons
 		else if (results.RowCount == 0)
 		{
 			char steamid[32];
-			GetClientAuthId(client, AuthId_Steam2, steamid, sizeof(steamid), true);
+			GetClientAuthId(clientIndex, AuthId_Steam2, steamid, sizeof(steamid), true);
 			char query[255];
 			FormatEx(query, sizeof(query), "INSERT INTO %sweapons (steamid) VALUES ('%s')", g_TablePrefix, steamid);
-			db.Query(T_InsertCallback, query);
+			DataPack pack = new DataPack();
+			pack.WriteString(query);
+			db.Query(T_InsertCallback, query, pack);
 			for(int i = 0; i < sizeof(g_WeaponClasses); i++)
 			{
-				g_iSkins[client][i] = 0;
-				g_iStatTrak[client][i] = 0;
-				g_iStatTrakCount[client][i] = 0;
-				g_NameTag[client][i] = "";
-				g_fFloatValue[client][i] = 0.0;
+				g_iSkins[clientIndex][i] = 0;
+				g_iStatTrak[clientIndex][i] = 0;
+				g_iStatTrakCount[clientIndex][i] = 0;
+				g_NameTag[clientIndex][i] = "";
+				g_fFloatValue[clientIndex][i] = 0.0;
 			}
-			g_iKnife[client] = 0;
+			g_iKnife[clientIndex] = 0;
 		}
 		else
 		{
@@ -55,13 +58,13 @@ public void T_GetPlayerDataCallback(Database database, DBResultSet results, cons
 			{
 				for(int i = 2, j = 0; j < sizeof(g_WeaponClasses); i += 5, j++) 
 				{
-					g_iSkins[client][j] = results.FetchInt(i);
-					g_fFloatValue[client][j] = results.FetchFloat(i + 1);
-					g_iStatTrak[client][j] = results.FetchInt(i + 2);
-					g_iStatTrakCount[client][j] = results.FetchInt(i + 3);
-					results.FetchString(i + 4, g_NameTag[client][j], 128);
+					g_iSkins[clientIndex][j] = results.FetchInt(i);
+					g_fFloatValue[clientIndex][j] = results.FetchFloat(i + 1);
+					g_iStatTrak[clientIndex][j] = results.FetchInt(i + 2);
+					g_iStatTrakCount[clientIndex][j] = results.FetchInt(i + 3);
+					results.FetchString(i + 4, g_NameTag[clientIndex][j], 128);
 				}
-				g_iKnife[client] = results.FetchInt(1);
+				g_iKnife[clientIndex] = results.FetchInt(1);
 			}
 		}
 	}
@@ -73,23 +76,33 @@ void UpdatePlayerData(int client, char[] updateFields)
 	GetClientAuthId(client, AuthId_Steam2, steamid, sizeof(steamid), true);
 	char query[255];
 	FormatEx(query, sizeof(query), "UPDATE %sweapons SET %s WHERE steamid = '%s'", g_TablePrefix, updateFields, steamid);
-	db.Query(T_UpdatePlayerDataCallback, query, client);
+	DataPack pack = new DataPack();
+	pack.WriteString(query);
+	db.Query(T_UpdatePlayerDataCallback, query, pack);
 }
 
-public void T_UpdatePlayerDataCallback(Database database, DBResultSet results, const char[] error, int client)
+public void T_UpdatePlayerDataCallback(Database database, DBResultSet results, const char[] error, DataPack pack)
 {
 	if (results == null)
 	{
-		LogError("Update Player failed! %s", error);
+		pack.Reset();
+		char buffer[1024];
+		pack.ReadString(buffer, 1024);
+		LogError("Update Player failed! query: \"%s\" error: \"%s\"", buffer, error);
 	}
+	CloseHandle(pack);
 }
 
-public void T_InsertCallback(Database database, DBResultSet results, const char[] error, any data)
+public void T_InsertCallback(Database database, DBResultSet results, const char[] error, DataPack pack)
 {
 	if (results == null)
 	{
-		LogError("Query failed! %s", error);
+		pack.Reset();
+		char buffer[1024];
+		pack.ReadString(buffer, 1024);
+		LogError("Insert Query failed! query: \"%s\" error: \"%s\"", buffer, error);
 	}
+	CloseHandle(pack);
 }
 
 public void SQLConnectCallback(Database database, const char[] error, any data)
@@ -127,23 +140,25 @@ public void SQLConnectCallback(Database database, const char[] error, any data)
 		index += FormatEx(createQuery[index], sizeof(createQuery) - index, "NOT NULL DEFAULT '0', knife_push_tag varchar(256) NOT NULL DEFAULT '', knife_tactical int(4) NOT NULL DEFAULT '0', knife_tactical_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_tactical_trak int(1) NOT NULL DEFAULT '0', knife_tactical_trak_count int(10) NOT NULL DEFAULT '0', knife_tactical_tag varchar(256) NOT NULL DEFAULT '', knife_falchion int(4) NOT NULL DEFAULT '0', knife_falchion_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_falchion_trak int(1) NOT NULL DEFAULT '0', knife_falchion_trak_count int(10) NOT NULL DEFAULT '0', knife_falchion_tag varchar(256) NOT NULL DEFAULT '', knife_gut int(4) NOT NULL DEFAULT '0', knife_gut_float decimal(3,2) NOT NULL DEFAULT '0.0', knife_gut_trak int(1) NOT NULL DEFAULT '0', knife_gut_trak_count int(10) NOT NULL DEFAULT '0', knife_gut_tag varchar(256) NOT NULL DEFAULT '')");
 		
 		db.Driver.GetIdentifier(dbIdentifier, sizeof(dbIdentifier));
-		if (StrEqual(dbIdentifier, "mysql"))
+		bool mysql = StrEqual(dbIdentifier, "mysql");
+		if (mysql)
 		{
 			 index += FormatEx(createQuery[index], sizeof(createQuery) - index, " ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
 		}
 		
-		db.Query(T_CreateTableCallback, createQuery, _, DBPrio_High);
+		db.Query(T_CreateTableCallback, createQuery, mysql, DBPrio_High);
 	}
 }
 
-public void T_CreateTableCallback(Database database, DBResultSet results, const char[] error, int client)
+public void T_CreateTableCallback(Database database, DBResultSet results, const char[] error, bool mysql)
 {
 	if (results == null)
 	{
-		LogError("Create table failed! %s", error);
+		LogError("%s Create table failed! %s", (mysql ? "MySQL" : "SQLite"), error);
 	}
 	else
 	{
+		LogMessage("%s DB connection successful", (mysql ? "MySQL" : "SQLite"));
 		for(int i = 1; i <= MaxClients; i++)
 		{
 			if(IsClientConnected(i))
