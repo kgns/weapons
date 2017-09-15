@@ -28,10 +28,6 @@
 	{
 		"en"	"Decrease by %d%%"
 	}
-	"NameTagInfo"
-	{
-		"en"	"Use !nametag <tag> command to set a name tag for your current weapon"
-	}
 	"NameTagColor"
 	{
 		"en"	"Set Name Tag Color"
@@ -39,14 +35,6 @@
 	"NameTagDisabled"
 	{
 		"en"	"Name tag usage is disabled at the moment."
-	}
-	"DontSpamNameTag"
-	{
-		"en"	"Wait a little more before using !nametag again."
-	}
-	"NameTagNeedsParams"
-	{
-		"en"	"Usage: !nametag <tag>"
 	}
 	"ChooseLanguage"
 	{
@@ -71,10 +59,6 @@
 	"Black"
 	{
 		"en"	"Black"
-	}
-	"Grey"
-	{
-		"en"	"Grey"
 	}
 	"Red"
 	{
@@ -110,7 +94,7 @@
 	}
 	"SetNameTag"
 	{
-		"en"	"Name Tag: "
+		"en"	"Name Tag"
 	}
 	"On"
 	{
@@ -299,5 +283,37 @@
 	"weapon_knife"
 	{
 		"en"	"Knife"
+	}
+	"ChangeNameTag"
+	{
+		"en"	"Set Name Tag"
+	}
+	"NameTagNew"
+	{
+		"en"	"You can now use !ws menu to set name tag."
+	}
+	"GracePeriod"
+	{
+		"en"	"You can only use !ws command if you're dead or in the first %d seconds after every round start."
+	}
+	"ChangeLang"
+	{
+		"en"	"Change Language"
+	}
+	"NameTagCancelled"
+	{
+		"en"	"Nametag operation aborted."
+	}
+	"Yellow"
+	{
+		"en"	"Yellow"
+	}
+	"NameTagInstruction"
+	{
+		"en"	"Write your desired name tag into chat. To abort, type !cancel."
+	}
+	"NameTagSuccess"
+	{
+		"en"	"Name tag successfully applied"
 	}
 }
