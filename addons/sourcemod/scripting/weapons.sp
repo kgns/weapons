@@ -37,7 +37,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns | pluginal.com",
 	description = "All in one custom weapon management",
-	version = "1.1.0",
+	version = "1.1.1",
 	url = "https://pluginal.com"
 };
 
