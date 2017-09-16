@@ -286,34 +286,34 @@
 	}
 	"ChangeNameTag"
  	{
- 		"en"	"Définir l'étiquette"
+ 		"fr"	"Définir l'étiquette"
  	}
  	"NameTagNew"
  	{
- 		"en"	"Vous pouvez maintenant utiliser !ws menu pour définir l'étiquette."
+ 		"fr"	"Vous pouvez maintenant utiliser !ws menu pour définir l'étiquette."
  	}
  	"GracePeriod"
  	{
- 		"en"	"Vous ne pouvez utiliser la commande !ws si vous êtes mort ou dans les premieres %d secondes de la manche."
+ 		"fr"	"Vous ne pouvez utiliser la commande !ws si vous êtes mort ou dans les premieres %d secondes de la manche."
  	}
  	"ChangeLang"
  	{
- 		"en"	"Change de langue"
+ 		"fr"	"Change de langue"
  	}
  	"NameTagCancelled"
  	{
- 		"en"	"Votre etiquette a été interrompue."
+ 		"fr"	"Votre etiquette a été interrompue."
  	}
  	"Yellow"
  	{
- 		"en"	"Jaune
+ 		"fr"	"Jaune
  	}
  	"NameTagInstruction"
  	{
- 		"en"	"Écrivez votre etiquette souhaité dans un chat. Pour annuler, tapez !cancel."
+ 		"fr"	"Écrivez votre etiquette souhaité dans un chat. Pour annuler, tapez !cancel."
  	}
  	"NameTagSuccess"
  	{
- 		"en"	"Votre etiquette a été appliqué avec succès"
+ 		"fr"	"Votre etiquette a été appliqué avec succès"
  	}
 }
