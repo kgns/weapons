@@ -79,11 +79,11 @@ public Action CommandWeaponSkins(int client, int args)
 	{
 		if(g_iGracePeriod > 0 && g_iRoundStartTime + g_iGracePeriod < GetTime() && IsPlayerAlive(client))
 		{
-			ReplyToCommand(client, " %s \x02%t", g_ChatPrefix, "GracePeriod", g_iGracePeriod);
+			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "GracePeriod", g_iGracePeriod);
 		}
 		else
 		{
-			CreateMainMenu(client).Display(client, MENU_TIME_FOREVER);
+			CreateMainMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 		}
 	}
 	return Plugin_Handled;
@@ -93,7 +93,7 @@ public Action CommandKnife(int client, int args)
 {
 	if (IsValidClient(client))
 	{
-		CreateKnifeMenu(client).Display(client, MENU_TIME_FOREVER);
+		CreateKnifeMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 	}
 	return Plugin_Handled;
 }
@@ -102,7 +102,7 @@ public Action CommandWSLang(int client, int args)
 {
 	if (IsValidClient(client))
 	{
-		CreateLanguageMenu(client).Display(client, MENU_TIME_FOREVER);
+		CreateLanguageMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 	}
 	return Plugin_Handled;
 }
@@ -138,11 +138,15 @@ void SetWeaponProps(int client, int entity)
 		else
 		{
 			if(g_bEnableStatTrak)
+			{
 				SetEntProp(entity, Prop_Send, "m_nFallbackStatTrak", g_iStatTrak[client][index] == 0 ? -1 : g_iKnifeStatTrakMode == 0 ? GetTotalKnifeStatTrakCount(client) : g_iStatTrakCount[client][index]);
+			}
 			SetEntProp(entity, Prop_Send, "m_iEntityQuality", 3);
 		}
 		if (g_bEnableNameTag && strlen(g_NameTag[client][index]) > 0)
+		{
 			SetEntDataString(entity, FindSendPropInfo("CBaseAttributableItem", "m_szCustomName"), g_NameTag[client][index], 128);
+		}
 		SetEntProp(entity, Prop_Send, "m_iAccountID", g_iSteam32[client]);
 		SetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity", client);
 		SetEntPropEnt(entity, Prop_Send, "m_hPrevOwner", -1);
@@ -174,7 +178,7 @@ void RefreshWeapon(int client, int index, bool defaultKnife = false)
 				int ammo = -1;
 				int offset = -1;
 				int reserve = -1;
-					
+				
 				if (!isKnife)
 				{
 					offset = FindDataMapInfo(client, "m_iAmmo") + (GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType") * 4);

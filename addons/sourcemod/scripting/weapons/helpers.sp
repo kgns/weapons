@@ -199,3 +199,15 @@ stock int GetTotalKnifeStatTrakCount(int client)
 	}
 	return count;
 }
+
+stock int GetRemainingGracePeriodSeconds()
+{
+	if(g_iGracePeriod == 0 || g_iRoundStartTime == 0)
+	{
+		return MENU_TIME_FOREVER;
+	}
+	else
+	{
+		return g_iRoundStartTime + g_iGracePeriod - GetTime();
+	}
+}

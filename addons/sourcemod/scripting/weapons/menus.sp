@@ -69,7 +69,7 @@ public int WeaponsMenuHandler(Menu menu, MenuAction action, int client, int sele
 		{
 			if (IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				CreateWeaponMenu(client).Display(client, MENU_TIME_FOREVER);
+				CreateWeaponMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 			}
 		}
 	}
@@ -85,7 +85,7 @@ public Action WeaponsMenuTimer(Handle timer, DataPack pack)
 	
 	if(IsClientInGame(clientIndex))
 	{
-		menu.DisplayAt(clientIndex, menuSelectionPosition, MENU_TIME_FOREVER);
+		menu.DisplayAt(clientIndex, menuSelectionPosition, GetRemainingGracePeriodSeconds());
 	}
 }
 
@@ -101,11 +101,11 @@ public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selec
 				menu.GetItem(selection, buffer, sizeof(buffer));
 				if(StrEqual(buffer, "skin"))
 				{
-					menuWeapons[g_iClientLanguage[client]][g_iIndex[client]].Display(client, MENU_TIME_FOREVER);
+					menuWeapons[g_iClientLanguage[client]][g_iIndex[client]].Display(client, GetRemainingGracePeriodSeconds());
 				}
 				else if(StrEqual(buffer, "float"))
 				{
-					CreateFloatMenu(client).Display(client, MENU_TIME_FOREVER);
+					CreateFloatMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 				}
 				else if(StrEqual(buffer, "stattrak"))
 				{
@@ -122,7 +122,7 @@ public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selec
 				}
 				else if(StrEqual(buffer, "nametag"))
 				{
-					CreateNameTagMenu(client).Display(client, MENU_TIME_FOREVER);
+					CreateNameTagMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 				}
 			}
 		}
@@ -130,7 +130,7 @@ public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selec
 		{
 			if(IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				CreateMainMenu(client).Display(client, MENU_TIME_FOREVER);
+				CreateMainMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 			}
 		}
 		case MenuAction_End:
@@ -145,7 +145,7 @@ public Action StatTrakMenuTimer(Handle timer, int userid)
 	int clientIndex = GetClientOfUserId(userid);
 	if(IsClientInGame(clientIndex))
 	{
-		CreateWeaponMenu(clientIndex).Display(clientIndex, MENU_TIME_FOREVER);
+		CreateWeaponMenu(clientIndex).Display(clientIndex, GetRemainingGracePeriodSeconds());
 	}
 }
 
@@ -197,7 +197,7 @@ public int FloatMenuHandler(Menu menu, MenuAction action, int client, int select
 					g_FloatTimer[client] = CreateDataTimer(1.0, FloatTimer, pack);
 					pack.WriteCell(GetClientUserId(client));
 					pack.WriteCell(g_iIndex[client]);
-					CreateFloatMenu(client).Display(client, MENU_TIME_FOREVER);
+					CreateFloatMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 				}
 				else if(StrEqual(buffer, "decrease"))
 				{
@@ -215,7 +215,7 @@ public int FloatMenuHandler(Menu menu, MenuAction action, int client, int select
 					g_FloatTimer[client] = CreateDataTimer(1.0, FloatTimer, pack);
 					pack.WriteCell(GetClientUserId(client));
 					pack.WriteCell(g_iIndex[client]);
-					CreateFloatMenu(client).Display(client, MENU_TIME_FOREVER);
+					CreateFloatMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 				}
 			}
 		}
@@ -223,7 +223,7 @@ public int FloatMenuHandler(Menu menu, MenuAction action, int client, int select
 		{
 			if(IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				CreateWeaponMenu(client).Display(client, MENU_TIME_FOREVER);
+				CreateWeaponMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 			}
 		}
 		case MenuAction_End:
@@ -294,7 +294,7 @@ public int NameTagMenuHandler(Menu menu, MenuAction action, int client, int sele
 				}
 				else if(StrEqual(buffer, "color"))
 				{
-					CreateColorsMenu(client).Display(client, MENU_TIME_FOREVER);
+					CreateColorsMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 				}
 				else if(StrEqual(buffer, "delete"))
 				{
@@ -308,7 +308,7 @@ public int NameTagMenuHandler(Menu menu, MenuAction action, int client, int sele
 					
 					RefreshWeapon(client, g_iIndex[client]);
 					
-					CreateWeaponMenu(client).Display(client, MENU_TIME_FOREVER);
+					CreateWeaponMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 				}
 			}
 		}
@@ -316,7 +316,7 @@ public int NameTagMenuHandler(Menu menu, MenuAction action, int client, int sele
 		{
 			if(IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				CreateWeaponMenu(client).Display(client, MENU_TIME_FOREVER);
+				CreateWeaponMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 			}
 		}
 		case MenuAction_End:
@@ -400,7 +400,7 @@ public int ColorsMenuHandler(Menu menu, MenuAction action, int client, int selec
 		{
 			if(IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				CreateNameTagMenu(client).Display(client, MENU_TIME_FOREVER);
+				CreateNameTagMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 			}
 		}
 		case MenuAction_End:
@@ -415,7 +415,7 @@ public Action NameTagColorsMenuTimer(Handle timer, int userid)
 	int clientIndex = GetClientOfUserId(userid);
 	if(IsClientInGame(clientIndex))
 	{
-		CreateColorsMenu(clientIndex).Display(clientIndex, MENU_TIME_FOREVER);
+		CreateColorsMenu(clientIndex).Display(clientIndex, GetRemainingGracePeriodSeconds());
 	}
 }
 
@@ -448,14 +448,14 @@ public int AllWeaponsMenuHandler(Menu menu, MenuAction action, int client, int s
 				menu.GetItem(selection, class, sizeof(class));
 				
 				g_smWeaponIndex.GetValue(class, g_iIndex[client]);
-				CreateWeaponMenu(client).Display(client, MENU_TIME_FOREVER);
+				CreateWeaponMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 			}
 		}
 		case MenuAction_Cancel:
 		{
 			if(IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				CreateMainMenu(client).Display(client, MENU_TIME_FOREVER);
+				CreateMainMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 			}
 		}
 		case MenuAction_End:
@@ -524,16 +524,16 @@ public int MainMenuHandler(Menu menu, MenuAction action, int client, int selecti
 				menu.GetItem(selection, info, sizeof(info));
 				if(StrEqual(info, "all"))
 				{
-					CreateAllWeaponsMenu(client).Display(client, MENU_TIME_FOREVER);
+					CreateAllWeaponsMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 				}
 				else if(StrEqual(info, "lang"))
 				{
-					CreateLanguageMenu(client).Display(client, MENU_TIME_FOREVER);
+					CreateLanguageMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 				}
 				else
 				{
 					g_smWeaponIndex.GetValue(info, g_iIndex[client]);
-					CreateWeaponMenu(client).Display(client, MENU_TIME_FOREVER);
+					CreateWeaponMenu(client).Display(client, GetRemainingGracePeriodSeconds());
 				}
 			}
 		}
@@ -636,7 +636,7 @@ public int KnifeMenuHandler(Menu menu, MenuAction action, int client, int select
 				
 				RefreshWeapon(client, knifeId, knifeId == 0);
 				
-				CreateKnifeMenu(client).DisplayAt(client, GetMenuSelectionPosition(), MENU_TIME_FOREVER);
+				CreateKnifeMenu(client).DisplayAt(client, GetMenuSelectionPosition(), GetRemainingGracePeriodSeconds());
 			}
 		}
 		case MenuAction_End:
