@@ -59,10 +59,15 @@ public void GiveNamedItem(int client, const char[] classname, const CEconItemVie
 
 public Action ChatListener(int client, const char[] command, int args)
 {
-	if (g_bWaitingForNametag[client] && IsValidClient(client) && g_iIndex[client] > -1 && !IsChatTrigger())
+	char nameTag[128];
+	GetCmdArgString(nameTag, sizeof(nameTag));
+	StripQuotes(nameTag);
+	if (StrEqual(nameTag, "!ws") || StrEqual(nameTag, "!knife") || StrEqual(nameTag, "!wslang") || StrContains(nameTag, "!nametag") == 0)
 	{
-		char nameTag[128];
-		GetCmdArgString(nameTag, sizeof(nameTag));
+		return Plugin_Handled;
+	}
+	else if (g_bWaitingForNametag[client] && IsValidClient(client) && g_iIndex[client] > -1 && !IsChatTrigger())
+	{
 		CleanNameTag(nameTag, sizeof(nameTag));
 		
 		g_bWaitingForNametag[client] = false;
