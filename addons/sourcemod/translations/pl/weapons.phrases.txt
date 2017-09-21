@@ -2,7 +2,7 @@
 {
 	"WSMenuTitle"
 	{
-		"pl"	"Menu Skinów"
+		"pl"	"★ Menu Skinów ★"
 	}
 	"ChooseKnife"
 	{
@@ -10,7 +10,7 @@
 	}
 	"ConfigAllWeapons"
 	{
-		"pl"	"Ustaw skiny do każdej broni"
+		"pl"	"Ustaw skiny do wszystkich broni"
 	}
 	"KnifeMenuTitle"
 	{
@@ -28,29 +28,17 @@
 	{
 		"pl"	"Zmniejsz o %d%%"
 	}
-	"NameTagInfo"
-	{
-		"pl"	"Wpisz !nametag <nazwa> aby zmienić nazwę swojej broni"
-	}
 	"NameTagColor"
 	{
-		"pl"	"Ustaw kolor NameTagu"
+		"pl"	"Ustaw kolor NameTag'a"
 	}
 	"NameTagDisabled"
 	{
-		"pl"	"Używanie nametag'ów jest obecnie wyłączone."
-	}
-	"DontSpamNameTag"
-	{
-		"pl"	"Poczekaj chwilę zanim znowu użyjesz !nametag"
-	}
-	"NameTagNeedsParams"
-	{
-		"pl"	"Wpiz: !nametag <nazwa>"
+		"pl"	"Używanie NameTag'ów jest aktualnie wyłączone"
 	}
 	"ChooseLanguage"
 	{
-		"pl"	"Wybierz język dla nazwy skinów:"
+		"pl"	"Wybierz język do nazwy skinów:"
 	}
 	"ChooseColor"
 	{
@@ -58,11 +46,11 @@
 	}
 	"DefaultColor"
 	{
-		"pl"	"Domyslny"
+		"pl"	"Domyślny"
 	}
 	"DefaultSkin"
 	{
-		"pl"	"Domyslny"
+		"pl"	"Domyślny"
 	}
 	"RandomSkin"
 	{
@@ -71,10 +59,6 @@
 	"Black"
 	{
 		"pl"	"Czarny"
-	}
-	"Grey"
-	{
-		"pl"	"Szary"
 	}
 	"Red"
 	{
@@ -110,7 +94,7 @@
 	}
 	"SetNameTag"
 	{
-		"pl"	"NameTag: "
+		"pl"	"NameTag"
 	}
 	"On"
 	{
@@ -198,7 +182,7 @@
 	}
 	"weapon_elite"
 	{
-		"pl"	"Dual Berettas"
+		"pl"	"Dwie Beretty"
 	}
 	"weapon_m249"
 	{
@@ -299,5 +283,37 @@
 	"weapon_knife"
 	{
 		"pl"	"Nóż"
+	}
+	"ChangeNameTag"
+	{
+		"pl"	"Ustaw NameTag"
+	}
+	"NameTagNew"
+	{
+		"pl"	"Możesz teraz użyć menu !ws , aby ustawić NameTag"
+	}
+	"GracePeriod"
+	{
+		"pl"	"Możesz użyć komendy !ws tylko jak nie żyjesz lub w pierwszych %d sekundach początku rundy"
+	}
+	"ChangeLang"
+	{
+		"pl"	"Zmień język nazwy skinów"
+	}
+	"NameTagCancelled"
+	{
+		"pl"	"Ustawianie NameTag'a zostało przerwane!"
+	}
+	"Yellow"
+	{
+		"pl"	"Żółty"
+	}
+	"NameTagInstruction"
+	{
+		"pl"	"Wpisz swój NameTag na czacie. Aby anulować, wpisz !cancel"
+	}
+	"NameTagSuccess"
+	{
+		"pl"	"Ustawienie NameTag'a przebiegło pomyślnie!"
 	}
 }
