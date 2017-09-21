@@ -28,10 +28,6 @@
 	{
 		"fr"	"Diminution en %d%%"
 	}
-	"NameTagInfo"
-	{
-		"fr"	"Utilisez la commande !nametag <tag> pour définir une étiquette sur votre arme actuelle"
-	}
 	"NameTagColor"
 	{
 		"fr"	"Définir le nom de la couleur de l'étiquette"
@@ -39,14 +35,6 @@
 	"NameTagDisabled"
 	{
 		"fr"	"L'utilisation de l'étiquette est désactivée pour le moment."
-	}
-	"DontSpamNameTag"
-	{
-		"fr"	"Attendez un peu plus avant d'utiliser !nametag à nouveau."
-	}
-	"NameTagNeedsParams"
-	{
-		"fr"	"Utiliser: !nametag <tag>"
 	}
 	"ChooseLanguage"
 	{
@@ -71,10 +59,6 @@
 	"Black"
 	{
 		"fr"	"Noir"
-	}
-	"Grey"
-	{
-		"fr"	"Gris"
 	}
 	"Red"
 	{
@@ -110,7 +94,7 @@
 	}
 	"SetNameTag"
 	{
-		"fr"	"Etiquette: "
+		"fr"	"Etiquette"
 	}
 	"On"
 	{
@@ -190,6 +174,7 @@
 	}
 	"weapon_fiveseven"
 	{
+		"fr"	"Five-SeveN"
 	}
 	"weapon_aug"
 	{
@@ -299,4 +284,36 @@
 	{
 		"fr"	"Couteau"
 	}
+	"ChangeNameTag"
+ 	{
+ 		"fr"	"Définir l'étiquette"
+ 	}
+ 	"NameTagNew"
+ 	{
+ 		"fr"	"Vous pouvez maintenant utiliser !ws menu pour définir l'étiquette."
+ 	}
+ 	"GracePeriod"
+ 	{
+ 		"fr"	"Vous ne pouvez utiliser la commande !ws si vous êtes mort ou dans les premieres %d secondes de la manche."
+ 	}
+ 	"ChangeLang"
+ 	{
+ 		"fr"	"Change de langue"
+ 	}
+ 	"NameTagCancelled"
+ 	{
+ 		"fr"	"Votre etiquette a été interrompue."
+ 	}
+ 	"Yellow"
+ 	{
+ 		"fr"	"Jaune
+ 	}
+ 	"NameTagInstruction"
+ 	{
+ 		"fr"	"Écrivez votre etiquette souhaité dans un chat. Pour annuler, tapez !cancel."
+ 	}
+ 	"NameTagSuccess"
+ 	{
+ 		"fr"	"Votre etiquette a été appliqué avec succès"
+ 	}
 }

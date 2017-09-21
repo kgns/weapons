@@ -28,25 +28,13 @@
 	{
 		"tr"	"%d%% Düşür"
 	}
-	"NameTagInfo"
-	{
-		"tr"	"Kullandığınız silaha isim etiketi eklemek için !nametag <etiket> komudunu kullanın"
-	}
 	"NameTagColor"
 	{
-		"tr"	"İsim Etiketi Rengi Belirle"
+		"tr"	"Etiket Rengi Belirle"
 	}
 	"NameTagDisabled"
 	{
 		"tr"	"İsim etiketi kullanımı şu an kapalı."
-	}
-	"DontSpamNameTag"
-	{
-		"tr"	"Art arda !nametag kullanmadan önce biraz bekleyin."
-	}
-	"NameTagNeedsParams"
-	{
-		"tr"	"Kullanım: !nametag <etiket>"
 	}
 	"ChooseLanguage"
 	{
@@ -72,10 +60,6 @@
 	{
 		"tr"	"Siyah"
 	}
-	"Grey"
-	{
-		"tr"	"Gri"
-	}
 	"Red"
 	{
 		"tr"	"Kırmızı"
@@ -90,7 +74,7 @@
 	}
 	"DeleteNameTag"
 	{
-		"tr"	"İsim Etiketini Sil"
+		"tr"	"Etiketi Sil"
 	}
 	"OwnKnife"
 	{
@@ -110,7 +94,7 @@
 	}
 	"SetNameTag"
 	{
-		"tr"	"İsim Etiketi: "
+		"tr"	"İsim Etiketi"
 	}
 	"On"
 	{
@@ -299,5 +283,37 @@
 	"weapon_knife"
 	{
 		"tr"	"Bıçak"
+	}
+	"ChangeNameTag"
+	{
+		"tr"	"Etiket Belirle"
+	}
+	"NameTagNew"
+	{
+		"tr"	"İsim etiketi belirlemek için artık !ws menüsünü kullanabilirsiniz."
+	}
+	"GracePeriod"
+	{
+		"tr"	"!ws komudunu sadece ölüyken ya da her tur başı ilk %d saniye içerisinde kullanabilirsiniz."
+	}
+	"ChangeLang"
+	{
+		"tr"	"Dil Değiştir"
+	}
+	"NameTagCancelled"
+	{
+		"tr"	"İsim etiketi işleminiz iptal edildi."
+	}
+	"Yellow"
+	{
+		"tr"	"Sarı"
+	}
+	"NameTagInstruction"
+	{
+		"tr"	"Kullanmak istediğiniz isim etiketini chat'e yazın. İsim etiketi değiştirmekten vazgeçtiyseniz !iptal yazabilirsiniz."
+	}
+	"NameTagSuccess"
+	{
+		"tr"	"İsim etiketi belirlendi"
 	}
 }

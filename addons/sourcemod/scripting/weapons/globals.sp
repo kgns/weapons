@@ -39,6 +39,7 @@ char configPath[PLATFORM_MAX_PATH];
 
 ConVar g_Cvar_DBConnection;
 char g_DBConnection[32];
+char g_DBConnectionOld[32];
 
 ConVar g_Cvar_TablePrefix;
 char g_TablePrefix[10];
@@ -54,25 +55,35 @@ ConVar g_Cvar_KnifeStatTrakMode;
 int g_iKnifeStatTrakMode;
 
 ConVar g_Cvar_EnableFloat;
-int g_iEnableFloat;
+bool g_bEnableFloat;
 
 ConVar g_Cvar_EnableNameTag;
-int g_iEnableNameTag;
+bool g_bEnableNameTag;
 
 ConVar g_Cvar_EnableStatTrak;
-int g_iEnableStatTrak;
+bool g_bEnableStatTrak;
+
+ConVar g_Cvar_EnableWeaponOverwrite;
+bool g_bOverwriteEnabled;
+
+ConVar g_Cvar_GracePeriod;
+int g_iGracePeriod;
 
 int g_iSkins[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 int g_iStatTrak[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 int g_iStatTrakCount[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 char g_NameTag[MAXPLAYERS+1][sizeof(g_WeaponClasses)][128];
 float g_fFloatValue[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
+
 int g_iIndex[MAXPLAYERS+1] = { 0, ... };
 Handle g_FloatTimer[MAXPLAYERS+1] = { INVALID_HANDLE, ... };
-int g_iNameTagTime[MAXPLAYERS+1] = { 0, ... };
 int g_iSteam32[MAXPLAYERS+1] = { 0, ... };
 
+bool g_bWaitingForNametag[MAXPLAYERS+1] = { false, ... };
+
 int g_iKnife[MAXPLAYERS+1] = { 0, ... };
+
+int g_iRoundStartTime = 0;
 
 char g_Language[MAX_LANG][32];
 int g_iClientLanguage[MAXPLAYERS+1];

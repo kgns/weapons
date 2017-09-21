@@ -19,9 +19,9 @@ stock void StripHtml(const char[] source, char[] output, int size)
 {
 	int start, end;
 	strcopy(output, size, source);
-	if((start = StrContains(source, ">")) > 0)
+	while((start = StrContains(output, ">")) > 0)
 	{
-		strcopy(output, size, source[start+1]);
+		strcopy(output, size, output[start+1]);
 		if((end = StrContains(output, "<")) > 0)
 		{
 			output[end] = '\0';
@@ -36,6 +36,7 @@ stock void CleanNameTag(char[] nameTag, int size)
 	{
 		ReplaceString(nameTag, size, "  ", " ");
 	}
+	StripQuotes(nameTag);
 }
 
 stock int GetRandomSkin(int client, int index)
@@ -197,4 +198,16 @@ stock int GetTotalKnifeStatTrakCount(int client)
 		}
 	}
 	return count;
+}
+
+stock int GetRemainingGracePeriodSeconds()
+{
+	if(g_iGracePeriod == 0 || g_iRoundStartTime == 0)
+	{
+		return MENU_TIME_FOREVER;
+	}
+	else
+	{
+		return g_iRoundStartTime + g_iGracePeriod - GetTime();
+	}
 }

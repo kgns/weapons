@@ -17,23 +17,24 @@
 
 public void HookPlayer(int client)
 {
-	if(g_iEnableStatTrak == 1)
+	if(g_bEnableStatTrak)
 		SDKHook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
 }
 
 public void UnhookPlayer(int client)
 {
-	if(g_iEnableStatTrak == 1)
+	if(g_bEnableStatTrak)
 		SDKUnhook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
 }
 
-public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item)
+public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, bool &ignoredCEconItemView)
 {
 	if (IsValidClient(client))
 	{
-		if (g_iKnife[client] != 0 && IsKnifeClass(classname) && !StrEqual(classname, g_WeaponClasses[g_iKnife[client]]))
+		if (g_iKnife[client] != 0 && IsKnifeClass(classname))
 		{
-			Format(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
+			ignoredCEconItemView = true;
+			strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
 			return Plugin_Changed;
 		}
 	}
@@ -42,33 +43,61 @@ public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &it
 
 public void GiveNamedItem(int client, const char[] classname, const CEconItemView item, int entity)
 {
-	if (entity > -1 && IsValidClient(client))
+	if (IsValidClient(client) && IsValidEntity(entity))
 	{
 		int index;
 		if (g_smWeaponIndex.GetValue(classname, index))
 		{
 			if (IsKnifeClass(classname))
 			{
-				int defIndex;
-				g_smWeaponDefIndex.GetValue(g_WeaponClasses[g_iKnife[client]], defIndex);
-				char knifeClassName[32];
-				GetWeaponClass(entity, knifeClassName, sizeof(knifeClassName));
-				CEconItemView playerItem = PTaH_GetItemInLoadout(client, GetClientTeam(client), 0);
-				int playerKnifeDefIndex = playerItem.GetItemDefinition().GetDefinitionIndex();
-				if(!StrEqual(knifeClassName, g_WeaponClasses[g_iKnife[client]]) || defIndex == playerKnifeDefIndex)
-				{
-					float origin[3], angles[3];
-					GetClientAbsOrigin(client, origin);
-					GetClientAbsAngles(client, angles);
-					RemovePlayerItem(client, entity);
-					AcceptEntityInput(entity, "KillHierarchy");
-					entity = PTaH_SpawnItemFromDefIndex(defIndex, origin, angles);
-				}
 				EquipPlayerWeapon(client, entity);
 			}
 			SetWeaponProps(client, entity);
 		}
 	}
+}
+
+public Action ChatListener(int client, const char[] command, int args)
+{
+	char nameTag[128];
+	GetCmdArgString(nameTag, sizeof(nameTag));
+	StripQuotes(nameTag);
+	if (StrEqual(nameTag, "!ws") || StrEqual(nameTag, "!knife") || StrEqual(nameTag, "!wslang") || StrContains(nameTag, "!nametag") == 0)
+	{
+		return Plugin_Handled;
+	}
+	else if (g_bWaitingForNametag[client] && IsValidClient(client) && g_iIndex[client] > -1 && !IsChatTrigger())
+	{
+		CleanNameTag(nameTag, sizeof(nameTag));
+		
+		g_bWaitingForNametag[client] = false;
+		
+		if (StrEqual(nameTag, "!cancel") || StrEqual(nameTag, "!iptal"))
+		{
+			PrintToChat(client, " %s\x02 %t", g_ChatPrefix, "NameTagCancelled");
+			return Plugin_Handled;
+		}
+		
+		g_NameTag[client][g_iIndex[client]] = nameTag;
+		
+		RefreshWeapon(client, g_iIndex[client]);
+		
+		char updateFields[300];
+		char escaped[257];
+		db.Escape(nameTag, escaped, sizeof(escaped));
+		char weaponName[32];
+		char weaponClass[32];
+		strcopy(weaponClass, sizeof(weaponClass), g_WeaponClasses[g_iIndex[client]]);
+		RemoveWeaponPrefix(weaponClass, weaponName, sizeof(weaponName));
+		Format(updateFields, sizeof(updateFields), "%s_tag = '%s'", weaponName, escaped);
+		UpdatePlayerData(client, updateFields);
+		
+		PrintToChat(client, " %s \x04%t: \x01\"%s\"", g_ChatPrefix, "NameTagSuccess", nameTag);
+	
+		return Plugin_Handled;
+	}
+	
+	return Plugin_Continue;
 }
 
 public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float &damage, int &damagetype, int &weapon, float damageForce[3], float damagePosition[3])
@@ -98,6 +127,7 @@ public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float
 		return Plugin_Continue;
 	
 	g_iStatTrakCount[attacker][index]++;
+	/*
 	if (IsKnife(weapon))
 	{
 		SetEntProp(weapon, Prop_Send, "m_nFallbackStatTrak", g_iKnifeStatTrakMode == 0 ? GetTotalKnifeStatTrakCount(attacker) : g_iStatTrakCount[attacker][index]);
@@ -106,6 +136,7 @@ public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float
 	{
 		SetEntProp(weapon, Prop_Send, "m_nFallbackStatTrak", g_iStatTrakCount[attacker][index]);
 	}
+	*/
 
 	char updateFields[50];
 	char weaponName[32];
@@ -115,8 +146,7 @@ public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float
 	return Plugin_Continue;
 }
 
-public bool WeaponCanUse(int client, int iEnt, bool pickup)
+public void OnRoundStart(Handle event, const char[] name, bool dontBroadcast)
 {
-	if(IsValidEdict(iEnt) && IsValidEntity(iEnt) && GetEntProp(iEnt, Prop_Send, "m_iItemDefinitionIndex") >= 500) return true;
-	return pickup;
+	g_iRoundStartTime = GetTime();
 }
