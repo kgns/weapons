@@ -73,7 +73,7 @@ public void ReadConfig()
 		do {
 			char name[64];
 			char index[4];
-			char classes[512];
+			char classes[1024];
 			
 			KvGetSectionName(kv, name, sizeof(name));
 			KvGetString(kv, "classes", classes, sizeof(classes));
