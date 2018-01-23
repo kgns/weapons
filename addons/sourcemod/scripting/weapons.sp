@@ -35,10 +35,10 @@
 public Plugin myinfo = 
 {
 	name = "Weapons & Knives",
-	author = "kgns | pluginal.com",
+	author = "kgns | oyunhost.net",
 	description = "All in one custom weapon management",
-	version = "1.1.1",
-	url = "https://pluginal.com"
+	version = "1.1.2",
+	url = "https://www.oyunhost.net"
 };
 
 public void OnPluginStart()
