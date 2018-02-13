@@ -19,6 +19,7 @@ public void OnConfigsExecuted()
 {
 	GetConVarString(g_Cvar_DBConnection, g_DBConnection, sizeof(g_DBConnection));
 	GetConVarString(g_Cvar_TablePrefix, g_TablePrefix, sizeof(g_TablePrefix));
+	g_iGraceInactiveDays = g_Cvar_InactiveDays.IntValue;
 	
 	if(g_DBConnectionOld[0] != EOS && strcmp(g_DBConnectionOld, g_DBConnection) != 0 && db != null)
 	{
@@ -29,6 +30,10 @@ public void OnConfigsExecuted()
 	if(db == null)
 	{
 		Database.Connect(SQLConnectCallback, g_DBConnection);
+	}
+	else
+	{
+		DeleteInactivePlayerData();
 	}
 	
 	strcopy(g_DBConnectionOld, sizeof(g_DBConnectionOld), g_DBConnection);
@@ -103,5 +108,16 @@ public void OnClientDisconnect(int client)
 	{
 		UnhookPlayer(client);
 		g_iSteam32[client] = 0;
+	}
+}
+
+public void OnPluginEnd()
+{
+	for(int i = 1; i <= MaxClients; i++)
+	{
+		if(IsClientInGame(i))
+		{
+			OnClientDisconnect(i);
+		}
 	}
 }

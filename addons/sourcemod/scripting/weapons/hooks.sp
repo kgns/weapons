@@ -93,6 +93,12 @@ public Action ChatListener(int client, const char[] command, int args)
 		UpdatePlayerData(client, updateFields);
 		
 		PrintToChat(client, " %s \x04%t: \x01\"%s\"", g_ChatPrefix, "NameTagSuccess", nameTag);
+		
+		int menuTime;
+		if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+		{
+			CreateColorsMenu(client).Display(client, menuTime);
+		}
 	
 		return Plugin_Handled;
 	}

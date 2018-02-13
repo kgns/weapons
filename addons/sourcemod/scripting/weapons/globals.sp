@@ -69,6 +69,9 @@ bool g_bOverwriteEnabled;
 ConVar g_Cvar_GracePeriod;
 int g_iGracePeriod;
 
+ConVar g_Cvar_InactiveDays;
+int g_iGraceInactiveDays;
+
 int g_iSkins[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 int g_iStatTrak[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 int g_iStatTrakCount[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
