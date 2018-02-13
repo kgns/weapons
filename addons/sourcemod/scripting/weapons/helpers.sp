@@ -200,14 +200,15 @@ stock int GetTotalKnifeStatTrakCount(int client)
 	return count;
 }
 
-stock int GetRemainingGracePeriodSeconds()
+stock int GetRemainingGracePeriodSeconds(int client)
 {
-	if(g_iGracePeriod == 0 || g_iRoundStartTime == 0)
+	if(g_iGracePeriod == 0 || g_iRoundStartTime == 0 || (IsClientInGame(client) && !IsPlayerAlive(client)))
 	{
 		return MENU_TIME_FOREVER;
 	}
 	else
 	{
-		return g_iRoundStartTime + g_iGracePeriod - GetTime();
+		int remaining = g_iRoundStartTime + g_iGracePeriod - GetTime();
+		return remaining > 0 ? remaining : -1;
 	}
 }
