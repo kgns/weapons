@@ -56,21 +56,21 @@ public int WeaponsMenuHandler(Menu menu, MenuAction action, int client, int sele
 				if (StrEqual(info, "0"))
 				{
 					Format(display, sizeof(display), "%T", "DefaultSkin", client);
-					return RedrawMenuItem(display);
 				}
 				else if (StrEqual(info, "-1"))
 				{
 					Format(display, sizeof(display), "%T", "RandomSkin", client);
-					return RedrawMenuItem(display);
 				}
+
+			    return RedrawMenuItem(display);
 			}
 		}
 		case MenuAction_Cancel:
 		{
 			if (IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				int menuTime;
-				if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+				int menuTime = GetRemainingGracePeriodSeconds(client);
+				if(menuTime >= 0)
 				{
 					CreateWeaponMenu(client).Display(client, menuTime);
 				}
@@ -89,8 +89,8 @@ public Action WeaponsMenuTimer(Handle timer, DataPack pack)
 	
 	if(IsClientInGame(clientIndex))
 	{
-		int menuTime;
-		if((menuTime = GetRemainingGracePeriodSeconds(clientIndex)) >= 0)
+		int menuTime = GetRemainingGracePeriodSeconds(clientIndex);
+		if(menuTime >= 0)
 		{
 			menu.DisplayAt(clientIndex, menuSelectionPosition, menuTime);
 		}
@@ -99,6 +99,8 @@ public Action WeaponsMenuTimer(Handle timer, DataPack pack)
 
 public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selection)
 {
+    int menuTime = GetRemainingGracePeriodSeconds(client);
+
 	switch(action)
 	{
 		case MenuAction_Select:
@@ -109,16 +111,14 @@ public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selec
 				menu.GetItem(selection, buffer, sizeof(buffer));
 				if(StrEqual(buffer, "skin"))
 				{
-					int menuTime;
-					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+					if(menuTime >= 0)
 					{
 						menuWeapons[g_iClientLanguage[client]][g_iIndex[client]].Display(client, menuTime);
 					}
 				}
 				else if(StrEqual(buffer, "float"))
 				{
-					int menuTime;
-					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+					if(menuTime >= 0)
 					{
 						CreateFloatMenu(client).Display(client, menuTime);
 					}
@@ -138,8 +138,7 @@ public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selec
 				}
 				else if(StrEqual(buffer, "nametag"))
 				{
-					int menuTime;
-					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+					if(menuTime >= 0)
 					{
 						CreateNameTagMenu(client).Display(client, menuTime);
 					}
@@ -150,8 +149,7 @@ public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selec
 		{
 			if(IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				int menuTime;
-				if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+				if(menuTime >= 0)
 				{
 					CreateMainMenu(client).Display(client, menuTime);
 				}
@@ -169,8 +167,8 @@ public Action StatTrakMenuTimer(Handle timer, int userid)
 	int clientIndex = GetClientOfUserId(userid);
 	if(IsClientInGame(clientIndex))
 	{
-		int menuTime;
-		if((menuTime = GetRemainingGracePeriodSeconds(clientIndex)) >= 0)
+		int menuTime = menuTime = GetRemainingGracePeriodSeconds(clientIndex);
+		if(menuTime >= 0)
 		{
 			CreateWeaponMenu(clientIndex).Display(clientIndex, menuTime);
 		}
@@ -201,6 +199,8 @@ Menu CreateFloatMenu(int client)
 
 public int FloatMenuHandler(Menu menu, MenuAction action, int client, int selection)
 {
+    int menuTime = GetRemainingGracePeriodSeconds(client);
+
 	switch(action)
 	{
 		case MenuAction_Select:
@@ -225,8 +225,7 @@ public int FloatMenuHandler(Menu menu, MenuAction action, int client, int select
 					g_FloatTimer[client] = CreateDataTimer(1.0, FloatTimer, pack);
 					pack.WriteCell(GetClientUserId(client));
 					pack.WriteCell(g_iIndex[client]);
-					int menuTime;
-					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+					if(menuTime >= 0)
 					{
 						CreateFloatMenu(client).Display(client, menuTime);
 					}
@@ -247,8 +246,7 @@ public int FloatMenuHandler(Menu menu, MenuAction action, int client, int select
 					g_FloatTimer[client] = CreateDataTimer(1.0, FloatTimer, pack);
 					pack.WriteCell(GetClientUserId(client));
 					pack.WriteCell(g_iIndex[client]);
-					int menuTime;
-					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+					if(menuTime >= 0)
 					{
 						CreateFloatMenu(client).Display(client, menuTime);
 					}
@@ -259,8 +257,7 @@ public int FloatMenuHandler(Menu menu, MenuAction action, int client, int select
 		{
 			if(IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				int menuTime;
-				if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+				if(menuTime >= 0)
 				{
 					CreateWeaponMenu(client).Display(client, menuTime);
 				}
@@ -319,6 +316,8 @@ Menu CreateNameTagMenu(int client)
 
 public int NameTagMenuHandler(Menu menu, MenuAction action, int client, int selection)
 {
+    int menuTime = GetRemainingGracePeriodSeconds(client);
+
 	switch(action)
 	{
 		case MenuAction_Select:
@@ -334,8 +333,7 @@ public int NameTagMenuHandler(Menu menu, MenuAction action, int client, int sele
 				}
 				else if(StrEqual(buffer, "color"))
 				{
-					int menuTime;
-					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+					if(menuTime >= 0)
 					{
 						CreateColorsMenu(client).Display(client, menuTime);
 					}
@@ -351,9 +349,8 @@ public int NameTagMenuHandler(Menu menu, MenuAction action, int client, int sele
 					UpdatePlayerData(client, updateFields);
 					
 					RefreshWeapon(client, g_iIndex[client]);
-					
-					int menuTime;
-					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+
+					if(menuTime >= 0)
 					{
 						CreateWeaponMenu(client).Display(client, menuTime);
 					}
@@ -364,8 +361,7 @@ public int NameTagMenuHandler(Menu menu, MenuAction action, int client, int sele
 		{
 			if(IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				int menuTime;
-				if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+				if(menuTime >= 0)
 				{
 					CreateWeaponMenu(client).Display(client, menuTime);
 				}
@@ -452,8 +448,8 @@ public int ColorsMenuHandler(Menu menu, MenuAction action, int client, int selec
 		{
 			if(IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				int menuTime;
-				if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+				int menuTime = GetRemainingGracePeriodSeconds(client);
+				if(menuTime >= 0)
 				{
 					CreateNameTagMenu(client).Display(client, menuTime);
 				}
@@ -471,8 +467,8 @@ public Action NameTagColorsMenuTimer(Handle timer, int userid)
 	int clientIndex = GetClientOfUserId(userid);
 	if(IsClientInGame(clientIndex))
 	{
-		int menuTime;
-		if((menuTime = GetRemainingGracePeriodSeconds(clientIndex)) >= 0)
+		int menuTime = GetRemainingGracePeriodSeconds(clientIndex);
+		if(menuTime >= 0)
 		{
 			CreateColorsMenu(clientIndex).Display(clientIndex, menuTime);
 		}
@@ -498,6 +494,7 @@ Menu CreateAllWeaponsMenu(int client)
 
 public int AllWeaponsMenuHandler(Menu menu, MenuAction action, int client, int selection)
 {
+    int menuTime = GetRemainingGracePeriodSeconds(client);
 	switch(action)
 	{
 		case MenuAction_Select:
@@ -508,8 +505,7 @@ public int AllWeaponsMenuHandler(Menu menu, MenuAction action, int client, int s
 				menu.GetItem(selection, class, sizeof(class));
 				
 				g_smWeaponIndex.GetValue(class, g_iIndex[client]);
-				int menuTime;
-				if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+				if(menuTime >= 0)
 				{
 					CreateWeaponMenu(client).Display(client, menuTime);
 				}
@@ -519,8 +515,7 @@ public int AllWeaponsMenuHandler(Menu menu, MenuAction action, int client, int s
 		{
 			if(IsClientInGame(client) && selection == MenuCancel_ExitBack)
 			{
-				int menuTime;
-				if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+				if(menuTime >= 0)
 				{
 					CreateMainMenu(client).Display(client, menuTime);
 				}
@@ -582,6 +577,7 @@ Menu CreateWeaponMenu(int client)
 
 public int MainMenuHandler(Menu menu, MenuAction action, int client, int selection)
 {
+    int menuTime = GetRemainingGracePeriodSeconds(client);
 	switch(action)
 	{
 		case MenuAction_Select:
@@ -590,17 +586,16 @@ public int MainMenuHandler(Menu menu, MenuAction action, int client, int selecti
 			{
 				char info[32];
 				menu.GetItem(selection, info, sizeof(info));
-				int menuTime;
 				if(StrEqual(info, "all"))
 				{
-					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+					if(menuTime >= 0)
 					{
 						CreateAllWeaponsMenu(client).Display(client, menuTime);
 					}
 				}
 				else if(StrEqual(info, "lang"))
 				{
-					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+					if(menuTime >= 0)
 					{
 						CreateLanguageMenu(client).Display(client, menuTime);
 					}
@@ -608,7 +603,7 @@ public int MainMenuHandler(Menu menu, MenuAction action, int client, int selecti
 				else
 				{
 					g_smWeaponIndex.GetValue(info, g_iIndex[client]);
-					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+					if(menuTime >= 0)
 					{
 						CreateWeaponMenu(client).Display(client, menuTime);
 					}
@@ -714,8 +709,8 @@ public int KnifeMenuHandler(Menu menu, MenuAction action, int client, int select
 				
 				RefreshWeapon(client, knifeId, knifeId == 0);
 				
-				int menuTime;
-				if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+				int menuTime = GetRemainingGracePeriodSeconds(client);
+				if(menuTime >= 0)
 				{
 					CreateKnifeMenu(client).DisplayAt(client, GetMenuSelectionPosition(), menuTime);
 				}
