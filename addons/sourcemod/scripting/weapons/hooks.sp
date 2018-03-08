@@ -18,26 +18,27 @@
 public void HookPlayer(int client)
 {
 	if(g_bEnableStatTrak)
+	{
 		SDKHook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
+    }
 }
 
 public void UnhookPlayer(int client)
 {
 	if(g_bEnableStatTrak)
+	{
 		SDKUnhook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
+    }
 }
 
 public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, bool &ignoredCEconItemView)
 {
-	if (IsValidClient(client))
-	{
-		if (g_iKnife[client] != 0 && IsKnifeClass(classname))
-		{
-			ignoredCEconItemView = true;
-			strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
-			return Plugin_Changed;
-		}
-	}
+    if (IsValidClient(client) && g_iKnife[client] != 0 && IsKnifeClass(classname))
+    {
+        ignoredCEconItemView = true;
+        strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
+        return Plugin_Changed;
+    }
 	return Plugin_Continue;
 }
 
@@ -94,8 +95,8 @@ public Action ChatListener(int client, const char[] command, int args)
 		
 		PrintToChat(client, " %s \x04%t: \x01\"%s\"", g_ChatPrefix, "NameTagSuccess", nameTag);
 		
-		int menuTime;
-		if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+		int menuTime = GetRemainingGracePeriodSeconds(client);
+		if(menuTime >= 0)
 		{
 			CreateColorsMenu(client).Display(client, menuTime);
 		}
@@ -109,28 +110,42 @@ public Action ChatListener(int client, const char[] command, int args)
 public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float &damage, int &damagetype, int &weapon, float damageForce[3], float damagePosition[3])
 {
 	if (float(GetClientHealth(victim)) - damage > 0.0)
+	{
 		return Plugin_Continue;
-		
+	}
+
 	if (!(damagetype & DMG_SLASH) && !(damagetype & DMG_BULLET))
-		return Plugin_Continue;
-		
+	{
+	    return Plugin_Continue;
+    }
+
 	if (!IsValidClient(attacker))
+	{
 		return Plugin_Continue;
-		
+	}
+
 	if (!IsValidWeapon(weapon))
-		return Plugin_Continue;
-		
+	{
+			return Plugin_Continue;
+	}
+
 	int index = GetWeaponIndex(weapon);
 	
 	if (index != -1 && g_iSkins[attacker][index] != 0 && g_iStatTrak[attacker][index] != 1)
+	{
 		return Plugin_Continue;
-		
+    }
+
 	if (GetEntProp(weapon, Prop_Send, "m_nFallbackStatTrak") == -1)
-		return Plugin_Continue;
-		
+	{
+			return Plugin_Continue;
+	}
+
 	int previousOwner;
 	if ((previousOwner = GetEntPropEnt(weapon, Prop_Send, "m_hPrevOwner")) != INVALID_ENT_REFERENCE && previousOwner != attacker)
+	{
 		return Plugin_Continue;
+    }
 	
 	g_iStatTrakCount[attacker][index]++;
 	/*

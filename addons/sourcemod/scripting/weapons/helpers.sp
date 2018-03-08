@@ -51,9 +51,7 @@ stock int GetRandomSkin(int client, int index)
 stock bool IsEntityActive(int client, int entity)
 {
 	int activeWeaponClient = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-	if (activeWeaponClient == entity)
-		return true;
-	return false;
+	return activeWeaponClient == entity;
 }
 
 stock void SetActiveEntity(int client, int entity)
@@ -63,11 +61,7 @@ stock void SetActiveEntity(int client, int entity)
 
 stock bool IsValidClient(int client)
 {
-    if (!(1 <= client <= MaxClients) || !IsClientInGame(client) || IsFakeClient(client) || IsClientSourceTV(client) || IsClientReplay(client))
-    {
-        return false;
-    }
-    return true;
+    return (1 <= client <= MaxClients) || !IsClientInGame(client) || IsFakeClient(client) || IsClientSourceTV(client) || IsClientReplay(client);
 }
 
 stock int GetWeaponIndex(int entity)
@@ -92,9 +86,7 @@ stock bool GetWeaponClass(int entity, char[] weaponClass, int size)
 
 stock bool IsKnifeClass(const char[] classname)
 {
-	if ((StrContains(classname, "knife") > -1 && strcmp(classname, "weapon_knifegg") != 0) || StrContains(classname, "bayonet") > -1)
-		return true;
-	return false;
+	return (StrContains(classname, "knife") > -1 && strcmp(classname, "weapon_knifegg") != 0) || StrContains(classname, "bayonet") > -1;
 }
 
 stock bool IsKnife(int entity)
@@ -117,9 +109,7 @@ stock int DefIndexByClass(char[] class)
 	}
 	int index;
 	g_smWeaponDefIndex.GetValue(class, index);
-	if(index > -1)
-		return index;
-	return 0;
+	return index > -1 ? index : 0;
 }
 
 stock void RemoveWeaponPrefix(char[] source, char[] output, int size)

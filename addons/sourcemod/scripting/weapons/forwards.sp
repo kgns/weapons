@@ -78,8 +78,8 @@ public void OnClientPostAdminCheck(int client)
 		char temp[20];
 		GetClientAuthId(client, AuthId_Steam3, steam32, sizeof(steam32));
 		strcopy(temp, sizeof(temp), steam32[5]);
-		int index;
-		if((index = StrContains(temp, "]")) > -1)
+		int index = StrContains(temp, "]");
+		if(index > -1)
 		{
 			temp[index] = '\0';
 		}
@@ -102,7 +102,9 @@ public void OnClientDisconnect(int client)
 	if(IsFakeClient(client))
 	{
 		if(g_bEnableStatTrak)
+		{
 			SDKUnhook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
+	    }
 	}
 	else if(IsValidClient(client))
 	{

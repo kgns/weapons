@@ -290,11 +290,11 @@
 	}
 	"NameTagNew"
 	{
-		"en"	"You can now use !ws menu to set name tag."
+		"en"	"You can now use !ws menu to set your name tags."
 	}
 	"GracePeriod"
 	{
-		"en"	"You can only use !ws command if you're dead or in the first %d seconds after every round start."
+		"en"	"You can only use the !ws command if you're dead or in the first %d seconds after every round start."
 	}
 	"ChangeLang"
 	{
@@ -302,7 +302,7 @@
 	}
 	"NameTagCancelled"
 	{
-		"en"	"Nametag operation aborted."
+		"en"	"Name tag operation aborted."
 	}
 	"Yellow"
 	{
@@ -310,7 +310,7 @@
 	}
 	"NameTagInstruction"
 	{
-		"en"	"Write your desired name tag into chat. To abort, type !cancel."
+		"en"	"Enter your desired name tag in chat. To abort, type !cancel."
 	}
 	"NameTagSuccess"
 	{
