@@ -37,7 +37,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns | oyunhost.net",
 	description = "All in one custom weapon management",
-	version = "1.1.2",
+	version = "1.1.3",
 	url = "https://www.oyunhost.net"
 };
 
@@ -141,7 +141,9 @@ void SetWeaponProps(int client, int entity)
 	int index = GetWeaponIndex(entity);
 	if (index > -1 && g_iSkins[client][index] != 0)
 	{
+		static int IDHigh = 16384;
 		SetEntProp(entity, Prop_Send, "m_iItemIDLow", -1);
+		SetEntProp(entity, Prop_Send, "m_iItemIDHigh", IDHigh++);
 		SetEntProp(entity, Prop_Send, "m_nFallbackPaintKit", g_iSkins[client][index] == -1 ? GetRandomSkin(client, index) : g_iSkins[client][index]);
 		SetEntPropFloat(entity, Prop_Send, "m_flFallbackWear", !g_bEnableFloat || g_fFloatValue[client][index] == 0.0 ? 0.000001 : g_fFloatValue[client][index] == 1.0 ? 0.999999 : g_fFloatValue[client][index]);
 		SetEntProp(entity, Prop_Send, "m_nFallbackSeed", GetRandomInt(0, 8192));
