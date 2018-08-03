@@ -116,7 +116,7 @@ void UpdatePlayerData(int client, char[] updateFields)
 {
 	char steamid[32];
 	GetClientAuthId(client, AuthId_Steam2, steamid, sizeof(steamid), true);
-	char query[255];
+	char query[1024];
 	FormatEx(query, sizeof(query), "UPDATE %sweapons SET %s WHERE steamid = '%s'", g_TablePrefix, updateFields, steamid);
 	DataPack pack = new DataPack();
 	pack.WriteString(query);
@@ -379,7 +379,28 @@ public void SQLConnectCallback(Database database, const char[] error, any data)
 				knife_gut_trak int(1) NOT NULL DEFAULT '0', ");
 		index += FormatEx(createQuery[index], sizeof(createQuery) - index, "	\
 				knife_gut_trak_count int(10) NOT NULL DEFAULT '0', 				\
-				knife_gut_tag varchar(256) NOT NULL DEFAULT '')");
+				knife_gut_tag varchar(256) NOT NULL DEFAULT '', 				\
+				knife_ursus int(4) NOT NULL DEFAULT '0', 						\
+				knife_ursus_float decimal(3,2) NOT NULL DEFAULT '0.0', 			\
+				knife_ursus_trak int(1) NOT NULL DEFAULT '0', 					\
+				knife_ursus_trak_count int(10) NOT NULL DEFAULT '0', 			\
+				knife_ursus_tag varchar(256) NOT NULL DEFAULT '', 				\
+				knife_gypsy_jackknife int(4) NOT NULL DEFAULT '0', 				\
+				knife_gypsy_jackknife_float decimal(3,2) NOT NULL DEFAULT '0.0',\
+				knife_gypsy_jackknife_trak int(1) NOT NULL DEFAULT '0', 		\
+				knife_gypsy_jackknife_trak_count int(10) NOT NULL DEFAULT '0', 	\
+				knife_gypsy_jackknife_tag varchar(256) NOT NULL DEFAULT '', 	\
+				knife_stiletto int(4) NOT NULL DEFAULT '0', 					\
+				knife_stiletto_float decimal(3,2) NOT NULL DEFAULT '0.0', 		\
+				knife_stiletto_trak int(1) NOT NULL DEFAULT '0', 				\
+				knife_stiletto_trak_count int(10) NOT NULL DEFAULT '0', 		\
+				knife_stiletto_tag varchar(256) NOT NULL DEFAULT '', 			\
+				knife_widowmaker int(4) NOT NULL DEFAULT '0', ");
+		index += FormatEx(createQuery[index], sizeof(createQuery) - index, "	\
+				knife_widowmaker_float decimal(3,2) NOT NULL DEFAULT '0.0', 	\
+				knife_widowmaker_trak int(1) NOT NULL DEFAULT '0', 				\
+				knife_widowmaker_trak_count int(10) NOT NULL DEFAULT '0', 		\
+				knife_widowmaker_tag varchar(256) NOT NULL DEFAULT '')");
 		
 		db.Driver.GetIdentifier(dbIdentifier, sizeof(dbIdentifier));
 		bool mysql = StrEqual(dbIdentifier, "mysql");
@@ -400,6 +421,11 @@ public void T_CreateMainTableCallback(Database database, DBResultSet results, co
 	}
 	else
 	{
+		AddWeaponColumns("knife_ursus");
+		AddWeaponColumns("knife_gypsy_jackknife");
+		AddWeaponColumns("knife_stiletto");
+		AddWeaponColumns("knife_widowmaker");
+		
 		char createQuery[512];
 		Format(createQuery, sizeof(createQuery), "			\
 			CREATE TABLE %sweapons_timestamps ( 			\
@@ -413,6 +439,26 @@ public void T_CreateMainTableCallback(Database database, DBResultSet results, co
 		
 		db.Query(T_CreateTimestampTableCallback, createQuery, mysql, DBPrio_High);
 	}
+}
+
+void AddWeaponColumns(const char[] weapon)
+{
+	char query[512];
+	
+	SQL_LockDatabase(db);
+	
+	Format(query, sizeof(query), "ALTER TABLE %sweapons ADD %s int(4) NOT NULL DEFAULT '0'", g_TablePrefix, weapon);
+	SQL_FastQuery(db, query);
+	Format(query, sizeof(query), "ALTER TABLE %sweapons ADD %s_float decimal(3,2) NOT NULL DEFAULT '0.0'", g_TablePrefix, weapon);
+	SQL_FastQuery(db, query);
+	Format(query, sizeof(query), "ALTER TABLE %sweapons ADD %s_trak int(1) NOT NULL DEFAULT '0'", g_TablePrefix, weapon);
+	SQL_FastQuery(db, query);
+	Format(query, sizeof(query), "ALTER TABLE %sweapons ADD %s_trak_count int(10) NOT NULL DEFAULT '0'", g_TablePrefix, weapon);
+	SQL_FastQuery(db, query);
+	Format(query, sizeof(query), "ALTER TABLE %sweapons ADD %s_tag varchar(256) NOT NULL DEFAULT ''", g_TablePrefix, weapon);
+	SQL_FastQuery(db, query);
+	
+	SQL_UnlockDatabase(db);
 }
 
 public void T_CreateTimestampTableCallback(Database database, DBResultSet results, const char[] error, bool mysql)
