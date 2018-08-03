@@ -30,7 +30,7 @@ public int WeaponsMenuHandler(Menu menu, MenuAction action, int client, int sele
 				int skinId = StringToInt(skinIdStr);
 				
 				g_iSkins[client][index] = skinId;
-				char updateFields[128];
+				char updateFields[256];
 				char weaponName[32];
 				RemoveWeaponPrefix(g_WeaponClasses[index], weaponName, sizeof(weaponName));
 				Format(updateFields, sizeof(updateFields), "%s = %d", weaponName, skinId);
@@ -126,7 +126,7 @@ public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selec
 				else if(StrEqual(buffer, "stattrak"))
 				{
 					g_iStatTrak[client][g_iIndex[client]] = 1 - g_iStatTrak[client][g_iIndex[client]];
-					char updateFields[50];
+					char updateFields[256];
 					char weaponName[32];
 					RemoveWeaponPrefix(g_WeaponClasses[g_iIndex[client]], weaponName, sizeof(weaponName));
 					Format(updateFields, sizeof(updateFields), "%s_trak = %d", weaponName, g_iStatTrak[client][g_iIndex[client]]);
@@ -282,7 +282,7 @@ public Action FloatTimer(Handle timer, DataPack pack)
 	
 	if(IsClientInGame(clientIndex))
 	{
-		char updateFields[30];
+		char updateFields[256];
 		char weaponName[32];
 		RemoveWeaponPrefix(g_WeaponClasses[index], weaponName, sizeof(weaponName));
 		Format(updateFields, sizeof(updateFields), "%s_float = %.2f", weaponName, g_fFloatValue[clientIndex][g_iIndex[clientIndex]]);
@@ -306,8 +306,10 @@ Menu CreateNameTagMenu(int client)
 	Format(buffer, sizeof(buffer), "%T", "ChangeNameTag", client);
 	menu.AddItem("nametag", buffer);
 	
+	/* NAMETAGCOLOR
 	Format(buffer, sizeof(buffer), "%T", "NameTagColor", client);
 	menu.AddItem("color", buffer, strlen(g_NameTag[client][g_iIndex[client]]) > 0 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	*/
 	
 	Format(buffer, sizeof(buffer), "%T", "DeleteNameTag", client);
 	menu.AddItem("delete", buffer, strlen(g_NameTag[client][g_iIndex[client]]) > 0 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
@@ -332,6 +334,7 @@ public int NameTagMenuHandler(Menu menu, MenuAction action, int client, int sele
 					g_bWaitingForNametag[client] = true;
 					PrintToChat(client, " %s \x04%t", g_ChatPrefix, "NameTagInstruction");
 				}
+				/* NAMETAGCOLOR
 				else if(StrEqual(buffer, "color"))
 				{
 					int menuTime;
@@ -340,11 +343,12 @@ public int NameTagMenuHandler(Menu menu, MenuAction action, int client, int sele
 						CreateColorsMenu(client).Display(client, menuTime);
 					}
 				}
+				*/
 				else if(StrEqual(buffer, "delete"))
 				{
 					g_NameTag[client][g_iIndex[client]] = "";
 					
-					char updateFields[30];
+					char updateFields[256];
 					char weaponName[32];
 					RemoveWeaponPrefix(g_WeaponClasses[g_iIndex[client]], weaponName, sizeof(weaponName));
 					Format(updateFields, sizeof(updateFields), "%s_tag = ''", weaponName);
@@ -378,6 +382,7 @@ public int NameTagMenuHandler(Menu menu, MenuAction action, int client, int sele
 	}
 }
 
+/* NAMETAGCOLOR
 Menu CreateColorsMenu(int client)
 {
 	Menu menu = new Menu(ColorsMenuHandler);
@@ -422,7 +427,7 @@ public int ColorsMenuHandler(Menu menu, MenuAction action, int client, int selec
 				char stripped[128];
 				char escaped[257];
 				char colored[128];
-				char updateFields[300];
+				char updateFields[512];
 				StripHtml(g_NameTag[client][g_iIndex[client]], stripped, sizeof(stripped));
 				if (StrEqual(buffer, "default"))
 				{
@@ -478,6 +483,7 @@ public Action NameTagColorsMenuTimer(Handle timer, int userid)
 		}
 	}
 }
+*/
 
 Menu CreateAllWeaponsMenu(int client)
 {
@@ -672,6 +678,14 @@ Menu CreateKnifeMenu(int client)
 	char buffer[60];
 	Format(buffer, sizeof(buffer), "%T", "OwnKnife", client);
 	menu.AddItem("0", buffer, g_iKnife[client] != 0 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_ursus", client);
+	menu.AddItem("43", buffer, g_iKnife[client] != 43 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_gypsy_jackknife", client);
+	menu.AddItem("44", buffer, g_iKnife[client] != 44 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_stiletto", client);
+	menu.AddItem("45", buffer, g_iKnife[client] != 45 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_widowmaker", client);
+	menu.AddItem("46", buffer, g_iKnife[client] != 46 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_karambit", client);
 	menu.AddItem("33", buffer, g_iKnife[client] != 33 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_m9_bayonet", client);

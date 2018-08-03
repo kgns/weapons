@@ -48,19 +48,6 @@ stock int GetRandomSkin(int client, int index)
 	return StringToInt(idStr);
 }
 
-stock bool IsEntityActive(int client, int entity)
-{
-	int activeWeaponClient = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-	if (activeWeaponClient == entity)
-		return true;
-	return false;
-}
-
-stock void SetActiveEntity(int client, int entity)
-{
-	SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", entity);
-}
-
 stock bool IsValidClient(int client)
 {
     if (!(1 <= client <= MaxClients) || !IsClientInGame(client) || IsFakeClient(client) || IsClientSourceTV(client) || IsClientReplay(client))
@@ -170,13 +157,6 @@ stock bool IsValidWeapon(int weaponEntity)
 	GetEdictClassname(weaponEntity, weaponClass, sizeof(weaponClass));
 	
 	return StrContains(weaponClass, "weapon_") == 0;
-}
-
-stock void SetImmunity(int client, const char[] name)
-{
-    AdminId admin = CreateAdmin(name);
-    SetAdminImmunityLevel(admin, 100);
-    SetUserAdmin(client, admin);
 }
 
 stock void FirstCharUpper(char[] string)

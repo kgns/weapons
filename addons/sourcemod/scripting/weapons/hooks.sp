@@ -82,7 +82,7 @@ public Action ChatListener(int client, const char[] command, int args)
 		
 		RefreshWeapon(client, g_iIndex[client]);
 		
-		char updateFields[300];
+		char updateFields[1024];
 		char escaped[257];
 		db.Escape(nameTag, escaped, sizeof(escaped));
 		char weaponName[32];
@@ -94,11 +94,13 @@ public Action ChatListener(int client, const char[] command, int args)
 		
 		PrintToChat(client, " %s \x04%t: \x01\"%s\"", g_ChatPrefix, "NameTagSuccess", nameTag);
 		
+		/* NAMETAGCOLOR
 		int menuTime;
 		if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
 		{
 			CreateColorsMenu(client).Display(client, menuTime);
 		}
+		*/
 	
 		return Plugin_Handled;
 	}
@@ -144,7 +146,7 @@ public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float
 	}
 	*/
 
-	char updateFields[50];
+	char updateFields[256];
 	char weaponName[32];
 	RemoveWeaponPrefix(g_WeaponClasses[index], weaponName, sizeof(weaponName));
 	Format(updateFields, sizeof(updateFields), "%s_trak_count = %d", weaponName, g_iStatTrakCount[attacker][index]);

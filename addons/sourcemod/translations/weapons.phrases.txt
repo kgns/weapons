@@ -276,6 +276,22 @@
 	{
 		"en"	"★ Bowie Knife"
 	}
+	"weapon_knife_ursus"
+	{
+		"en"	"★ Ursus"
+	}
+	"weapon_knife_gypsy_jackknife"
+	{
+		"en"	"★ Navaja"
+	}
+	"weapon_knife_stiletto"
+	{
+		"en"	"★ Stiletto"
+	}
+	"weapon_knife_widowmaker"
+	{
+		"en"	"★ Talon"
+	}
 	"weapon_knife_t"
 	{
 		"en"	"Knife"
