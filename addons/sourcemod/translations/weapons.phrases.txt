@@ -236,6 +236,10 @@
 	{
 		"en"	"Glock-18"
 	}
+	"weapon_mp5sd"
+	{
+		"en"	"MP5-SD"
+	}
 	"weapon_bayonet"
 	{
 		"en"	"★ Bayonet"

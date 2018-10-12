@@ -236,6 +236,10 @@
 	{
 		"tr"	"Glock-18"
 	}
+	"weapon_mp5sd"
+	{
+		"tr"	"MP5-SD"
+	}
 	"weapon_bayonet"
 	{
 		"tr"	"★ Bayonet"
