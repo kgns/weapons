@@ -37,7 +37,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns | oyunhost.net",
 	description = "All in one custom weapon management",
-	version = "1.3.0",
+	version = "1.3.1",
 	url = "https://www.oyunhost.net"
 };
 
@@ -68,6 +68,7 @@ public void OnPluginStart()
 	
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
 	PTaH(PTaH_GiveNamedItem, Hook, GiveNamedItem);
+	PTaH(PTaH_WeaponCanUse, Hook, WeaponCanUse);
 	
 	AddCommandListener(ChatListener, "say");
 	AddCommandListener(ChatListener, "say2");
