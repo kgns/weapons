@@ -37,7 +37,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns | oyunhost.net",
 	description = "All in one custom weapon management",
-	version = "1.3.1",
+	version = "1.3.2",
 	url = "https://www.oyunhost.net"
 };
 
@@ -68,7 +68,14 @@ public void OnPluginStart()
 	
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
 	PTaH(PTaH_GiveNamedItem, Hook, GiveNamedItem);
-	PTaH(PTaH_WeaponCanUse, Hook, WeaponCanUse);
+	
+	ConVar g_cvGameType = FindConVar("game_type");
+	ConVar g_cvGameMode = FindConVar("game_mode");
+	
+	if(g_cvGameType != null && g_cvGameMode != null && g_cvGameType.IntValue == 1 && g_cvGameMode.IntValue == 2)
+	{
+		PTaH(PTaH_WeaponCanUse, Hook, WeaponCanUse);
+	}
 	
 	AddCommandListener(ChatListener, "say");
 	AddCommandListener(ChatListener, "say2");
