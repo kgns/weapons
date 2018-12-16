@@ -676,37 +676,58 @@ Menu CreateKnifeMenu(int client)
 	menu.SetTitle("%T", "KnifeMenuTitle", client);
 	
 	char buffer[60];
+	
 	Format(buffer, sizeof(buffer), "%T", "OwnKnife", client);
-	menu.AddItem("0", buffer, g_iKnife[client] != 0 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("0", buffer, MenuKnifeSelectState(client, 0));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_ursus", client);
-	menu.AddItem("43", buffer, g_iKnife[client] != 43 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("43", buffer, MenuKnifeSelectState(client, 43));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_gypsy_jackknife", client);
-	menu.AddItem("44", buffer, g_iKnife[client] != 44 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("44", buffer, MenuKnifeSelectState(client, 44));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_stiletto", client);
-	menu.AddItem("45", buffer, g_iKnife[client] != 45 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("45", buffer, MenuKnifeSelectState(client, 45));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_widowmaker", client);
-	menu.AddItem("46", buffer, g_iKnife[client] != 46 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("46", buffer, MenuKnifeSelectState(client, 46));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_karambit", client);
-	menu.AddItem("33", buffer, g_iKnife[client] != 33 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("33", buffer, MenuKnifeSelectState(client, 33));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_m9_bayonet", client);
-	menu.AddItem("34", buffer, g_iKnife[client] != 34 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("34", buffer, MenuKnifeSelectState(client, 34));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_bayonet", client);
-	menu.AddItem("35", buffer, g_iKnife[client] != 35 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("35", buffer, MenuKnifeSelectState(client, 35));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_survival_bowie", client);
-	menu.AddItem("36", buffer, g_iKnife[client] != 36 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("36", buffer, MenuKnifeSelectState(client, 36));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_butterfly", client);
-	menu.AddItem("37", buffer, g_iKnife[client] != 37 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("37", buffer, MenuKnifeSelectState(client, 37));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_flip", client);
-	menu.AddItem("38", buffer, g_iKnife[client] != 38 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("38", buffer, MenuKnifeSelectState(client, 38));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_push", client);
-	menu.AddItem("39", buffer, g_iKnife[client] != 39 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("39", buffer, MenuKnifeSelectState(client, 39));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_tactical", client);
-	menu.AddItem("40", buffer, g_iKnife[client] != 40 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("40", buffer, MenuKnifeSelectState(client, 40));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_falchion", client);
-	menu.AddItem("41", buffer, g_iKnife[client] != 41 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("41", buffer, MenuKnifeSelectState(client, 41));
+	
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_gut", client);
-	menu.AddItem("42", buffer, g_iKnife[client] != 42 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("42", buffer, MenuKnifeSelectState(client, 42));
+	
 	return menu;
+}
+
+int MenuKnifeSelectState(int client, int knife)
+{
+	return g_iKnife[client] != knife ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED;
 }
 
 public int KnifeMenuHandler(Menu menu, MenuAction action, int client, int selection)
