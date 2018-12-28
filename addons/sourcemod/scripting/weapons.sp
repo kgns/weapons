@@ -250,7 +250,7 @@ void RefreshWeapon(int client, int index, bool defaultKnife = false)
 
 public Action ReserveAmmoTimer(Handle timer, DataPack pack)
 {
-	ResetPack(pack);
+	pack.Reset();
 	int clientIndex = GetClientOfUserId(pack.ReadCell());
 	int offset = pack.ReadCell();
 	int ammo = pack.ReadCell();
