@@ -76,6 +76,10 @@ public int WeaponsMenuHandler(Menu menu, MenuAction action, int client, int sele
 				}
 			}
 		}
+		case MenuAction_End:
+		{
+			delete menu;
+		}
 	}
 	return 0;
 }
