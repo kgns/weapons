@@ -27,7 +27,7 @@ public void UnhookPlayer(int client)
 		SDKUnhook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
 }
 
-public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, bool &ignoredCEconItemView)
+public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, bool &ignoredCEconItemView, bool &OriginIsNULL, float Origin[3])
 {
 	if (IsValidClient(client))
 	{
@@ -41,7 +41,7 @@ public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &it
 	return Plugin_Continue;
 }
 
-public void GiveNamedItem(int client, const char[] classname, const CEconItemView item, int entity)
+public void GiveNamedItem(int client, const char[] classname, const CEconItemView item, int entity, bool OriginIsNULL, const float Origin[3])
 {
 	if (IsValidClient(client) && IsValidEntity(entity))
 	{
