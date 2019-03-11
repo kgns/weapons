@@ -87,7 +87,7 @@ public Action WeaponsMenuTimer(Handle timer, DataPack pack)
 	int clientIndex = GetClientOfUserId(pack.ReadCell());
 	int menuSelectionPosition = pack.ReadCell();
 	
-	if(IsClientInGame(clientIndex))
+	if(IsValidClient(clientIndex))
 	{
 		int menuTime;
 		if((menuTime = GetRemainingGracePeriodSeconds(clientIndex)) >= 0)
