@@ -167,7 +167,7 @@ public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selec
 public Action StatTrakMenuTimer(Handle timer, int userid)
 {
 	int clientIndex = GetClientOfUserId(userid);
-	if(IsClientInGame(clientIndex))
+	if(IsValidClient(clientIndex))
 	{
 		int menuTime;
 		if((menuTime = GetRemainingGracePeriodSeconds(clientIndex)) >= 0)
@@ -280,7 +280,7 @@ public Action FloatTimer(Handle timer, DataPack pack)
 	int clientIndex = GetClientOfUserId(pack.ReadCell());
 	int index = pack.ReadCell();
 	
-	if(IsClientInGame(clientIndex))
+	if(IsValidClient(clientIndex))
 	{
 		char updateFields[256];
 		char weaponName[32];
@@ -474,7 +474,7 @@ public int ColorsMenuHandler(Menu menu, MenuAction action, int client, int selec
 public Action NameTagColorsMenuTimer(Handle timer, int userid)
 {
 	int clientIndex = GetClientOfUserId(userid);
-	if(IsClientInGame(clientIndex))
+	if(IsValidClient(clientIndex))
 	{
 		int menuTime;
 		if((menuTime = GetRemainingGracePeriodSeconds(clientIndex)) >= 0)
