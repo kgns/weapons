@@ -37,7 +37,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns | oyunhost.net",
 	description = "All in one custom weapon management",
-	version = "1.3.2",
+	version = "1.3.3",
 	url = "https://www.oyunhost.net"
 };
 
