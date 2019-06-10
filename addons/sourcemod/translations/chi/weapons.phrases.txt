@@ -1,0 +1,339 @@
+"Phrases"
+{
+	"WSMenuTitle"
+	{
+		"chi"	"武器皮肤菜单"
+	}
+	"ChooseKnife"
+	{
+		"chi"	"★ 改变刀皮肤 ★"
+	}
+	"ConfigAllWeapons"
+	{
+		"chi"	"设置所有武器"
+	}
+	"KnifeMenuTitle"
+	{
+		"chi"	"★ 选择刀 ★"
+	}
+	"AllWeaponsMenuTitle"
+	{
+		"chi"	"所有武器"
+	}
+	"Increase"
+	{
+		"chi"	"增加 %d%%"
+	}
+	"Decrease"
+	{
+		"chi"	"减少 by %d%%"
+	}
+	"NameTagColor"
+	{
+		"chi"	"设置名称标签颜色"
+	}
+	"NameTagDisabled"
+	{
+		"chi"	"此时名称标签使用被禁用."
+	}
+	"ChooseLanguage"
+	{
+		"chi"	"为皮肤名称选择语言:"
+	}
+	"ChooseColor"
+	{
+		"chi"	"选择一个颜色:"
+	}
+	"DefaultColor"
+	{
+		"chi"	"默认"
+	}
+	"DefaultSkin"
+	{
+		"chi"	"默认"
+	}
+	"RandomSkin"
+	{
+		"chi"	"随机"
+	}
+	"Black"
+	{
+		"chi"	"黑"
+	}
+	"Red"
+	{
+		"chi"	"红"
+	}
+	"Green"
+	{
+		"chi"	"绿"
+	}
+	"Blue"
+	{
+		"chi"	"蓝"
+	}
+	"DeleteNameTag"
+	{
+		"chi"	"删除名称标签"
+	}
+	"OwnKnife"
+	{
+		"chi"	"★ 你自己的刀"
+	}
+	"SetSkin"
+	{
+		"chi"	"选择皮肤"
+	}
+	"SetFloat"
+	{
+		"chi"	"武器条件: "
+	}
+	"StatTrak"
+	{
+		"chi"	"StatTrak™: "
+	}
+	"SetNameTag"
+	{
+		"chi"	"名称标签"
+	}
+	"On"
+	{
+		"chi"	"开"
+	}
+	"Off"
+	{
+		"chi"	"关"
+	}
+	"weapon_galilar"
+	{
+		"chi"	"Galil AR"
+	}
+	"weapon_awp"
+	{
+		"chi"	"AWP"
+	}
+	"weapon_m4a1"
+	{
+		"chi"	"M4A4"
+	}
+	"weapon_m4a1_silencer"
+	{
+		"chi"	"M4A1-S"
+	}
+	"weapon_cz75a"
+	{
+		"chi"	"CZ75-Auto"
+	}
+	"weapon_revolver"
+	{
+		"chi"	"Revolver"
+	}
+	"weapon_deagle"
+	{
+		"chi"	"Desert Eagle"
+	}
+	"weapon_g3sg1"
+	{
+		"chi"	"G3SG1"
+	}
+	"weapon_scar20"
+	{
+		"chi"	"SCAR-20"
+	}
+	"weapon_sawedoff"
+	{
+		"chi"	"Sawed-Off"
+	}
+	"weapon_negev"
+	{
+		"chi"	"Negev"
+	}
+	"weapon_ssg08"
+	{
+		"chi"	"SSG 08"
+	}
+	"weapon_sg556"
+	{
+		"chi"	"SG 553"
+	}
+	"weapon_nova"
+	{
+		"chi"	"Nova"
+	}
+	"weapon_xm1014"
+	{
+		"chi"	"XM1014"
+	}
+	"weapon_p90"
+	{
+		"chi"	"P90"
+	}
+	"weapon_p250"
+	{
+		"chi"	"P250"
+	}
+	"weapon_fiveseven"
+	{
+		"chi"	"Five-SeveN"
+	}
+	"weapon_aug"
+	{
+		"chi"	"AUG"
+	}
+	"weapon_elite"
+	{
+		"chi"	"Dual Berettas"
+	}
+	"weapon_m249"
+	{
+		"chi"	"M249"
+	}
+	"weapon_mac10"
+	{
+		"chi"	"MAC-10"
+	}
+	"weapon_mag7"
+	{
+		"chi"	"MAG-7"
+	}
+	"weapon_mp7"
+	{
+		"chi"	"MP7"
+	}
+	"weapon_mp9"
+	{
+		"chi"	"MP9"
+	}
+	"weapon_tec9"
+	{
+		"chi"	"Tec-9"
+	}
+	"weapon_ump45"
+	{
+		"chi"	"UMP-45"
+	}
+	"weapon_ak47"
+	{
+		"chi"	"AK-47"
+	}
+	"weapon_bizon"
+	{
+		"chi"	"PP-Bizon"
+	}
+	"weapon_usp_silencer"
+	{
+		"chi"	"USP-S"
+	}
+	"weapon_hkp2000"
+	{
+		"chi"	"P2000"
+	}
+	"weapon_famas"
+	{
+		"chi"	"FAMAS"
+	}
+	"weapon_glock"
+	{
+		"chi"	"Glock-18"
+	}
+	"weapon_mp5sd"
+	{
+		"chi"	"MP5-SD"
+	}
+	"weapon_bayonet"
+	{
+		"chi"	"★ 刺刀"
+	}
+	"weapon_knife_gut"
+	{
+		"chi"	"★ 穿肠刀"
+	}
+	"weapon_knife_flip"
+	{
+		"chi"	"★ 折叠刀"
+	}
+	"weapon_knife_m9_bayonet"
+	{
+		"chi"	"★ M9 刺刀"
+	}
+	"weapon_knife_karambit"
+	{
+		"chi"	"★ 爪子刀"
+	}
+	"weapon_knife_tactical"
+	{
+		"chi"	"★ 猎杀者匕首"
+	}
+	"weapon_knife_butterfly"
+	{
+		"chi"	"★ 蝴蝶刀"
+	}
+	"weapon_knife_falchion"
+	{
+		"chi"	"★ 弯刀"
+	}
+	"weapon_knife_push"
+	{
+		"chi"	"★ 暗影双匕"
+	}
+	"weapon_knife_survival_bowie"
+	{
+		"chi"	"★ 鲍伊猎刀"
+	}
+	"weapon_knife_ursus"
+	{
+		"chi"	"★ 熊刀"
+	}
+	"weapon_knife_gypsy_jackknife"
+	{
+		"chi"	"★ 折刀"
+	}
+	"weapon_knife_stiletto"
+	{
+		"chi"	"★ 短剑"
+	}
+	"weapon_knife_widowmaker"
+	{
+		"chi"	"★ 锯齿爪刀"
+	}
+	"weapon_knife_t"
+	{
+		"chi"	"Knife"
+	}
+	"weapon_knife"
+	{
+		"chi"	"Knife"
+	}
+	"ChangeNameTag"
+	{
+		"chi"	"设置名称标签"
+	}
+	"NameTagNew"
+	{
+		"chi"	"您现在可以使用 !ws 设置名称标签."
+	}
+	"GracePeriod"
+	{
+		"chi"	"You can only use !ws command if you're dead or in the first %d seconds after every round start."
+	}
+	"ChangeLang"
+	{
+		"chi"	"修改语言"
+	}
+	"NameTagCancelled"
+	{
+		"chi"	"名称标签 操作取消."
+	}
+	"Yellow"
+	{
+		"chi"	"黄色"
+	}
+	"NameTagInstruction"
+	{
+		"chi"	"在聊天中写下你想要的名字标签, 输入 !cancel 来取消"
+	}
+	"NameTagSuccess"
+	{
+		"chi"	"成功应用名称标签"
+	}
+}
