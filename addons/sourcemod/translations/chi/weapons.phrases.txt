@@ -6,15 +6,15 @@
 	}
 	"ChooseKnife"
 	{
-		"chi"	"★ 改变刀皮肤 ★"
+		"chi"	"★ 更换您的刀具 ★"
 	}
 	"ConfigAllWeapons"
 	{
-		"chi"	"设置所有武器"
+		"chi"	"配置所有武器"
 	}
 	"KnifeMenuTitle"
 	{
-		"chi"	"★ 选择刀 ★"
+		"chi"	"★ 选择您的刀具 ★"
 	}
 	"AllWeaponsMenuTitle"
 	{
@@ -26,7 +26,7 @@
 	}
 	"Decrease"
 	{
-		"chi"	"减少 by %d%%"
+		"chi"	"减少 %d%%"
 	}
 	"NameTagColor"
 	{
@@ -34,15 +34,15 @@
 	}
 	"NameTagDisabled"
 	{
-		"chi"	"此时名称标签使用被禁用."
+		"chi"	"名称标签已禁用"
 	}
 	"ChooseLanguage"
 	{
-		"chi"	"为皮肤名称选择语言:"
+		"chi"	"请选择皮肤名称显示语言："
 	}
 	"ChooseColor"
 	{
-		"chi"	"选择一个颜色:"
+		"chi"	"选择一个颜色："
 	}
 	"DefaultColor"
 	{
@@ -78,7 +78,7 @@
 	}
 	"OwnKnife"
 	{
-		"chi"	"★ 你自己的刀"
+		"chi"	"★ 您自己的刀"
 	}
 	"SetSkin"
 	{
@@ -86,11 +86,11 @@
 	}
 	"SetFloat"
 	{
-		"chi"	"武器条件: "
+		"chi"	"武器磨损："
 	}
 	"StatTrak"
 	{
-		"chi"	"StatTrak™: "
+		"chi"	"StatTrak™："
 	}
 	"SetNameTag"
 	{
@@ -106,7 +106,7 @@
 	}
 	"weapon_galilar"
 	{
-		"chi"	"Galil AR"
+		"chi"	"加利尔 AR"
 	}
 	"weapon_awp"
 	{
@@ -118,19 +118,19 @@
 	}
 	"weapon_m4a1_silencer"
 	{
-		"chi"	"M4A1-S"
+		"chi"	"M4A1 消音型"
 	}
 	"weapon_cz75a"
 	{
-		"chi"	"CZ75-Auto"
+		"chi"	"CZ75 自动手枪"
 	}
 	"weapon_revolver"
 	{
-		"chi"	"Revolver"
+		"chi"	"R8 左轮手枪"
 	}
 	"weapon_deagle"
 	{
-		"chi"	"Desert Eagle"
+		"chi"	"沙漠之鹰"
 	}
 	"weapon_g3sg1"
 	{
@@ -142,11 +142,11 @@
 	}
 	"weapon_sawedoff"
 	{
-		"chi"	"Sawed-Off"
+		"chi"	"截短霰弹枪"
 	}
 	"weapon_negev"
 	{
-		"chi"	"Negev"
+		"chi"	"内格夫"
 	}
 	"weapon_ssg08"
 	{
@@ -158,7 +158,7 @@
 	}
 	"weapon_nova"
 	{
-		"chi"	"Nova"
+		"chi"	"新星"
 	}
 	"weapon_xm1014"
 	{
@@ -174,7 +174,7 @@
 	}
 	"weapon_fiveseven"
 	{
-		"chi"	"Five-SeveN"
+		"chi"	"FN57"
 	}
 	"weapon_aug"
 	{
@@ -182,7 +182,7 @@
 	}
 	"weapon_elite"
 	{
-		"chi"	"Dual Berettas"
+		"chi"	"双枪贝瑞塔"
 	}
 	"weapon_m249"
 	{
@@ -218,7 +218,7 @@
 	}
 	"weapon_bizon"
 	{
-		"chi"	"PP-Bizon"
+		"chi"	"PP-野牛"
 	}
 	"weapon_usp_silencer"
 	{
@@ -234,7 +234,7 @@
 	}
 	"weapon_glock"
 	{
-		"chi"	"Glock-18"
+		"chi"	"格洛克18型"
 	}
 	"weapon_mp5sd"
 	{
@@ -298,11 +298,11 @@
 	}
 	"weapon_knife_t"
 	{
-		"chi"	"Knife"
+		"chi"	"恐怖分子默认刀"
 	}
 	"weapon_knife"
 	{
-		"chi"	"Knife"
+		"chi"	"恐怖分子默认刀"
 	}
 	"ChangeNameTag"
 	{
@@ -310,30 +310,30 @@
 	}
 	"NameTagNew"
 	{
-		"chi"	"您现在可以使用 !ws 设置名称标签."
+		"chi"	"你现在可以使用 !ws 指令设置名称标签。"
 	}
 	"GracePeriod"
 	{
-		"chi"	"You can only use !ws command if you're dead or in the first %d seconds after every round start."
+		"chi"	"你只能在你死后或开局 %d 秒后，使用 !ws 指令。"
 	}
 	"ChangeLang"
 	{
-		"chi"	"修改语言"
+		"chi"	"更改语言"
 	}
 	"NameTagCancelled"
 	{
-		"chi"	"名称标签 操作取消."
+		"chi"	"名称标签设置中断。"
 	}
 	"Yellow"
 	{
-		"chi"	"黄色"
+		"chi"	"黄"
 	}
 	"NameTagInstruction"
 	{
-		"chi"	"在聊天中写下你想要的名字标签, 输入 !cancel 来取消"
+		"chi"	"请将你希望设置的名称标签输入至聊天框。如需取消，请输入 !cancel 。"
 	}
 	"NameTagSuccess"
 	{
-		"chi"	"成功应用名称标签"
+		"chi"	"名称标签已设置"
 	}
 }
