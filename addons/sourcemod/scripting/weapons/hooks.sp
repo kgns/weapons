@@ -159,9 +159,12 @@ public void OnRoundStart(Handle event, const char[] name, bool dontBroadcast)
 	g_iRoundStartTime = GetTime();
 }
 
-public bool WeaponCanUse(int client, int weapon, bool pickup)
+public Action WeaponCanUse(int client, int weapon, bool& pickup)
 {
-	if (IsValidClient(client) && IsKnife(weapon))
-		return true;
-	return pickup;
+	if (IsKnife(weapon) && IsValidClient(client))
+	{
+		pickup = true;
+		return Plugin_Changed;
+	}
+	return Plugin_Continue;
 }
