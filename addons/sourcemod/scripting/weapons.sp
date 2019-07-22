@@ -36,8 +36,8 @@ public Plugin myinfo =
 {
 	name = "Weapons & Knives",
 	author = "kgns | oyunhost.net",
-	description = "All in one custom weapon management",
-	version = "1.3.4",
+	description = "All in one weapon skin management",
+	version = "1.4.0",
 	url = "https://www.oyunhost.net"
 };
 
@@ -45,7 +45,7 @@ public void OnPluginStart()
 {
 	if(GetEngineVersion() != Engine_CSGO)
 	{
-		SetFailState("Plugin only for CS:GO servers");
+		SetFailState("Only CS:GO servers are supported!");
 		return;
 	}
 	
@@ -53,22 +53,22 @@ public void OnPluginStart()
 	{
 		char sBuf[16];
 		PTaH_Version(sBuf, sizeof(sBuf));
-		SetFailState("Version PTaH %s is too old (requires no less than 1.1.0)", sBuf);
+		SetFailState("PTaH extension needs to be updated. (Installed Version: %s - Required Version: 1.1.0+) [ Download from: https://ptah.zizt.ru ]", sBuf);
 		return;
 	}
 	
 	LoadTranslations("weapons.phrases");
 	
 	g_Cvar_DBConnection 			= CreateConVar("sm_weapons_db_connection", 			"storage-local", 	"Database connection name in databases.cfg to use");
-	g_Cvar_TablePrefix 				= CreateConVar("sm_weapons_table_prefix", 			"", 				"Prefix for database table (example: 'xyz_')");
-	g_Cvar_ChatPrefix 				= CreateConVar("sm_weapons_chat_prefix", 			"[oyunhost.net]", 	"Prefix for chat messages");
+	g_Cvar_TablePrefix 			= CreateConVar("sm_weapons_table_prefix", 			"", 				"Prefix for database table (example: 'xyz_')");
+	g_Cvar_ChatPrefix 			= CreateConVar("sm_weapons_chat_prefix", 			"[oyunhost.net]", 	"Prefix for chat messages");
 	g_Cvar_KnifeStatTrakMode 		= CreateConVar("sm_weapons_knife_stattrak_mode", 	"0", 				"0: All knives show the same StatTrak counter (total knife kills) 1: Each type of knife shows its own separate StatTrak counter");
-	g_Cvar_EnableFloat 				= CreateConVar("sm_weapons_enable_float", 			"1", 				"Enable/Disable weapon float options");
+	g_Cvar_EnableFloat 			= CreateConVar("sm_weapons_enable_float", 			"1", 				"Enable/Disable weapon float options");
 	g_Cvar_EnableNameTag 			= CreateConVar("sm_weapons_enable_nametag", 		"1", 				"Enable/Disable name tag options");
 	g_Cvar_EnableStatTrak 			= CreateConVar("sm_weapons_enable_stattrak", 		"1", 				"Enable/Disable StatTrak options");
 	g_Cvar_FloatIncrementSize 		= CreateConVar("sm_weapons_float_increment_size", 	"0.05", 			"Increase/Decrease by value for weapon float");
 	g_Cvar_EnableWeaponOverwrite 	= CreateConVar("sm_weapons_enable_overwrite", 		"1", 				"Enable/Disable players overwriting other players' weapons (picked up from the ground) by using !ws command");
-	g_Cvar_GracePeriod 				= CreateConVar("sm_weapons_grace_period", 			"0", 				"Grace period in terms of seconds counted after round start for allowing the use of !ws command. 0 means no restrictions");
+	g_Cvar_GracePeriod 			= CreateConVar("sm_weapons_grace_period", 			"0", 				"Grace period in terms of seconds counted after round start for allowing the use of !ws command. 0 means no restrictions");
 	g_Cvar_InactiveDays 			= CreateConVar("sm_weapons_inactive_days", 			"30", 				"Number of days before a player (SteamID) is marked as inactive and his data is deleted. (0 or any negative value to disable deleting)");
 	
 	AutoExecConfig(true, "weapons");
@@ -81,14 +81,14 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_wslang", CommandWSLang);
 	
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
-	PTaH(PTaH_GiveNamedItemPost, Hook, GiveNamedItem);
+	PTaH(PTaH_GiveNamedItemPost, Hook, GiveNamedItemPost);
 	
 	ConVar g_cvGameType = FindConVar("game_type");
 	ConVar g_cvGameMode = FindConVar("game_mode");
 	
 	if(g_cvGameType.IntValue == 1 && g_cvGameMode.IntValue == 2)
 	{
-		PTaH(PTaH_WeaponCanUsePre, Hook, WeaponCanUse);
+		PTaH(PTaH_WeaponCanUsePre, Hook, WeaponCanUsePre);
 	}
 	
 	AddCommandListener(ChatListener, "say");

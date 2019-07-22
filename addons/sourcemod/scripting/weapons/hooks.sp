@@ -41,7 +41,7 @@ Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, boo
 	return Plugin_Continue;
 }
 
-void GiveNamedItem(int client, const char[] classname, const CEconItemView item, int entity, bool OriginIsNULL, const float Origin[3])
+void GiveNamedItemPost(int client, const char[] classname, const CEconItemView item, int entity, bool OriginIsNULL, const float Origin[3])
 {
 	if (IsValidClient(client) && IsValidEntity(entity))
 	{
@@ -159,7 +159,7 @@ public void OnRoundStart(Handle event, const char[] name, bool dontBroadcast)
 	g_iRoundStartTime = GetTime();
 }
 
-Action WeaponCanUse(int client, int weapon, bool& pickup)
+Action WeaponCanUsePre(int client, int weapon, bool& pickup)
 {
 	if (IsKnife(weapon) && IsValidClient(client))
 	{
