@@ -27,7 +27,7 @@ public void UnhookPlayer(int client)
 		SDKUnhook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
 }
 
-public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, bool &ignoredCEconItemView, bool &OriginIsNULL, float Origin[3])
+Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, bool &ignoredCEconItemView, bool &OriginIsNULL, float Origin[3])
 {
 	if (IsValidClient(client))
 	{
@@ -41,7 +41,7 @@ public Action GiveNamedItemPre(int client, char classname[64], CEconItemView &it
 	return Plugin_Continue;
 }
 
-public void GiveNamedItem(int client, const char[] classname, const CEconItemView item, int entity, bool OriginIsNULL, const float Origin[3])
+void GiveNamedItem(int client, const char[] classname, const CEconItemView item, int entity, bool OriginIsNULL, const float Origin[3])
 {
 	if (IsValidClient(client) && IsValidEntity(entity))
 	{
@@ -159,9 +159,12 @@ public void OnRoundStart(Handle event, const char[] name, bool dontBroadcast)
 	g_iRoundStartTime = GetTime();
 }
 
-public bool WeaponCanUse(int client, int weapon, bool pickup)
+Action WeaponCanUse(int client, int weapon, bool& pickup)
 {
-	if (IsValidClient(client) && IsKnife(weapon))
-		return true;
-	return pickup;
+	if (IsKnife(weapon) && IsValidClient(client))
+	{
+		pickup = true;
+		return Plugin_Changed;
+	}
+	return Plugin_Continue;
 }

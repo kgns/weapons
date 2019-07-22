@@ -37,12 +37,26 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns | oyunhost.net",
 	description = "All in one custom weapon management",
-	version = "1.3.3",
+	version = "1.3.4",
 	url = "https://www.oyunhost.net"
 };
 
 public void OnPluginStart()
 {
+	if(GetEngineVersion() != Engine_CSGO)
+	{
+		SetFailState("Plugin only for CS:GO servers");
+		return;
+	}
+	
+	if(PTaH_Version() < 101000)
+	{
+		char sBuf[16];
+		PTaH_Version(sBuf, sizeof(sBuf));
+		SetFailState("Version PTaH %s is too old (requires no less than 1.1.0)", sBuf);
+		return;
+	}
+	
 	LoadTranslations("weapons.phrases");
 	
 	g_Cvar_DBConnection 			= CreateConVar("sm_weapons_db_connection", 			"storage-local", 	"Database connection name in databases.cfg to use");
@@ -67,14 +81,14 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_wslang", CommandWSLang);
 	
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
-	PTaH(PTaH_GiveNamedItem, Hook, GiveNamedItem);
+	PTaH(PTaH_GiveNamedItemPost, Hook, GiveNamedItem);
 	
 	ConVar g_cvGameType = FindConVar("game_type");
 	ConVar g_cvGameMode = FindConVar("game_mode");
 	
-	if(g_cvGameType != null && g_cvGameMode != null && g_cvGameType.IntValue == 1 && g_cvGameMode.IntValue == 2)
+	if(g_cvGameType.IntValue == 1 && g_cvGameMode.IntValue == 2)
 	{
-		PTaH(PTaH_WeaponCanUse, Hook, WeaponCanUse);
+		PTaH(PTaH_WeaponCanUsePre, Hook, WeaponCanUse);
 	}
 	
 	AddCommandListener(ChatListener, "say");

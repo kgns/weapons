@@ -1,7 +1,6 @@
 # Weapons & Knives for CS:GO Community Servers
 
 [![](https://img.shields.io/github/license/kgns/weapons.svg?style=flat-square)](https://github.com/kgns/weapons/blob/master/LICENSE)
-[![](http://hits.dwyl.io/kgns/weapons.svg)](#)
 [![Build Status](https://ci.kgns.me/job/csgo-weapons/badge/icon?style=flat-square)](https://ci.kgns.me/job/csgo-weapons)
 [![GitHub Downloads](https://img.shields.io/github/downloads/kgns/weapons/total.svg?style=flat-square)](https://github.com/kgns/weapons/releases/latest)
 
