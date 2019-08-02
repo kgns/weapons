@@ -79,6 +79,7 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_knife", CommandKnife);
 	RegConsoleCmd("sm_nametag", CommandNameTag);
 	RegConsoleCmd("sm_wslang", CommandWSLang);
+	RegConsoleCmd("sm_seed", CommandSeedMenu);
 	
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
 	PTaH(PTaH_GiveNamedItemPost, Hook, GiveNamedItemPost);
@@ -107,6 +108,30 @@ public Action CommandWeaponSkins(int client, int args)
 		}
 		else
 		{
+			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "GracePeriod", g_iGracePeriod);
+		}
+	}
+	return Plugin_Handled;
+}
+
+public Action CommandSeedMenu(int client, int args)
+{
+	if (IsValidClient(client)) {
+		int curWep = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
+		if (!IsValidEntity(curWep) || !g_iSkins[client][GetWeaponIndex(curWep)])
+        {
+			PrintToChat(client, " %s Please equip a skinned weapon!", g_ChatPrefix);
+			return Plugin_Handled;
+		}
+        g_iIndex[client] = GetWeaponIndex(curWep);
+
+		int menuTime;
+		if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+        {
+			CreateSeedMenu(client).Display(client, menuTime);
+		}
+        else
+        {
 			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "GracePeriod", g_iGracePeriod);
 		}
 	}
@@ -168,7 +193,7 @@ void SetWeaponProps(int client, int entity)
 		SetEntProp(entity, Prop_Send, "m_iItemIDHigh", IDHigh++);
 		SetEntProp(entity, Prop_Send, "m_nFallbackPaintKit", g_iSkins[client][index] == -1 ? GetRandomSkin(client, index) : g_iSkins[client][index]);
 		SetEntPropFloat(entity, Prop_Send, "m_flFallbackWear", !g_bEnableFloat || g_fFloatValue[client][index] == 0.0 ? 0.000001 : g_fFloatValue[client][index] == 1.0 ? 0.999999 : g_fFloatValue[client][index]);
-		SetEntProp(entity, Prop_Send, "m_nFallbackSeed", GetRandomInt(0, 8192));
+		SetEntProp(entity, Prop_Send, "m_nFallbackSeed", g_iWeaponSeed[client][index] == -1 ? (g_iSeedRandom[client][index] = GetRandomInt(0, 8192)) : g_iWeaponSeed[client][index]);
 		if(!IsKnife(entity))
 		{
 			if(g_bEnableStatTrak)

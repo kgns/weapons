@@ -66,6 +66,11 @@ public void OnClientPutInServer(int client)
 		g_iIndex[client] = 0;
 		g_FloatTimer[client] = INVALID_HANDLE;
 		g_bWaitingForNametag[client] = false;
+		g_bWaitingForSeed[client] = false;
+		for (int i = 0; i < sizeof(g_WeaponClasses); i++)
+        {
+			g_iSeedRandom[client][i] = 0;
+		}
 		HookPlayer(client);
 	}
 }
