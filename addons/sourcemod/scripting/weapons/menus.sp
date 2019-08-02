@@ -671,8 +671,6 @@ public int AllSkinsMenuHandler(Menu menu, MenuAction action, int client, int sel
 Menu CreateSkinsMenu(int client, int index)
 {
     Menu menu = new Menu(SkinMenuHandler);
-    
-    char title[32];
     menu.SetTitle("Skins for: %T", g_WeaponClasses[index], LANG_SERVER);
 
     char idTemp[4];
@@ -741,7 +739,6 @@ public Action SkinsMenuTimer(Handle timer, DataPack pack)
 {
 	ResetPack(pack);
 	int clientIndex = GetClientOfUserId(pack.ReadCell());
-    int wepIndex = pack.ReadCell();
 	int menuSelectionPosition = pack.ReadCell();
 	
 	if(IsValidClient(clientIndex))
@@ -821,8 +818,11 @@ Menu CreateWeaponMenu(int client)
 	Format(buffer, sizeof(buffer), "%T", "SetSkin", client);
 	menu.AddItem("skin", buffer);
 	
-    Format(buffer, sizeof(buffer), "Skin From All");
-    menu.AddItem("allskins", buffer);
+    if (g_bEnableAllSkins)
+    {
+        Format(buffer, sizeof(buffer), "Skin From All");
+        menu.AddItem("allskins", buffer);
+    }
 
 	bool weaponHasSkin = (g_iSkins[client][index] != 0);
 	
@@ -854,9 +854,11 @@ Menu CreateWeaponMenu(int client)
 		menu.AddItem("nametag", buffer, weaponHasSkin ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	}
 	
-	Format(buffer, sizeof(buffer), "Seed", client);
-	menu.AddItem("seed", buffer, weaponHasSkin ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
-
+    if (g_bEnableSeed)
+    {
+        Format(buffer, sizeof(buffer), "Seed", client);
+        menu.AddItem("seed", buffer, weaponHasSkin ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+    }
 
 	menu.ExitBackButton = true;
 	

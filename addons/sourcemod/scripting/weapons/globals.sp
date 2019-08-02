@@ -65,6 +65,12 @@ bool g_bEnableNameTag;
 ConVar g_Cvar_EnableStatTrak;
 bool g_bEnableStatTrak;
 
+ConVar g_Cvar_EnableAllSkins;
+bool g_bEnableAllSkins;
+
+ConVar g_Cvar_EnableSeed;
+bool g_bEnableSeed;
+
 ConVar g_Cvar_EnableWeaponOverwrite;
 bool g_bOverwriteEnabled;
 
