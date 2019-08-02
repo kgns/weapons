@@ -577,8 +577,6 @@ public void T_SeedColumnCallback(Database database, DBResultSet results, const c
 		
 		//SQL_EscapeString(db, createQuery, createQuery, sizeof(createQuery));
 		db.Driver.GetIdentifier(dbIdentifier, sizeof(dbIdentifier));
-		bool mysql = StrEqual(dbIdentifier, "mysql");
-
 		db.Query(T_SeedConfirmationCallback, createQuery, mysql, DBPrio_High);
 	}
 	else
