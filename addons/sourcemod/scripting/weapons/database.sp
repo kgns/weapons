@@ -449,13 +449,13 @@ public void SQLConnectCallback(Database database, const char[] error, any data)
 				knife_widowmaker_trak int(1) NOT NULL DEFAULT '0', 				\
 				knife_widowmaker_trak_count int(10) NOT NULL DEFAULT '0', 		\
 				knife_widowmaker_tag varchar(256) NOT NULL DEFAULT '',			\
-				knife_widowmaker_seed int(10) NOT NULL DEFAULT '-1',            \
-                mp5sd int(4) NOT NULL DEFAULT '0', 								\
+				knife_widowmaker_seed int(10) NOT NULL DEFAULT '-1',			\
+				mp5sd int(4) NOT NULL DEFAULT '0', 								\
 				mp5sd_float decimal(3,2) NOT NULL DEFAULT '0.0',				\
 				mp5sd_trak int(1) NOT NULL DEFAULT '0', 						\
 				mp5sd_trak_count int(10) NOT NULL DEFAULT '0', 					\
-				mp5sd_tag varchar(256) NOT NULL DEFAULT '',                     \
-                mp5sd_seed int(10) NOT NULL DEFAULT '-1')");
+				mp5sd_tag varchar(256) NOT NULL DEFAULT '',					 \
+				mp5sd_seed int(10) NOT NULL DEFAULT '-1')");
 		
 		db.Driver.GetIdentifier(dbIdentifier, sizeof(dbIdentifier));
 		bool mysql = StrEqual(dbIdentifier, "mysql");
@@ -480,7 +480,7 @@ public void T_CreateMainTableCallback(Database database, DBResultSet results, co
 		AddWeaponColumns("knife_gypsy_jackknife");
 		AddWeaponColumns("knife_stiletto");
 		AddWeaponColumns("knife_widowmaker");
-        AddWeaponColumns("mp5sd");
+		AddWeaponColumns("mp5sd");
 		
 		addSeedColumns();
 
@@ -572,8 +572,8 @@ public void T_SeedColumnCallback(Database database, DBResultSet results, const c
 				ADD COLUMN knife_ursus_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_ursus_tag,						\
 				ADD COLUMN knife_gypsy_jackknife_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_gypsy_jackknife_tag,	\
 				ADD COLUMN knife_stiletto_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_stiletto_tag,					\
-				ADD COLUMN knife_widowmaker_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_widowmaker_tag,              \
-                ADD COLUMN mp5sd_seed int(10) NOT NULL DEFAULT '-1' AFTER mp5sd_tag");
+				ADD COLUMN knife_widowmaker_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_widowmaker_tag,			  \
+				ADD COLUMN mp5sd_seed int(10) NOT NULL DEFAULT '-1' AFTER mp5sd_tag");
 		
 		//SQL_EscapeString(db, createQuery, createQuery, sizeof(createQuery));
 		db.Driver.GetIdentifier(dbIdentifier, sizeof(dbIdentifier));
@@ -610,7 +610,7 @@ void AddWeaponColumns(const char[] weapon)
 	SQL_FastQuery(db, query);
 	Format(query, sizeof(query), "ALTER TABLE %sweapons ADD %s_tag varchar(256) NOT NULL DEFAULT ''", g_TablePrefix, weapon);
 	SQL_FastQuery(db, query);
-    Format(query, sizeof(query), "ALTER TABLE %sweapons ADD %s_seed int(10) NOT NULL DEFAULT '-1'", g_TablePrefix, weapon);
+	Format(query, sizeof(query), "ALTER TABLE %sweapons ADD %s_seed int(10) NOT NULL DEFAULT '-1'", g_TablePrefix, weapon);
 	SQL_FastQuery(db, query);
 	
 	SQL_UnlockDatabase(db);

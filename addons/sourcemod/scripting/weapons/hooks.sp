@@ -119,11 +119,11 @@ public Action ChatListener(int client, const char[] command, int args)
 		}
 
 		g_iWeaponSeed[client][g_iIndex[client]] = seedInt;
-        g_iSeedRandom[client][g_iIndex[client]] = -1;
+		g_iSeedRandom[client][g_iIndex[client]] = -1;
 	
 		RefreshWeapon(client, g_iIndex[client]);
 	
-        CreateTimer(0.1, SeedMenuTimer, GetClientUserId(client));
+		CreateTimer(0.1, SeedMenuTimer, GetClientUserId(client));
 		return Plugin_Handled;
 	}
 	
