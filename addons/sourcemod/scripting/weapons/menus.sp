@@ -318,25 +318,25 @@ Menu CreateSeedMenu(int client)
 
 	if (g_iWeaponSeed[client][g_iIndex[client]] != -1)
 	{
-		Format(buffer, sizeof(buffer), "Seed: %i", g_iWeaponSeed[client][g_iIndex[client]]);
+		Format(buffer, sizeof(buffer), "%T", "SeedTitle", client, g_iWeaponSeed[client][g_iIndex[client]]);
 	}
 	else if (g_iSeedRandom[client][g_iIndex[client]] > 0)
 	{
-		Format(buffer, sizeof(buffer), "Seed: %i", g_iSeedRandom[client][g_iIndex[client]]);
+		Format(buffer, sizeof(buffer), "%T", "SeedTitle", client, g_iSeedRandom[client][g_iIndex[client]]);
 	}
 	else
 	{
-		Format(buffer, sizeof(buffer), "Seed: ∞");
+		Format(buffer, sizeof(buffer), "%T", "SeedTitleNoSeed", client);
 	}
 	menu.SetTitle(buffer);
 
-	Format(buffer, sizeof(buffer), "Use Random Seed");
+	Format(buffer, sizeof(buffer), "%T", "SeedRandom", client);
 	menu.AddItem("rseed", buffer);
 
-	Format(buffer, sizeof(buffer), "Manual Seed");
+	Format(buffer, sizeof(buffer), "%T", "SeedManual", client);
 	menu.AddItem("cseed", buffer);
 
-	Format(buffer, sizeof(buffer), "Save Current Seed");
+	Format(buffer, sizeof(buffer), "%T", "SeedSave", client);
 	menu.AddItem("sseed", buffer, g_iSeedRandom[client][g_iIndex[client]] == 0 ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 
 	menu.ExitBackButton = true;
@@ -368,7 +368,7 @@ public int SeedMenuHandler(Menu menu, MenuAction action, int client, int selecti
 				else if (StrEqual(buffer, "cseed"))
 				{					
 					g_bWaitingForSeed[client] = true;
-					PrintToChat(client, " %s Write your desired seed into chat. To abort, type !cancel", g_ChatPrefix);
+					PrintToChat(client, " %s \x04%t", g_ChatPrefix, "SeedInstruction");
 				}
 				else if (StrEqual(buffer, "sseed"))
 				{	
@@ -379,7 +379,7 @@ public int SeedMenuHandler(Menu menu, MenuAction action, int client, int selecti
 					g_iSeedRandom[client][g_iIndex[client]] = 0;
 					RefreshWeapon(client, g_iIndex[client]);
 
-					PrintToChat(client, " %s Seed saved.", g_ChatPrefix);
+					PrintToChat(client, " %s \x04%t", g_ChatPrefix, "SeedSaved");
 
 					char updateFields[256];
 					char weaponName[32];
@@ -614,13 +614,13 @@ public Action NameTagColorsMenuTimer(Handle timer, int userid)
 Menu CreateAllSkinsMenu(int client)
 {
 	Menu menu = new Menu(AllSkinsMenuHandler);
-	menu.SetTitle("All Skins");
+	menu.SetTitle("%T", "AllSkins", client);
 
-	char name[32];
+	char buffer[60];
 	for (int i = 0; i < sizeof(g_WeaponClasses); i++)
 	{
-		Format(name, sizeof(name), "%T", g_WeaponClasses[i], client);
-		menu.AddItem(g_WeaponClasses[i], name);
+		Format(buffer, sizeof(buffer), "%T", client, g_WeaponClasses[i]);
+		menu.AddItem(g_WeaponClasses[i], buffer);
 	}
 	
 	menu.ExitBackButton = true;
@@ -671,7 +671,10 @@ public int AllSkinsMenuHandler(Menu menu, MenuAction action, int client, int sel
 Menu CreateSkinsMenu(int client, int index)
 {
 	Menu menu = new Menu(SkinMenuHandler);
-	menu.SetTitle("Skins for: %T", g_WeaponClasses[index], LANG_SERVER);
+
+	char buffer[60];
+	Format(buffer, sizeof(buffer), "%T", client, g_WeaponClasses[index]);
+	menu.SetTitle("AllSkinsSub", client, buffer);
 
 	char idTemp[4];
 	char infoTemp[32];
@@ -760,7 +763,7 @@ Menu CreateAllWeaponsMenu(int client)
 	char name[32];
 	for (int i = 0; i < sizeof(g_WeaponClasses); i++)
 	{
-		Format(name, sizeof(name), "%T", g_WeaponClasses[i], client);
+		Format(name, sizeof(name), "%T", client, g_WeaponClasses[i]);
 		menu.AddItem(g_WeaponClasses[i], name);
 	}
 	
@@ -820,7 +823,7 @@ Menu CreateWeaponMenu(int client)
 	
 	if (g_bEnableAllSkins)
 	{
-		Format(buffer, sizeof(buffer), "Skin From All");
+		Format(buffer, sizeof(buffer), "%T", "AllSkins", client);
 		menu.AddItem("allskins", buffer);
 	}
 

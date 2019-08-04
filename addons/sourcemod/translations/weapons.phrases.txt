@@ -336,4 +336,52 @@
 	{
 		"en"	"Name tag successfully applied"
 	}
+	"AllSkins"
+	{
+		"en"	"Skin From All"
+	}
+	"AllSkinsSub"
+	{
+		"en"	"Skins for: %s"
+	}
+	"SeedTitle"
+	{
+		"en"	"Seed: %i"
+	}
+	"SeedTitleNoSeed"
+	{
+		"en"	"Seed: ∞"
+	}
+	"SeedRandom"
+	{
+		"en"	"Use Random Seed"
+	}
+	"SeedManual"
+	{
+		"en"	"Manual Seed"
+	}
+	"SeedSave"
+	{
+		"en"	"Save Current Seed"
+	}
+	"SeedInstruction"
+	{
+		"en"	"Write your desired seed into chat. To abort, type !cancel."
+	}
+	"SeedSuccess"
+	{
+		"en"	"Seed successfully applied"
+	}
+	"SeedCancelled"
+	{
+		"en"	"Seed operation aborted."
+	}
+	"SeedFailed"
+	{
+		"en"	"Invalid seed (0 - 8192)"
+	}
+	"SeedSaved"
+	{
+		"en"	"Seed saved."
+	}
 }
