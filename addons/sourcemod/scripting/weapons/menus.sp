@@ -619,7 +619,7 @@ Menu CreateAllSkinsMenu(int client)
 	char buffer[60];
 	for (int i = 0; i < sizeof(g_WeaponClasses); i++)
 	{
-		Format(buffer, sizeof(buffer), "%T", client, g_WeaponClasses[i]);
+		Format(buffer, sizeof(buffer), "%T", g_WeaponClasses[i], client);
 		menu.AddItem(g_WeaponClasses[i], buffer);
 	}
 	
@@ -673,8 +673,8 @@ Menu CreateSkinsMenu(int client, int index)
 	Menu menu = new Menu(SkinMenuHandler);
 
 	char buffer[60];
-	Format(buffer, sizeof(buffer), "%T", client, g_WeaponClasses[index]);
-	menu.SetTitle("AllSkinsSub", client, buffer);
+	Format(buffer, sizeof(buffer), "%T", g_WeaponClasses[index], client);
+	menu.SetTitle("%T", "AllSkinsSub", client, buffer);
 
 	char idTemp[4];
 	char infoTemp[32];
@@ -763,7 +763,7 @@ Menu CreateAllWeaponsMenu(int client)
 	char name[32];
 	for (int i = 0; i < sizeof(g_WeaponClasses); i++)
 	{
-		Format(name, sizeof(name), "%T", client, g_WeaponClasses[i]);
+		Format(name, sizeof(name), "%T", g_WeaponClasses[i], client);
 		menu.AddItem(g_WeaponClasses[i], name);
 	}
 	
