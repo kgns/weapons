@@ -342,7 +342,7 @@
 	}
 	"AllSkinsSub"
 	{
-		"chi"	"Skins for: %s"
+		"chi"	"来自 %s 的皮肤："
 	}
 	"SeedTitle"
 	{
