@@ -394,8 +394,13 @@ public void SQLConnectCallback(Database database, const char[] error, any data)
 				knife_stiletto_float decimal(3,2) NOT NULL DEFAULT '0.0', 		\
 				knife_stiletto_trak int(1) NOT NULL DEFAULT '0', 				\
 				knife_stiletto_trak_count int(10) NOT NULL DEFAULT '0', 		\
-				knife_stiletto_tag varchar(256) NOT NULL DEFAULT '', 			\
-				knife_widowmaker int(4) NOT NULL DEFAULT '0', ");
+				knife_stiletto_tag varchar(256) NOT NULL DEFAULT '',            \
+                knife_css int(4) NOT NULL DEFAULT '0', 				            \
+				knife_css_float decimal(3,2) NOT NULL DEFAULT '0.0',            \
+				knife_css_trak int(1) NOT NULL DEFAULT '0', 		            \
+				knife_css_trak_count int(10) NOT NULL DEFAULT '0', 	            \
+				knife_css_tag varchar(256) NOT NULL DEFAULT '', 	            \
+				knife_widowmaker int(4) NOT NULL DEFAULT '0', ");               \
 		index += FormatEx(createQuery[index], sizeof(createQuery) - index, "	\
 				knife_widowmaker_float decimal(3,2) NOT NULL DEFAULT '0.0', 	\
 				knife_widowmaker_trak int(1) NOT NULL DEFAULT '0', 				\
