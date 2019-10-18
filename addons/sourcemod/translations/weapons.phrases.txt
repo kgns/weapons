@@ -306,7 +306,7 @@
 	}
 	"weapon_knife_css"
 	{
-		"en"	"Knife Classic"
+		"en"	"Classic Knife"
 	}
 	"ChangeNameTag"
 	{
