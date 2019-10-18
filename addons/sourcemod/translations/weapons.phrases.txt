@@ -304,6 +304,10 @@
 	{
 		"en"	"Knife"
 	}
+	"weapon_knife_css"
+	{
+		"en"	"Knife Classic"
+	}
 	"ChangeNameTag"
 	{
 		"en"	"Set Name Tag"
