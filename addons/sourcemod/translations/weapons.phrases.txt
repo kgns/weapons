@@ -296,6 +296,10 @@
 	{
 		"en"	"★ Talon"
 	}
+	"weapon_knife_css"
+	{
+		"en"	"★ Classic Knife"
+	}
 	"weapon_knife_t"
 	{
 		"en"	"Knife"
