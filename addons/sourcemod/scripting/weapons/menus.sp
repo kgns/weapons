@@ -678,6 +678,8 @@ Menu CreateKnifeMenu(int client)
 	char buffer[60];
 	Format(buffer, sizeof(buffer), "%T", "OwnKnife", client);
 	menu.AddItem("0", buffer, g_iKnife[client] != 0 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_css", client);
+	menu.AddItem("48", buffer, g_iKnife[client] != 48 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_ursus", client);
 	menu.AddItem("43", buffer, g_iKnife[client] != 43 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_gypsy_jackknife", client);
