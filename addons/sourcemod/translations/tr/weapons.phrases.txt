@@ -280,6 +280,26 @@
 	{
 		"tr"	"★ Bowie Bıçağı"
 	}
+	"weapon_knife_ursus"
+	{
+		"tr"	"★ Ursus Bıçağı"
+	}
+	"weapon_knife_gypsy_jackknife"
+	{
+		"tr"	"★ Navaja Bıçağı"
+	}
+	"weapon_knife_stiletto"
+	{
+		"tr"	"★ Stiletto Bıçak"
+	}
+	"weapon_knife_widowmaker"
+	{
+		"tr"	"★ Talon Bıçağı"
+	}
+	"weapon_knife_css"
+	{
+		"tr"	"★ Klasik Bıçak"
+	}
 	"weapon_knife_t"
 	{
 		"tr"	"Bıçak"

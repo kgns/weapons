@@ -455,7 +455,13 @@ public void SQLConnectCallback(Database database, const char[] error, any data)
 				mp5sd_trak int(1) NOT NULL DEFAULT '0', 						\
 				mp5sd_trak_count int(10) NOT NULL DEFAULT '0',					\
 				mp5sd_tag varchar(256) NOT NULL DEFAULT '',						\
-				mp5sd_seed int(10) NOT NULL DEFAULT '-1')");
+				mp5sd_seed int(10) NOT NULL DEFAULT '-1',						\
+				knife_css int(4) NOT NULL DEFAULT '0', 							\
+				knife_css_float decimal(3,2) NOT NULL DEFAULT '0.0',			\
+				knife_css_trak int(1) NOT NULL DEFAULT '0', 					\
+				knife_css_trak_count int(10) NOT NULL DEFAULT '0', 				\
+				knife_css_tag varchar(256) NOT NULL DEFAULT '', 				\
+				knife_css_seed int(10) NOT NULL DEFAULT '-1')");
 		
 		db.Driver.GetIdentifier(dbIdentifier, sizeof(dbIdentifier));
 		bool mysql = StrEqual(dbIdentifier, "mysql");
@@ -481,6 +487,7 @@ public void T_CreateMainTableCallback(Database database, DBResultSet results, co
 		AddWeaponColumns("knife_stiletto", false);
 		AddWeaponColumns("knife_widowmaker", false);
 		AddWeaponColumns("mp5sd", false);
+		AddWeaponColumns("knife_css");
 		
 		addSeedColumns(mysql);
 		
