@@ -320,4 +320,64 @@
 	{
 		"tr"	"İsim etiketi belirlendi"
 	}
+	"Seed"
+	{
+		"tr"	"Seed"
+	}
+	"SeedTitle"
+	{
+		"tr"	"Seed: %i"
+	}
+	"SeedTitleNoSeed"
+	{
+		"tr"	"Seed: ∞"
+	}
+	"SeedRandom"
+	{
+		"tr"	"Rastgele Seed"
+	}
+	"SeedManual"
+	{
+		"tr"	"Kendin Seed Gir"
+	}
+	"SeedSave"
+	{
+		"tr"	"Seed'i Kaydet"
+	}
+	"SeedInstruction"
+	{
+		"tr"	"Kullanmak istediğiniz seed değerini (0 - 8192) chat'e yazın. Seed belirlemekten vazgeçtiyseniz !iptal yazabilirsiniz."
+	}
+	"SeedSuccess"
+	{
+		"tr"	"Seed başarıyla uygulandı."
+	}
+	"SeedCancelled"
+	{
+		"tr"	"Seed işlemi iptal edildi."
+	}
+	"SeedFailed"
+	{
+		"tr"	"Geçersiz seed değeri (0 - 8192)"
+	}
+	"SeedSaved"
+	{
+		"tr"	"Seed kaydedildi."
+	}
+	"SeedDisabled"
+	{
+		"tr"	"Seed menü kullanımı şu an kapalı."
+	}
+	"SeedExplanation"
+	{
+		"tr"	"Seed işlemleri için !ws menüsünü kullanmalısınız."
+	}
+	"SeedReset"
+	{
+		"tr"	"Seed sıfırlandı."
+	}
+	"ResetSeed"
+	{
+		"tr"	"Seed Sıfırla"
+	}
 }

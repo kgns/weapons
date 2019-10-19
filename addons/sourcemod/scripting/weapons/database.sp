@@ -453,8 +453,8 @@ public void SQLConnectCallback(Database database, const char[] error, any data)
 				mp5sd int(4) NOT NULL DEFAULT '0', 								\
 				mp5sd_float decimal(3,2) NOT NULL DEFAULT '0.0',				\
 				mp5sd_trak int(1) NOT NULL DEFAULT '0', 						\
-				mp5sd_trak_count int(10) NOT NULL DEFAULT '0', 					\
-				mp5sd_tag varchar(256) NOT NULL DEFAULT '',					 \
+				mp5sd_trak_count int(10) NOT NULL DEFAULT '0',					\
+				mp5sd_tag varchar(256) NOT NULL DEFAULT '',						\
 				mp5sd_seed int(10) NOT NULL DEFAULT '-1')");
 		
 		db.Driver.GetIdentifier(dbIdentifier, sizeof(dbIdentifier));
@@ -476,14 +476,14 @@ public void T_CreateMainTableCallback(Database database, DBResultSet results, co
 	}
 	else
 	{
-		AddWeaponColumns("knife_ursus");
-		AddWeaponColumns("knife_gypsy_jackknife");
-		AddWeaponColumns("knife_stiletto");
-		AddWeaponColumns("knife_widowmaker");
-		AddWeaponColumns("mp5sd");
+		AddWeaponColumns("knife_ursus", false);
+		AddWeaponColumns("knife_gypsy_jackknife", false);
+		AddWeaponColumns("knife_stiletto", false);
+		AddWeaponColumns("knife_widowmaker", false);
+		AddWeaponColumns("mp5sd", false);
 		
-		addSeedColumns();
-
+		addSeedColumns(mysql);
+		
 		char createQuery[512];
 		Format(createQuery, sizeof(createQuery), "			\
 			CREATE TABLE %sweapons_timestamps ( 			\
@@ -499,31 +499,25 @@ public void T_CreateMainTableCallback(Database database, DBResultSet results, co
 	}
 }
 
-void addSeedColumns()
+void addSeedColumns(bool mysql)
 {
-	char createQuery[1024];
-	char dbIdentifier[10];
-	FormatEx(createQuery, sizeof(createQuery), "SELECT awp_seed FROM %sweapons", g_TablePrefix);
+	char seedCheckQuery[128];
+	FormatEx(seedCheckQuery, sizeof(seedCheckQuery), "SELECT awp_seed FROM %sweapons", g_TablePrefix);
 
-	db.Driver.GetIdentifier(dbIdentifier, sizeof(dbIdentifier));
-	bool mysql = StrEqual(dbIdentifier, "mysql");
-	
-	SQL_EscapeString(db, createQuery, createQuery, sizeof(createQuery));
-
-	db.Query(T_SeedColumnCallback, createQuery, mysql, DBPrio_High);
+	db.Query(T_SeedColumnCallback, seedCheckQuery, mysql, DBPrio_High);
 }
 
 public void T_SeedColumnCallback(Database database, DBResultSet results, const char[] error, bool mysql)
 {
-	if (results == null) {
-		LogMessage("%s Attempting to create seed tables", (mysql ? "MySQL" : "SQLite"));
-
-		char createQuery[20480];
-		char dbIdentifier[10];
+	if (results == null)
+	{
+		LogMessage("%s Attempting to create seed columns", (mysql ? "MySQL" : "SQLite"));
+		
+		char seedColumnsQuery[8192];
 		
 		int index = 0;
 		
-		index += FormatEx(createQuery[index], sizeof(createQuery) - index, "											\
+		index += FormatEx(seedColumnsQuery[index], sizeof(seedColumnsQuery) - index, "										\
 			ALTER TABLE %sweapons																						\
 				ADD COLUMN awp_seed int(10) NOT NULL DEFAULT '-1' AFTER awp_tag,										\
 				ADD COLUMN ak47_seed int(10) NOT NULL DEFAULT '-1' AFTER ak47_tag,										\
@@ -546,7 +540,7 @@ public void T_SeedColumnCallback(Database database, DBResultSet results, const c
 				ADD COLUMN m249_seed int(10) NOT NULL DEFAULT '-1' AFTER m249_tag,										\
 				ADD COLUMN negev_seed int(10) NOT NULL DEFAULT '-1' AFTER negev_tag,									\
 				ADD COLUMN mp9_seed int(10) NOT NULL DEFAULT '-1' AFTER mp9_tag, ", g_TablePrefix);
-		index += FormatEx(createQuery[index], sizeof(createQuery) - index, "											\
+		index += FormatEx(seedColumnsQuery[index], sizeof(seedColumnsQuery) - index, "										\
 				ADD COLUMN mac10_seed int(10) NOT NULL DEFAULT '-1' AFTER mac10_tag,									\
 				ADD COLUMN mp7_seed int(10) NOT NULL DEFAULT '-1' AFTER mp7_tag,										\
 				ADD COLUMN ump45_seed int(10) NOT NULL DEFAULT '-1' AFTER ump45_tag,									\
@@ -572,29 +566,26 @@ public void T_SeedColumnCallback(Database database, DBResultSet results, const c
 				ADD COLUMN knife_ursus_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_ursus_tag,						\
 				ADD COLUMN knife_gypsy_jackknife_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_gypsy_jackknife_tag,	\
 				ADD COLUMN knife_stiletto_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_stiletto_tag,					\
-				ADD COLUMN knife_widowmaker_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_widowmaker_tag,			  \
+				ADD COLUMN knife_widowmaker_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_widowmaker_tag,				\
 				ADD COLUMN mp5sd_seed int(10) NOT NULL DEFAULT '-1' AFTER mp5sd_tag");
 		
-		//SQL_EscapeString(db, createQuery, createQuery, sizeof(createQuery));
-		db.Driver.GetIdentifier(dbIdentifier, sizeof(dbIdentifier));
-		db.Query(T_SeedConfirmationCallback, createQuery, mysql, DBPrio_High);
-	}
-	else
-	{
-		LogMessage("%s Seed tables already exist", (mysql ? "MySQL" : "SQLite"));
+		db.Query(T_SeedConfirmationCallback, seedColumnsQuery, mysql, DBPrio_High);
 	}
 }
 
 public void T_SeedConfirmationCallback(Database database, DBResultSet results, const char[] error, bool mysql)
 {
-	if (results == null) {
-		LogMessage("Null Results: %s", error);
-	} else {
-		LogMessage("Successfully Added Columns");
+	if (results == null)
+	{
+		LogError("%s Seed column creation failed! %s", (mysql ? "MySQL" : "SQLite"), error);
+	}
+	else
+	{
+		LogMessage("Successfully created seed columns");
 	}
 }
 
-void AddWeaponColumns(const char[] weapon)
+void AddWeaponColumns(const char[] weapon, bool seedColumn = true)
 {
 	char query[512];
 	
@@ -610,8 +601,11 @@ void AddWeaponColumns(const char[] weapon)
 	SQL_FastQuery(db, query);
 	Format(query, sizeof(query), "ALTER TABLE %sweapons ADD %s_tag varchar(256) NOT NULL DEFAULT ''", g_TablePrefix, weapon);
 	SQL_FastQuery(db, query);
-	Format(query, sizeof(query), "ALTER TABLE %sweapons ADD %s_seed int(10) NOT NULL DEFAULT '-1'", g_TablePrefix, weapon);
-	SQL_FastQuery(db, query);
+	if (seedColumn)
+	{
+		Format(query, sizeof(query), "ALTER TABLE %sweapons ADD %s_seed int(10) NOT NULL DEFAULT '-1'", g_TablePrefix, weapon);
+		SQL_FastQuery(db, query);
+	}
 	
 	SQL_UnlockDatabase(db);
 }

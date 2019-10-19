@@ -43,7 +43,6 @@ public void OnConfigsExecuted()
 	g_bEnableFloat = g_Cvar_EnableFloat.BoolValue;
 	g_bEnableNameTag = g_Cvar_EnableNameTag.BoolValue;
 	g_bEnableStatTrak = g_Cvar_EnableStatTrak.BoolValue;
-	g_bEnableAllSkins = g_Cvar_EnableAllSkins.BoolValue;
 	g_bEnableSeed = g_Cvar_EnableSeed.BoolValue;
 	g_fFloatIncrementSize = g_Cvar_FloatIncrementSize.FloatValue;
 	g_iFloatIncrementPercentage = RoundFloat(g_fFloatIncrementSize * 100.0);

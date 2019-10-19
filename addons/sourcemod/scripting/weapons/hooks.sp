@@ -59,40 +59,38 @@ void GiveNamedItemPost(int client, const char[] classname, const CEconItemView i
 
 public Action ChatListener(int client, const char[] command, int args)
 {
-	char nameTag[128];
-	GetCmdArgString(nameTag, sizeof(nameTag));
-	StripQuotes(nameTag);
-	if (StrEqual(nameTag, "!ws") || StrEqual(nameTag, "!knife") || StrEqual(nameTag, "!wslang") || StrContains(nameTag, "!nametag") == 0)
+	char msg[128];
+	GetCmdArgString(msg, sizeof(msg));
+	StripQuotes(msg);
+	if (StrEqual(msg, "!ws") || StrEqual(msg, "!knife") || StrEqual(msg, "!wslang") || StrContains(msg, "!nametag") == 0 || StrContains(msg, "!seed") == 0)
 	{
 		return Plugin_Handled;
 	}
 	else if (g_bWaitingForNametag[client] && IsValidClient(client) && g_iIndex[client] > -1 && !IsChatTrigger())
 	{
-		CleanNameTag(nameTag, sizeof(nameTag));
+		CleanNameTag(msg, sizeof(msg));
 		
 		g_bWaitingForNametag[client] = false;
 		
-		if (StrEqual(nameTag, "!cancel") || StrEqual(nameTag, "!iptal"))
+		if (StrEqual(msg, "!cancel") || StrEqual(msg, "!iptal"))
 		{
-			PrintToChat(client, " %s\x02 %t", g_ChatPrefix, "NameTagCancelled");
+			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "NameTagCancelled");
 			return Plugin_Handled;
 		}
 		
-		g_NameTag[client][g_iIndex[client]] = nameTag;
+		g_NameTag[client][g_iIndex[client]] = msg;
 		
 		RefreshWeapon(client, g_iIndex[client]);
 		
 		char updateFields[1024];
 		char escaped[257];
-		db.Escape(nameTag, escaped, sizeof(escaped));
+		db.Escape(msg, escaped, sizeof(escaped));
 		char weaponName[32];
-		char weaponClass[32];
-		strcopy(weaponClass, sizeof(weaponClass), g_WeaponClasses[g_iIndex[client]]);
-		RemoveWeaponPrefix(weaponClass, weaponName, sizeof(weaponName));
+		RemoveWeaponPrefix(g_WeaponClasses[g_iIndex[client]], weaponName, sizeof(weaponName));
 		Format(updateFields, sizeof(updateFields), "%s_tag = '%s'", weaponName, escaped);
 		UpdatePlayerData(client, updateFields);
 		
-		PrintToChat(client, " %s \x04%t: \x01\"%s\"", g_ChatPrefix, "NameTagSuccess", nameTag);
+		PrintToChat(client, " %s \x04%t: \x01\"%s\"", g_ChatPrefix, "NameTagSuccess", msg);
 		
 		/* NAMETAGCOLOR
 		int menuTime;
@@ -101,31 +99,34 @@ public Action ChatListener(int client, const char[] command, int args)
 			CreateColorsMenu(client).Display(client, menuTime);
 		}
 		*/
-	
+		
 		return Plugin_Handled;
 	}
-	else if (g_bWaitingForSeed[client] && IsValidClient(client) && g_iIndex[client] > -1 && !IsChatTrigger()) {
-		
+	else if (g_bWaitingForSeed[client] && IsValidClient(client) && g_iIndex[client] > -1 && !IsChatTrigger())
+	{
 		g_bWaitingForSeed[client] = false;
-
+		
 		int seedInt;
-		if (StrEqual(nameTag, "!cancel") || StrEqual(nameTag, "!iptal") || StrEqual(nameTag, "")) {
-			PrintToChat(client, " %s\x02 %t", g_ChatPrefix, "SeedCancelled");
+		if (StrEqual(msg, "!cancel") || StrEqual(msg, "!iptal") || StrEqual(msg, ""))
+		{
+			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "SeedCancelled");
 			return Plugin_Handled;
 		}
-		else if ((seedInt = StringToInt(nameTag)) == -1 || seedInt < 0 || seedInt > 8192) {
-			PrintToChat(client, " %s\x02 %t", g_ChatPrefix, "SeedFailed");
+		else if ((seedInt = StringToInt(msg)) < 0 || seedInt > 8192)
+		{
+			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "SeedFailed");
 			return Plugin_Handled;
 		}
-
+		
 		g_iWeaponSeed[client][g_iIndex[client]] = seedInt;
 		g_iSeedRandom[client][g_iIndex[client]] = -1;
-	
+		
 		RefreshWeapon(client, g_iIndex[client]);
+		
 		CreateTimer(0.1, SeedMenuTimer, GetClientUserId(client));
-
+		
 		PrintToChat(client, " %s \x04%t: \x01%i", g_ChatPrefix, "SeedSuccess", seedInt);
-
+		
 		return Plugin_Handled;
 	}
 	
