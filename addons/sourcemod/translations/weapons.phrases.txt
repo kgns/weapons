@@ -298,7 +298,7 @@
 	}
 	"weapon_knife_css"
 	{
-		"chi"	"★ Classic Knife"
+		"en"	"★ Classic Knife"
 	}
 	"weapon_knife_t"
 	{
