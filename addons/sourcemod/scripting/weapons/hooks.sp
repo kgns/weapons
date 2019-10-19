@@ -104,6 +104,30 @@ public Action ChatListener(int client, const char[] command, int args)
 	
 		return Plugin_Handled;
 	}
+	else if (g_bWaitingForSeed[client] && IsValidClient(client) && g_iIndex[client] > -1 && !IsChatTrigger()) {
+		
+		g_bWaitingForSeed[client] = false;
+
+		int seedInt;
+		if (StrEqual(nameTag, "!cancel") || StrEqual(nameTag, "!iptal") || StrEqual(nameTag, "")) {
+			PrintToChat(client, " %s\x02 %t", g_ChatPrefix, "SeedCancelled");
+			return Plugin_Handled;
+		}
+		else if ((seedInt = StringToInt(nameTag)) == -1 || seedInt < 0 || seedInt > 8192) {
+			PrintToChat(client, " %s\x02 %t", g_ChatPrefix, "SeedFailed");
+			return Plugin_Handled;
+		}
+
+		g_iWeaponSeed[client][g_iIndex[client]] = seedInt;
+		g_iSeedRandom[client][g_iIndex[client]] = -1;
+	
+		RefreshWeapon(client, g_iIndex[client]);
+		CreateTimer(0.1, SeedMenuTimer, GetClientUserId(client));
+
+		PrintToChat(client, " %s \x04%t: \x01%i", g_ChatPrefix, "SeedSuccess", seedInt);
+
+		return Plugin_Handled;
+	}
 	
 	return Plugin_Continue;
 }

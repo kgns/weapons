@@ -43,6 +43,8 @@ public void OnConfigsExecuted()
 	g_bEnableFloat = g_Cvar_EnableFloat.BoolValue;
 	g_bEnableNameTag = g_Cvar_EnableNameTag.BoolValue;
 	g_bEnableStatTrak = g_Cvar_EnableStatTrak.BoolValue;
+	g_bEnableAllSkins = g_Cvar_EnableAllSkins.BoolValue;
+	g_bEnableSeed = g_Cvar_EnableSeed.BoolValue;
 	g_fFloatIncrementSize = g_Cvar_FloatIncrementSize.FloatValue;
 	g_iFloatIncrementPercentage = RoundFloat(g_fFloatIncrementSize * 100.0);
 	g_bOverwriteEnabled = g_Cvar_EnableWeaponOverwrite.BoolValue;
@@ -66,6 +68,11 @@ public void OnClientPutInServer(int client)
 		g_iIndex[client] = 0;
 		g_FloatTimer[client] = INVALID_HANDLE;
 		g_bWaitingForNametag[client] = false;
+		g_bWaitingForSeed[client] = false;
+		for (int i = 0; i < sizeof(g_WeaponClasses); i++)
+		{
+			g_iSeedRandom[client][i] = 0;
+		}
 		HookPlayer(client);
 	}
 }

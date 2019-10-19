@@ -65,6 +65,12 @@ bool g_bEnableNameTag;
 ConVar g_Cvar_EnableStatTrak;
 bool g_bEnableStatTrak;
 
+ConVar g_Cvar_EnableAllSkins;
+bool g_bEnableAllSkins;
+
+ConVar g_Cvar_EnableSeed;
+bool g_bEnableSeed;
+
 ConVar g_Cvar_EnableWeaponOverwrite;
 bool g_bOverwriteEnabled;
 
@@ -77,14 +83,18 @@ int g_iGraceInactiveDays;
 int g_iSkins[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 int g_iStatTrak[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 int g_iStatTrakCount[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
+int g_iWeaponSeed[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 char g_NameTag[MAXPLAYERS+1][sizeof(g_WeaponClasses)][128];
 float g_fFloatValue[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 
 int g_iIndex[MAXPLAYERS+1] = { 0, ... };
+int g_iSkinIndex[MAXPLAYERS + 1] = { 0, ... };
 Handle g_FloatTimer[MAXPLAYERS+1] = { INVALID_HANDLE, ... };
 int g_iSteam32[MAXPLAYERS+1] = { 0, ... };
 
 bool g_bWaitingForNametag[MAXPLAYERS+1] = { false, ... };
+bool g_bWaitingForSeed[MAXPLAYERS+1] = { false, ... };
+int g_iSeedRandom[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 
 int g_iKnife[MAXPLAYERS+1] = { 0, ... };
 

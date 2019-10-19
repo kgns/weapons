@@ -50,11 +50,11 @@ stock int GetRandomSkin(int client, int index)
 
 stock bool IsValidClient(int client)
 {
-    if (!(1 <= client <= MaxClients) || !IsClientInGame(client) || IsFakeClient(client) || IsClientSourceTV(client) || IsClientReplay(client))
-    {
-        return false;
-    }
-    return true;
+	if (!(1 <= client <= MaxClients) || !IsClientInGame(client) || IsFakeClient(client) || IsClientSourceTV(client) || IsClientReplay(client))
+	{
+		return false;
+	}
+	return true;
 }
 
 stock int GetWeaponIndex(int entity)
