@@ -340,6 +340,14 @@
 	{
 		"chi"	"名称标签已设置"
 	}
+	"AllSkins"
+	{
+		"chi"	"选择来自所有武器的皮肤"
+	}
+	"AllSkinsSub"
+	{
+		"chi"	"Skins for: %s"
+	}
 	"SeedTitle"
 	{
 		"chi"	"图案模板： %i"

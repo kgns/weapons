@@ -588,7 +588,7 @@ public void T_CreateMainTableCallback(Database database, DBResultSet results, co
 		AddWeaponColumns("mp5sd", false);
 		AddWeaponColumns("knife_css");
 		
-		addSeedColumns(mysql);
+		AddSeedColumns(mysql);
 		
 		char createQuery[512];
 		Format(createQuery, sizeof(createQuery), "			\
@@ -605,7 +605,7 @@ public void T_CreateMainTableCallback(Database database, DBResultSet results, co
 	}
 }
 
-void addSeedColumns(bool mysql)
+void AddSeedColumns(bool mysql)
 {
 	char seedCheckQuery[128];
 	FormatEx(seedCheckQuery, sizeof(seedCheckQuery), "SELECT awp_seed FROM %sweapons", g_TablePrefix);

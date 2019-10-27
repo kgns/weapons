@@ -340,6 +340,14 @@
 	{
 		"en"	"Name tag successfully applied"
 	}
+	"AllSkins"
+	{
+		"en"	"Skin From All"
+	}
+	"AllSkinsSub"
+	{
+		"en"	"Skins for: %s"
+	}
 	"Seed"
 	{
 		"en"	"Seed"
