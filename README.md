@@ -1,7 +1,7 @@
 # Weapons & Knives for CS:GO Community Servers
 
 [![](https://img.shields.io/github/license/kgns/weapons.svg?style=flat-square)](https://github.com/kgns/weapons/blob/master/LICENSE)
-[![Build Status](https://ci.kgns.me/job/csgo-weapons/badge/icon?style=flat-square)](https://ci.kgns.me/job/csgo-weapons)
+[![Build Status](https://build.kgns.dev/job/csgo-weapons/badge/icon?style=flat-square)](https://build.kgns.dev/job/csgo-weapons)
 [![GitHub Downloads](https://img.shields.io/github/downloads/kgns/weapons/total.svg?style=flat-square)](https://github.com/kgns/weapons/releases/latest)
 
 CS:GO Custom Weapon Options (Skins, NameTag, StatTrak, Wear/Float, Knives)

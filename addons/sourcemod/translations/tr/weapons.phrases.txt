@@ -280,6 +280,26 @@
 	{
 		"tr"	"★ Bowie Bıçağı"
 	}
+	"weapon_knife_ursus"
+	{
+		"tr"	"★ Ursus Bıçağı"
+	}
+	"weapon_knife_gypsy_jackknife"
+	{
+		"tr"	"★ Navaja Bıçağı"
+	}
+	"weapon_knife_stiletto"
+	{
+		"tr"	"★ Stiletto Bıçak"
+	}
+	"weapon_knife_widowmaker"
+	{
+		"tr"	"★ Talon Bıçağı"
+	}
+	"weapon_knife_css"
+	{
+		"tr"	"★ Klasik Bıçak"
+	}
 	"weapon_knife_t"
 	{
 		"tr"	"Bıçak"
@@ -319,5 +339,65 @@
 	"NameTagSuccess"
 	{
 		"tr"	"İsim etiketi belirlendi"
+	}
+	"Seed"
+	{
+		"tr"	"Seed"
+	}
+	"SeedTitle"
+	{
+		"tr"	"Seed: %i"
+	}
+	"SeedTitleNoSeed"
+	{
+		"tr"	"Seed: ∞"
+	}
+	"SeedRandom"
+	{
+		"tr"	"Rastgele Seed"
+	}
+	"SeedManual"
+	{
+		"tr"	"Kendin Seed Gir"
+	}
+	"SeedSave"
+	{
+		"tr"	"Seed'i Kaydet"
+	}
+	"SeedInstruction"
+	{
+		"tr"	"Kullanmak istediğiniz seed değerini (0 - 8192) chat'e yazın. Seed belirlemekten vazgeçtiyseniz !iptal yazabilirsiniz."
+	}
+	"SeedSuccess"
+	{
+		"tr"	"Seed başarıyla uygulandı."
+	}
+	"SeedCancelled"
+	{
+		"tr"	"Seed işlemi iptal edildi."
+	}
+	"SeedFailed"
+	{
+		"tr"	"Geçersiz seed değeri (0 - 8192)"
+	}
+	"SeedSaved"
+	{
+		"tr"	"Seed kaydedildi."
+	}
+	"SeedDisabled"
+	{
+		"tr"	"Seed menü kullanımı şu an kapalı."
+	}
+	"SeedExplanation"
+	{
+		"tr"	"Seed işlemleri için !ws menüsünü kullanmalısınız."
+	}
+	"SeedReset"
+	{
+		"tr"	"Seed sıfırlandı."
+	}
+	"ResetSeed"
+	{
+		"tr"	"Seed Sıfırla"
 	}
 }

@@ -109,7 +109,7 @@ stock int DefIndexByClass(char[] class)
 	return 0;
 }
 
-stock void RemoveWeaponPrefix(char[] source, char[] output, int size)
+stock void RemoveWeaponPrefix(const char[] source, char[] output, int size)
 {
 	strcopy(output, size, source[7]);
 }
