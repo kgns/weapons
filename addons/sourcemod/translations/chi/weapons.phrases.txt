@@ -336,4 +336,52 @@
 	{
 		"chi"	"名称标签已设置"
 	}
+	"AllSkins"
+	{
+		"chi"	"选择来自所有武器的皮肤"
+	}
+	"AllSkinsSub"
+	{
+		"chi"	"来自 %s 的皮肤："
+	}
+	"SeedTitle"
+	{
+		"chi"	"图案模板： %i"
+	}
+	"SeedTitleNoSeed"
+	{
+		"chi"	"图案模板： ∞"
+	}
+	"SeedRandom"
+	{
+		"chi"	"使用随机图案模板编号"
+	}
+	"SeedManual"
+	{
+		"chi"	"手动设置图案模板编号"
+	}
+	"SeedSave"
+	{
+		"chi"	"保存当前图案模板编号"
+	}
+	"SeedInstruction"
+	{
+		"chi"	"请将你希望设置的图案模板编号输入至聊天框。如需取消，请输入 !cancel 。"
+	}
+	"SeedSuccess"
+	{
+		"chi"	"图案模板应用成功！"
+	}
+	"SeedCancelled"
+	{
+		"chi"	"图案模板设置中断。"
+	}
+	"SeedFailed"
+	{
+		"chi"	"图案模板编号无效 (0 - 8192)"
+	}
+	"SeedSaved"
+	{
+		"chi"	"图案模板编号已保存。"
+	}
 }
