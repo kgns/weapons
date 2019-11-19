@@ -471,7 +471,32 @@ void CreateMainTable(bool mysql, bool recreate = false)
 			knife_css_trak int(1) NOT NULL DEFAULT '0', 					\
 			knife_css_trak_count int(10) NOT NULL DEFAULT '0', 				\
 			knife_css_tag varchar(256) NOT NULL DEFAULT '', 				\
-			knife_css_seed int(10) NOT NULL DEFAULT '-1')");
+			knife_css_seed int(10) NOT NULL DEFAULT '-1',					\
+			knife_skeleton int(4) NOT NULL DEFAULT '0', 					\
+			knife_skeleton_float decimal(3,2) NOT NULL DEFAULT '0.0',		\
+			knife_skeleton_trak int(1) NOT NULL DEFAULT '0', 				\
+			knife_skeleton_trak_count int(10)NOT NULL DEFAULT'0', ");
+	index += FormatEx(createQuery[index], sizeof(createQuery) - index, "	\
+			knife_skeleton_tag varchar(256) NOT NULL DEFAULT '', 			\
+			knife_skeleton_seed int(10) NOT NULL DEFAULT '-1',				\
+			knife_outdoor int(4) NOT NULL DEFAULT '0', 						\
+			knife_outdoor_float decimal(3,2) NOT NULL DEFAULT '0.0',		\
+			knife_outdoor_trak int(1) NOT NULL DEFAULT '0', 				\
+			knife_outdoor_trak_count int(10) NOT NULL DEFAULT '0', 			\
+			knife_outdoor_tag varchar(256) NOT NULL DEFAULT '', 			\
+			knife_outdoor_seed int(10) NOT NULL DEFAULT '-1',				\
+			knife_canis int(4) NOT NULL DEFAULT '0', 						\
+			knife_canis_float decimal(3,2) NOT NULL DEFAULT '0.0',			\
+			knife_canis_trak int(1) NOT NULL DEFAULT '0', 					\
+			knife_canis_trak_count int(10) NOT NULL DEFAULT '0', 			\
+			knife_canis_tag varchar(256) NOT NULL DEFAULT '', 				\
+			knife_canis_seed int(10) NOT NULL DEFAULT '-1,					\
+			knife_cord int(4) NOT NULL DEFAULT '0', 						\
+			knife_cord_float decimal(3,2) NOT NULL DEFAULT '0.0',		\
+			knife_cord_trak int(1) NOT NULL DEFAULT '0', 				\
+			knife_cord_trak_count int(10) NOT NULL DEFAULT '0', 			\
+			knife_cord_tag varchar(256) NOT NULL DEFAULT '', 			\
+			knife_cord_seed int(10) NOT NULL DEFAULT '-1)");
 	
 	if (mysql)
 	{
@@ -538,7 +563,12 @@ public void T_ReCreateMainTableCallback(Database database, DBResultSet results, 
 			knife_gypsy_jackknife_trak_count, knife_gypsy_jackknife_tag, knife_stiletto, knife_stiletto_float, knife_stiletto_trak, 		\
 			knife_stiletto_trak_count, knife_stiletto_tag, knife_widowmaker, knife_widowmaker_float, knife_widowmaker_trak, 				\
 			knife_widowmaker_trak_count, knife_widowmaker_tag, mp5sd, mp5sd_float, mp5sd_trak, mp5sd_trak_count, mp5sd_tag, knife_css, 		\
-			knife_css_float, knife_css_trak, knife_css_trak_count, knife_css_tag, knife_css_seed)											\
+			knife_css_float, knife_css_trak, knife_css_trak_count, knife_css_tag, knife_css_seed, ");
+		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																	\
+			knife_skeleton, knife_skeleton_float, knife_skeleton_trak, knife_skeleton_trak_count, knife_skeleton_tag, knife_skeleton_seed,	\
+			knife_outdoor, knife_outdoor_float, knife_outdoor_trak, knife_outdoor_trak_count, knife_outdoor_tag, knife_outdoor_seed,		\
+			knife_canis, knife_canis_float, knife_canis_trak, knife_canis_trak_count, knife_canis_tag, knife_canis_seed,					\
+			knife_cord, knife_cord_float, knife_cord_trak, knife_cord_trak_count, knife_cord_tag, knife_cord_seed)							\
 			SELECT * FROM %sweapons_tmp", g_TablePrefix);
 		
 		db.Query(T_MigrateOldDataCallback, migrateQuery, mysql, DBPrio_High);
@@ -587,7 +617,11 @@ public void T_CreateMainTableCallback(Database database, DBResultSet results, co
 		AddWeaponColumns("knife_widowmaker", false);
 		AddWeaponColumns("mp5sd", false);
 		AddWeaponColumns("knife_css");
-		
+		AddWeaponColumns("knife_skeleton");
+		AddWeaponColumns("knife_outdoor");
+		AddWeaponColumns("knife_canis");
+		AddWeaponColumns("knife_cord");
+
 		addSeedColumns(mysql);
 		
 		char createQuery[512];
