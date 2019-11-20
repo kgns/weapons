@@ -815,6 +815,14 @@ Menu CreateKnifeMenu(int client)
 	char buffer[60];
 	Format(buffer, sizeof(buffer), "%T", "OwnKnife", client);
 	menu.AddItem("0", buffer, g_iKnife[client] != 0 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_cord", client);
+	menu.AddItem("49", buffer, g_iKnife[client] != 48 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_canis", client);
+	menu.AddItem("50", buffer, g_iKnife[client] != 48 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_outdoor", client);
+	menu.AddItem("51", buffer, g_iKnife[client] != 48 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_skeleton", client);
+	menu.AddItem("52", buffer, g_iKnife[client] != 48 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_css", client);
 	menu.AddItem("48", buffer, g_iKnife[client] != 48 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_ursus", client);

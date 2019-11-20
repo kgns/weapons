@@ -300,6 +300,22 @@
 	{
 		"chi"	"★ 经典匕首"
 	}
+	"weapon_knife_cord"
+	{
+		"chi"	"★ 系绳匕首"
+	}
+	"weapon_knife_canis"
+	{
+		"chi"	"★ 求生匕首"
+	}
+	"weapon_knife_outdoor"
+	{
+		"chi"	"★ 流浪者匕首"
+	}
+	"weapon_knife_skeleton"
+	{
+		"chi"	"★ 骷髅匕首"
+	}
 	"weapon_knife_t"
 	{
 		"chi"	"恐怖分子默认刀"

@@ -300,6 +300,22 @@
 	{
 		"en"	"★ Classic Knife"
 	}
+	"weapon_knife_cord"
+	{
+		"en"	"★ Paracord Knife"
+	}
+	"weapon_knife_canis"
+	{
+		"en"	"★ Survival Knife"
+	}
+	"weapon_knife_outdoor"
+	{
+		"en"	"★ Nomad Knife"
+	}
+	"weapon_knife_skeleton"
+	{
+		"en"	"★ Skeleton Knife"
+	}
 	"weapon_knife_t"
 	{
 		"en"	"Knife"
