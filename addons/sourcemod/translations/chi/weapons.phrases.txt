@@ -298,7 +298,7 @@
 	}
 	"weapon_knife_css"
 	{
-		"chi"	"★ 海报短刀"
+		"chi"	"★ 海豹短刀"
 	}
 	"weapon_knife_cord"
 	{
