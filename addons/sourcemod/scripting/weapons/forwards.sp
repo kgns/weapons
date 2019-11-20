@@ -29,6 +29,7 @@ public void OnConfigsExecuted()
 	
 	if(db == null)
 	{
+		g_iDatabaseState = 0;
 		Database.Connect(SQLConnectCallback, g_DBConnection);
 	}
 	else
@@ -78,7 +79,7 @@ public void OnClientPutInServer(int client)
 
 public void OnClientPostAdminCheck(int client)
 {
-	if(IsValidClient(client))
+	if(g_iDatabaseState > 1 && IsValidClient(client))
 	{
 		char steam32[20];
 		char temp[20];

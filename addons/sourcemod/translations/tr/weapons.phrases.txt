@@ -300,6 +300,22 @@
 	{
 		"tr"	"★ Klasik Bıçak"
 	}
+	"weapon_knife_cord"
+	{
+		"tr"	"★ Paraşüt Kordonu Saplı Bıçak"
+	}
+	"weapon_knife_canis"
+	{
+		"tr"	"★ Hayatta Kalma Bıçağı"
+	}
+	"weapon_knife_outdoor"
+	{
+		"tr"	"★ Göçebe Bıçağı"
+	}
+	"weapon_knife_skeleton"
+	{
+		"tr"	"★ İskelet Bıçak"
+	}
 	"weapon_knife_t"
 	{
 		"tr"	"Bıçak"
