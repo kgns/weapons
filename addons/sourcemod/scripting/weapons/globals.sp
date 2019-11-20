@@ -21,7 +21,8 @@ char g_WeaponClasses[][] = {
 /*18*/ "weapon_m249", /*19*/ "weapon_negev", /*20*/ "weapon_mp9", /*21*/ "weapon_mac10", /*22*/ "weapon_mp7", /*23*/ "weapon_ump45", /*24*/ "weapon_p90", /*25*/ "weapon_bizon", /*26*/ "weapon_famas", /*27*/ "weapon_galilar", 
 /*28*/ "weapon_ssg08", /*29*/ "weapon_aug", /*30*/ "weapon_sg556", /*31*/ "weapon_scar20", /*32*/ "weapon_g3sg1", /*33*/ "weapon_knife_karambit", /*34*/ "weapon_knife_m9_bayonet", /*35*/ "weapon_bayonet", 
 /*36*/ "weapon_knife_survival_bowie", /*37*/ "weapon_knife_butterfly", /*38*/ "weapon_knife_flip", /*39*/ "weapon_knife_push", /*40*/ "weapon_knife_tactical", /*41*/ "weapon_knife_falchion", /*42*/ "weapon_knife_gut",
-/*43*/ "weapon_knife_ursus", /*44*/ "weapon_knife_gypsy_jackknife", /*45*/ "weapon_knife_stiletto", /*46*/ "weapon_knife_widowmaker", /*47*/ "weapon_mp5sd", /*48*/ "weapon_knife_css"
+/*43*/ "weapon_knife_ursus", /*44*/ "weapon_knife_gypsy_jackknife", /*45*/ "weapon_knife_stiletto", /*46*/ "weapon_knife_widowmaker", /*47*/ "weapon_mp5sd", /*48*/ "weapon_knife_css", /*49*/ "weapon_knife_cord", 
+/*50*/ "weapon_knife_canis", /*51*/ "weapon_knife_outdoor", /*52*/ "weapon_knife_skeleton"
 };
 
 int g_iWeaponDefIndex[] = {
@@ -30,7 +31,8 @@ int g_iWeaponDefIndex[] = {
 /*18*/ 14, /*19*/ 28, /*20*/ 34, /*21*/ 17, /*22*/ 33, /*23*/ 24, /*24*/ 19, /*25*/ 26, /*26*/ 10, /*27*/ 13, 
 /*28*/ 40, /*29*/ 8, /*30*/ 39, /*31*/ 38, /*32*/ 11, /*33*/ 507, /*34*/ 508, /*35*/ 500, 
 /*36*/ 514, /*37*/ 515, /*38*/ 505, /*39*/ 516, /*40*/ 509, /*41*/ 512, /*42*/ 506,
-/*43*/ 519, /*44*/ 520, /*45*/ 522, /*46*/ 523, /*47*/ 23, /*48*/ 503
+/*43*/ 519, /*44*/ 520, /*45*/ 522, /*46*/ 523, /*47*/ 23, /*48*/ 503, /*49*/ 517,
+/*50*/ 518, /*51*/ 521, /*52*/ 525
 };
 
 const int MAX_LANG = 40;
@@ -95,6 +97,21 @@ int g_iSeedRandom[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 int g_iKnife[MAXPLAYERS+1] = { 0, ... };
 
 int g_iRoundStartTime = 0;
+
+int g_iDatabaseState = 0;
+int g_iMigrationStep = 0;
+char g_MigrationWeapons[][] = {
+	"knife_ursus",
+	"knife_gypsy_jackknife",
+	"knife_stiletto",
+	"knife_widowmaker",
+	"mp5sd",
+	"knife_css",
+	"knife_cord",
+	"knife_canis",
+	"knife_outdoor",
+	"knife_skeleton"
+};
 
 char g_Language[MAX_LANG][32];
 int g_iClientLanguage[MAXPLAYERS+1];
