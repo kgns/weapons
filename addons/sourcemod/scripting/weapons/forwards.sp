@@ -83,14 +83,16 @@ public void OnClientPostAdminCheck(int client)
 	{
 		char steam32[20];
 		char temp[20];
-		GetClientAuthId(client, AuthId_Steam3, steam32, sizeof(steam32));
-		strcopy(temp, sizeof(temp), steam32[5]);
-		int index;
-		if((index = StrContains(temp, "]")) > -1)
+		if(GetClientAuthId(client, AuthId_Steam3, steam32, sizeof(steam32)))
 		{
-			temp[index] = '\0';
+			strcopy(temp, sizeof(temp), steam32[5]);
+			int index;
+			if((index = StrContains(temp, "]")) > -1)
+			{
+				temp[index] = '\0';
+			}
+			g_iSteam32[client] = StringToInt(temp);
 		}
-		g_iSteam32[client] = StringToInt(temp);
 		GetPlayerData(client);
 		QueryClientConVar(client, "cl_language", ConVarCallBack);
 	}
