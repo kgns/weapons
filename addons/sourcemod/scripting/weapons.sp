@@ -37,7 +37,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns | oyunhost.net",
 	description = "All in one weapon skin management",
-	version = "1.5.0",
+	version = "1.6.0",
 	url = "https://www.oyunhost.net"
 };
 
@@ -286,7 +286,7 @@ void RefreshWeapon(int client, int index, bool defaultKnife = false)
 
 public Action ReserveAmmoTimer(Handle timer, DataPack pack)
 {
-	ResetPack(pack);
+	pack.Reset();
 	int clientIndex = GetClientOfUserId(pack.ReadCell());
 	int offset = pack.ReadCell();
 	int ammo = pack.ReadCell();

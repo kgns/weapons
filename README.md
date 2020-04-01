@@ -14,6 +14,10 @@ Required files to compile the plugin:
 
 - https://github.com/komashchenko/PTaH/blob/master/PTaH.inc
 
+AlliedModders forum link:
+
+- https://forums.alliedmods.net/showthread.php?t=298770
+
 --------------------
 
 If you want to donate, I'd appreciate it:

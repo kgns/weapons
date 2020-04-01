@@ -298,7 +298,23 @@
 	}
 	"weapon_knife_css"
 	{
-		"chi"	"★ 经典匕首"
+		"chi"	"★ 海豹短刀"
+	}
+	"weapon_knife_cord"
+	{
+		"chi"	"★ 系绳匕首"
+	}
+	"weapon_knife_canis"
+	{
+		"chi"	"★ 求生匕首"
+	}
+	"weapon_knife_outdoor"
+	{
+		"chi"	"★ 流浪者匕首"
+	}
+	"weapon_knife_skeleton"
+	{
+		"chi"	"★ 骷髅匕首"
 	}
 	"weapon_knife_t"
 	{
