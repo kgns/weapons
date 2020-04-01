@@ -17,11 +17,11 @@
 
 public void ReadConfig()
 {
-	if(g_smWeaponIndex != null) delete g_smWeaponIndex;
+	delete g_smWeaponIndex;
 	g_smWeaponIndex = new StringMap();
-	if(g_smWeaponDefIndex != null) delete g_smWeaponDefIndex;
+	delete g_smWeaponDefIndex;
 	g_smWeaponDefIndex = new StringMap();
-	if(g_smLanguageIndex != null) delete g_smLanguageIndex;
+	delete g_smLanguageIndex;
 	g_smLanguageIndex = new StringMap();
 	
 	for (int i = 0; i < sizeof(g_WeaponClasses); i++)
