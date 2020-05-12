@@ -1,41 +1,10 @@
 # Weapons & Knives for CS:GO Community Servers
 
-[![](https://img.shields.io/github/license/kgns/weapons.svg?style=flat-square)](https://github.com/kgns/weapons/blob/master/LICENSE)
-[![Build Status](https://build.kgns.dev/job/csgo-weapons/badge/icon?style=flat-square)](https://build.kgns.dev/job/csgo-weapons)
-[![GitHub Downloads](https://img.shields.io/github/downloads/kgns/weapons/total.svg?style=flat-square)](https://github.com/kgns/weapons/releases/latest)
+原作者为 kgns;
 
-CS:GO Custom Weapon Options (Skins, NameTag, StatTrak, Wear/Float, Knives)
+1:刀分边
+2:皮肤分边(全属性支持) 增加“应用到对面队伍”便于快速应用与两支队伍
+3:每个“使用其他皮肤”按钮， 武器可以使用其他武器的皮肤
+4:新增 sm_weapons_enable_paints 这个 convar 用于开关上面那个功能
 
-Required dependency to run the plugin:
-
-- https://forums.alliedmods.net/showthread.php?t=289289 Latest Builds: https://ptah.zizt.ru/
-
-Required files to compile the plugin:
-
-- https://github.com/komashchenko/PTaH/blob/master/PTaH.inc
-
-AlliedModders forum link:
-
-- https://forums.alliedmods.net/showthread.php?t=298770
-
---------------------
-
-If you want to donate, I'd appreciate it:
-
-https://steamcommunity.com/tradeoffer/new/?partner=37011238&token=yGo05pTn
-
---------------------
-
-Eklentiyi çalıştırmak için gerekli:
-
-- https://forums.alliedmods.net/showthread.php?t=289289 Son sürümleri: https://ptah.zizt.ru/
-
-Eklentiyi compile edebilmek için gerekli:
-
-- https://github.com/komashchenko/PTaH/blob/master/PTaH.inc
-
---------------------
-
-There is also a small java utility I coded to create config files when new skins arrive or for different languages:
-
-https://github.com/kaganus/CSGOItemParserForWeaponsPlugin
+Modify by Bone;
