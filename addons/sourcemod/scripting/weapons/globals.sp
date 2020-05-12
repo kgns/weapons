@@ -15,6 +15,10 @@
  * this program. If not, see http://www.gnu.org/licenses/.
  */
 
+
+// only one team
+int g_OnlyOneTeamWeaponIndex[] = {1, 2, 3, 5, 6, 7, 10, 11, 12, 16, 17, 20, 21, 26, 27, 29, 30, 31, 32};
+
 char g_WeaponClasses[][] = {
 /* 0*/ "weapon_awp", /* 1*/ "weapon_ak47", /* 2*/ "weapon_m4a1", /* 3*/ "weapon_m4a1_silencer", /* 4*/ "weapon_deagle", /* 5*/ "weapon_usp_silencer", /* 6*/ "weapon_hkp2000", /* 7*/ "weapon_glock", /* 8*/ "weapon_elite", 
 /* 9*/ "weapon_p250", /*10*/ "weapon_cz75a", /*11*/ "weapon_fiveseven", /*12*/ "weapon_tec9", /*13*/ "weapon_revolver", /*14*/ "weapon_nova", /*15*/ "weapon_xm1014", /*16*/ "weapon_mag7", /*17*/ "weapon_sawedoff", 
@@ -70,6 +74,9 @@ bool g_bEnableStatTrak;
 ConVar g_Cvar_EnableSeed;
 bool g_bEnableSeed;
 
+ConVar g_Cvar_EnablePaints;
+bool g_bEnablePaints;
+
 ConVar g_Cvar_EnableWeaponOverwrite;
 bool g_bOverwriteEnabled;
 
@@ -86,6 +93,13 @@ int g_iWeaponSeed[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 char g_NameTag[MAXPLAYERS+1][sizeof(g_WeaponClasses)][128];
 float g_fFloatValue[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 
+int g_iSkins_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
+int g_iStatTrak_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
+int g_iStatTrakCount_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
+int g_iWeaponSeed_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
+char g_NameTag_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][128];
+float g_fFloatValue_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
+
 int g_iIndex[MAXPLAYERS+1] = { 0, ... };
 Handle g_FloatTimer[MAXPLAYERS+1] = { INVALID_HANDLE, ... };
 int g_iSteam32[MAXPLAYERS+1] = { 0, ... };
@@ -95,6 +109,7 @@ bool g_bWaitingForSeed[MAXPLAYERS+1] = { false, ... };
 int g_iSeedRandom[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 
 int g_iKnife[MAXPLAYERS+1] = { 0, ... };
+int g_iKnife_ct[MAXPLAYERS+1] = { 0, ... };
 
 int g_iRoundStartTime = 0;
 
@@ -110,7 +125,61 @@ char g_MigrationWeapons[][] = {
 	"knife_cord",
 	"knife_canis",
 	"knife_outdoor",
-	"knife_skeleton"
+	"knife_skeleton",
+	"knife_ct",
+	"ct_awp", 
+	"ct_ak47", 
+	"ct_m4a1", 
+	"ct_m4a1_silencer", 
+	"ct_deagle", 
+	"ct_usp_silencer", 
+	"ct_hkp2000", 
+	"ct_glock", 
+	"ct_elite", 
+	"ct_p250", 
+	"ct_cz75a", 
+	"ct_fiveseven", 
+	"ct_tec9", 
+	"ct_revolver", 
+	"ct_nova", 
+	"ct_xm1014", 
+	"ct_mag7", 
+	"ct_sawedoff", 
+	"ct_m249", 
+	"ct_negev", 
+	"ct_mp9", 
+	"ct_mac10", 
+	"ct_mp7", 
+	"ct_ump45", 
+	"ct_p90", 
+	"ct_bizon", 
+	"ct_famas", 
+	"ct_galilar", 
+	"ct_ssg08", 
+	"ct_aug", 
+	"ct_sg556", 
+	"ct_scar20", 
+	"ct_g3sg1", 
+	"ct_knife_karambit", 
+	"ct_knife_m9_bayonet", 
+	"ct_bayonet", 
+	"ct_knife_survival_bowie", 
+	"ct_knife_butterfly", 
+	"ct_knife_flip", 
+	"ct_knife_push", 
+	"ct_knife_tactical", 
+	"ct_knife_falchion", 
+	"ct_knife_gut",
+	"ct_knife_ursus", 
+	"ct_knife_gypsy_jackknife", 
+	"ct_knife_stiletto", 
+	"ct_knife_widowmaker", 
+	"ct_mp5sd", 
+	"ct_knife_css", 
+	"ct_knife_cord", 
+	"ct_knife_canis", 
+	"ct_knife_outdoor", 
+	"ct_knife_skeleton"
 };
 
 char g_Language[MAX_LANG][32];

@@ -31,11 +31,23 @@ Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, boo
 {
 	if (IsValidClient(client))
 	{
-		if (g_iKnife[client] != 0 && IsKnifeClass(classname))
+		if (GetClientTeam(client) == CS_TEAM_T)
 		{
-			ignoredCEconItemView = true;
-			strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
-			return Plugin_Changed;
+			if (g_iKnife[client] != 0 && IsKnifeClass(classname))
+			{
+				ignoredCEconItemView = true;
+				strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
+				return Plugin_Changed;
+			}
+		}
+		else if(GetClientTeam(client) == CS_TEAM_CT)
+		{
+			if (g_iKnife_ct[client] != 0 && IsKnifeClass(classname))
+			{
+				ignoredCEconItemView = true;
+				strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife_ct[client]]);
+				return Plugin_Changed;
+			}
 		}
 	}
 	return Plugin_Continue;
@@ -78,7 +90,14 @@ public Action ChatListener(int client, const char[] command, int args)
 			return Plugin_Handled;
 		}
 		
-		g_NameTag[client][g_iIndex[client]] = msg;
+		if (GetClientTeam(client) == CS_TEAM_CT)
+		{
+			g_NameTag_ct[client][g_iIndex[client]] = msg;
+		}
+		else
+		{
+			g_NameTag[client][g_iIndex[client]] = msg;
+		}
 		
 		RefreshWeapon(client, g_iIndex[client]);
 		
@@ -87,7 +106,13 @@ public Action ChatListener(int client, const char[] command, int args)
 		db.Escape(msg, escaped, sizeof(escaped));
 		char weaponName[32];
 		RemoveWeaponPrefix(g_WeaponClasses[g_iIndex[client]], weaponName, sizeof(weaponName));
-		Format(updateFields, sizeof(updateFields), "%s_tag = '%s'", weaponName, escaped);
+		char currentWeaponName[32];
+		strcopy(currentWeaponName, sizeof(currentWeaponName), weaponName);
+		if (GetClientTeam(client) == CS_TEAM_CT)
+		{
+			Format(currentWeaponName, sizeof(currentWeaponName), "ct_%s", weaponName);
+		}
+		Format(updateFields, sizeof(updateFields), "%s_tag = '%s'", currentWeaponName, escaped);
 		UpdatePlayerData(client, updateFields);
 		
 		PrintToChat(client, " %s \x04%t: \x01\"%s\"", g_ChatPrefix, "NameTagSuccess", msg);
@@ -159,7 +184,15 @@ public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float
 	if ((previousOwner = GetEntPropEnt(weapon, Prop_Send, "m_hPrevOwner")) != INVALID_ENT_REFERENCE && previousOwner != attacker)
 		return Plugin_Continue;
 	
-	g_iStatTrakCount[attacker][index]++;
+	
+	if (GetClientTeam(attacker) == CS_TEAM_CT)
+	{
+		g_iStatTrakCount_ct[attacker][index]++;
+	}
+	else
+	{
+		g_iStatTrakCount[attacker][index]++;
+	}
 	/*
 	if (IsKnife(weapon))
 	{
@@ -174,7 +207,19 @@ public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float
 	char updateFields[256];
 	char weaponName[32];
 	RemoveWeaponPrefix(g_WeaponClasses[index], weaponName, sizeof(weaponName));
-	Format(updateFields, sizeof(updateFields), "%s_trak_count = %d", weaponName, g_iStatTrakCount[attacker][index]);
+	char currentWeaponName[32];
+	strcopy(currentWeaponName, sizeof(currentWeaponName), weaponName);
+	int temp_iStatTrakCount;
+	if (GetClientTeam(attacker) == CS_TEAM_CT)
+	{
+		temp_iStatTrakCount = g_iStatTrakCount_ct[attacker][index];
+		Format(currentWeaponName, sizeof(currentWeaponName), "ct_%s", weaponName);
+	}
+	else
+	{
+		temp_iStatTrakCount = g_iStatTrakCount[attacker][index];
+	}
+	Format(updateFields, sizeof(updateFields), "%s_trak_count = %d", currentWeaponName, temp_iStatTrakCount);
 	UpdatePlayerData(attacker, updateFields);
 	return Plugin_Continue;
 }

@@ -49,6 +49,7 @@ public void T_GetPlayerDataCallback(Database database, DBResultSet results, cons
 				for(int i = 0; i < sizeof(g_WeaponClasses); i++)
 				{
 					g_iSkins[clientIndex][i] = 0;
+					g_iSkins_ct[clientIndex][i] = 0;
 					g_iStatTrak[clientIndex][i] = 0;
 					g_iStatTrakCount[clientIndex][i] = 0;
 					g_NameTag[clientIndex][i] = "";
@@ -56,6 +57,7 @@ public void T_GetPlayerDataCallback(Database database, DBResultSet results, cons
 					g_iWeaponSeed[clientIndex][i] = -1;
 				}
 				g_iKnife[clientIndex] = 0;
+				g_iKnife_ct[clientIndex] = 0;
 			}
 		}
 		else
@@ -70,8 +72,19 @@ public void T_GetPlayerDataCallback(Database database, DBResultSet results, cons
 					g_iStatTrakCount[clientIndex][j] = results.FetchInt(i + 3);
 					results.FetchString(i + 4, g_NameTag[clientIndex][j], 128);
 					g_iWeaponSeed[clientIndex][j] = results.FetchInt(i + 5);
+
+					g_iSkins_ct[clientIndex][j] = results.FetchInt(i + 6 * 54);
+					g_fFloatValue_ct[clientIndex][j] = results.FetchFloat(i + 1 + 6 * 54);
+					g_iStatTrak_ct[clientIndex][j] = results.FetchInt(i + 2 + 6 * 54);
+					g_iStatTrakCount_ct[clientIndex][j] = results.FetchInt(i + 3 + 6 * 54);
+					results.FetchString(i + 4 + 6 * 54, g_NameTag_ct[clientIndex][j], 128);
+					g_iWeaponSeed_ct[clientIndex][j] = results.FetchInt(i + 5 + 6 * 54);
 				}
 				g_iKnife[clientIndex] = results.FetchInt(1);
+				int knifeCtIndex;
+				if (results.FieldNameToNum("knife_ct", knifeCtIndex)){
+					g_iKnife_ct[clientIndex] = results.FetchInt(knifeCtIndex);
+				}
 			}
 			char steamid[32];
 			if(GetClientAuthId(clientIndex, AuthId_Steam2, steamid, sizeof(steamid), true))
@@ -168,7 +181,7 @@ void CreateMainTable(bool mysql, bool recreate = false)
 	char createQuery[20480];
 	
 	int index = 0;
-
+	
 	index += FormatEx(createQuery[index], sizeof(createQuery) - index, "	\
 		CREATE TABLE IF NOT EXISTS %sweapons (								\
 			steamid varchar(32) NOT NULL PRIMARY KEY, 						\

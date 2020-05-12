@@ -34,11 +34,11 @@
 
 public Plugin myinfo = 
 {
-	name = "Weapons & Knives",
-	author = "kgns | oyunhost.net",
-	description = "All in one weapon skin management",
+	name = "Weapons & Knives (Modify by Bone)",
+	author = "kgns | oyunhost.net | Bone",
+	description = "All in one weapon skin management, Modify by Bone",
 	version = "1.6.0",
-	url = "https://www.oyunhost.net"
+	url = "https://www.oyunhost.net | https://bonetm.github.io/"
 };
 
 public void OnPluginStart()
@@ -67,6 +67,7 @@ public void OnPluginStart()
 	g_Cvar_EnableNameTag 			= CreateConVar("sm_weapons_enable_nametag", 		"1", 				"Enable/Disable name tag options");
 	g_Cvar_EnableStatTrak 			= CreateConVar("sm_weapons_enable_stattrak", 		"1", 				"Enable/Disable StatTrak options");
 	g_Cvar_EnableSeed				= CreateConVar("sm_weapons_enable_seed",			"1",				"Enable/Disable Seed options");
+	g_Cvar_EnablePaints				= CreateConVar("sm_weapons_enable_paints",			"1",				"Enable/Disable Paints options");
 	g_Cvar_FloatIncrementSize 		= CreateConVar("sm_weapons_float_increment_size", 	"0.05", 			"Increase/Decrease by value for weapon float");
 	g_Cvar_EnableWeaponOverwrite 	= CreateConVar("sm_weapons_enable_overwrite", 		"1", 				"Enable/Disable players overwriting other players' weapons (picked up from the ground) by using !ws command");
 	g_Cvar_GracePeriod 			= CreateConVar("sm_weapons_grace_period", 			"0", 				"Grace period in terms of seconds counted after round start for allowing the use of !ws command. 0 means no restrictions");
@@ -174,16 +175,35 @@ public Action CommandNameTag(int client, int args)
 void SetWeaponProps(int client, int entity)
 {
 	int index = GetWeaponIndex(entity);
-	if (index > -1 && g_iSkins[client][index] != 0)
+	if (index > -1 && (g_iSkins[client][index] != 0 || g_iSkins_ct[client][index] != 0))
 	{
 		static int IDHigh = 16384;
 		SetEntProp(entity, Prop_Send, "m_iItemIDLow", -1);
 		SetEntProp(entity, Prop_Send, "m_iItemIDHigh", IDHigh++);
-		SetEntProp(entity, Prop_Send, "m_nFallbackPaintKit", g_iSkins[client][index] == -1 ? GetRandomSkin(client, index) : g_iSkins[client][index]);
-		SetEntPropFloat(entity, Prop_Send, "m_flFallbackWear", !g_bEnableFloat || g_fFloatValue[client][index] == 0.0 ? 0.000001 : g_fFloatValue[client][index] == 1.0 ? 0.999999 : g_fFloatValue[client][index]);
-		if (g_bEnableSeed && g_iWeaponSeed[client][index] != -1)
+
+		
+		int temp_iSkins = g_iSkins[client][index];
+		float temp_fFloatValue = g_fFloatValue[client][index];
+		int temp_iWeaponSeed = g_iWeaponSeed[client][index];
+		int temp_iStatTrak = g_iStatTrak[client][index];
+		int temp_iStatTrakCount = g_iStatTrakCount[client][index];
+		char temp_NameTag[128];
+		strcopy(temp_NameTag, sizeof(temp_NameTag), g_NameTag[client][index]);
+		if ((GetClientTeam(client) == CS_TEAM_CT) && !IsWeaponIndexInOnlyOneTeam(index))
 		{
-			SetEntProp(entity, Prop_Send, "m_nFallbackSeed", g_iWeaponSeed[client][index]);
+			temp_iSkins = g_iSkins_ct[client][index];
+			temp_fFloatValue = g_fFloatValue_ct[client][index];
+			temp_iWeaponSeed = g_iWeaponSeed_ct[client][index];
+			temp_iStatTrak = g_iStatTrak_ct[client][index];
+			temp_iStatTrakCount = g_iStatTrakCount_ct[client][index];
+			strcopy(temp_NameTag, sizeof(temp_NameTag), g_NameTag_ct[client][index]);
+		}
+		SetEntProp(entity, Prop_Send, "m_nFallbackPaintKit", temp_iSkins == -1 ? GetRandomSkin(client, index) : temp_iSkins);
+
+		SetEntPropFloat(entity, Prop_Send, "m_flFallbackWear", !g_bEnableFloat || temp_fFloatValue == 0.0 ? 0.000001 : temp_fFloatValue == 1.0 ? 0.999999 : temp_fFloatValue);
+		if (g_bEnableSeed && temp_iWeaponSeed != -1)
+		{
+			SetEntProp(entity, Prop_Send, "m_nFallbackSeed", temp_iWeaponSeed);
 		}
 		else
 		{
@@ -195,21 +215,21 @@ void SetWeaponProps(int client, int entity)
 		{
 			if(g_bEnableStatTrak)
 			{
-				SetEntProp(entity, Prop_Send, "m_nFallbackStatTrak", g_iStatTrak[client][index] == 1 ? g_iStatTrakCount[client][index] : -1);
-				SetEntProp(entity, Prop_Send, "m_iEntityQuality", g_iStatTrak[client][index] == 1 ? 9 : 0);
+				SetEntProp(entity, Prop_Send, "m_nFallbackStatTrak", temp_iStatTrak == 1 ? temp_iStatTrakCount : -1);
+				SetEntProp(entity, Prop_Send, "m_iEntityQuality", temp_iStatTrak == 1 ? 9 : 0);
 			}
 		}
 		else
 		{
 			if(g_bEnableStatTrak)
 			{
-				SetEntProp(entity, Prop_Send, "m_nFallbackStatTrak", g_iStatTrak[client][index] == 0 ? -1 : g_iKnifeStatTrakMode == 0 ? GetTotalKnifeStatTrakCount(client) : g_iStatTrakCount[client][index]);
+				SetEntProp(entity, Prop_Send, "m_nFallbackStatTrak", temp_iStatTrak == 0 ? -1 : g_iKnifeStatTrakMode == 0 ? GetTotalKnifeStatTrakCount(client) : temp_iStatTrakCount);
 			}
 			SetEntProp(entity, Prop_Send, "m_iEntityQuality", 3);
 		}
-		if (g_bEnableNameTag && strlen(g_NameTag[client][index]) > 0)
+		if (g_bEnableNameTag && strlen(temp_NameTag) > 0)
 		{
-			SetEntDataString(entity, FindSendPropInfo("CBaseAttributableItem", "m_szCustomName"), g_NameTag[client][index], 128);
+			SetEntDataString(entity, FindSendPropInfo("CBaseAttributableItem", "m_szCustomName"), temp_NameTag, 128);
 		}
 		SetEntProp(entity, Prop_Send, "m_iAccountID", g_iSteam32[client]);
 		SetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity", client);

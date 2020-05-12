@@ -192,3 +192,15 @@ stock int GetRemainingGracePeriodSeconds(int client)
 		return remaining > 0 ? remaining : -1;
 	}
 }
+
+stock bool IsWeaponIndexInOnlyOneTeam(int index)
+{
+	for (int i = 0; i < sizeof(g_OnlyOneTeamWeaponIndex); i++)
+	{
+		if (g_OnlyOneTeamWeaponIndex[i] == index)
+		{
+			return true;
+		}
+	}
+	return false;
+}
