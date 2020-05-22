@@ -77,11 +77,15 @@ public void OnPluginStart()
 	
 	RegConsoleCmd("buyammo1", CommandWeaponSkins);
 	RegConsoleCmd("sm_ws", CommandWeaponSkins);
-	RegConsoleCmd("buyammo2", CommandKnife);
 	RegConsoleCmd("sm_knife", CommandKnife);
 	RegConsoleCmd("sm_nametag", CommandNameTag);
 	RegConsoleCmd("sm_wslang", CommandWSLang);
 	RegConsoleCmd("sm_seed", CommandSeedMenu);
+
+	if(!LibraryExists("diy"))
+	{
+		RegConsoleCmd("buyammo2", CommandKnife);
+	}
 	
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
 	PTaH(PTaH_GiveNamedItemPost, Hook, GiveNamedItemPost);
@@ -134,7 +138,7 @@ public Action CommandKnife(int client, int args)
 		int menuTime;
 		if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
 		{
-			CreateKnifeMenu(client).Display(client, menuTime);
+			menuKnife.Display(client, menuTime);
 		}
 		else
 		{
@@ -175,35 +179,19 @@ public Action CommandNameTag(int client, int args)
 void SetWeaponProps(int client, int entity)
 {
 	int index = GetWeaponIndex(entity);
-	if (index > -1 && (g_iSkins[client][index] != 0 || g_iSkins_ct[client][index] != 0))
+	int team = IsWeaponIndexInOnlyOneTeam(g_iIndex[client]) ? CS_TEAM_T : GetClientTeam(client);
+	if (index > -1 && (g_iSkins[client][index][team] != 0))
 	{
 		static int IDHigh = 16384;
 		SetEntProp(entity, Prop_Send, "m_iItemIDLow", -1);
 		SetEntProp(entity, Prop_Send, "m_iItemIDHigh", IDHigh++);
 
-		
-		int temp_iSkins = g_iSkins[client][index];
-		float temp_fFloatValue = g_fFloatValue[client][index];
-		int temp_iWeaponSeed = g_iWeaponSeed[client][index];
-		int temp_iStatTrak = g_iStatTrak[client][index];
-		int temp_iStatTrakCount = g_iStatTrakCount[client][index];
-		char temp_NameTag[128];
-		strcopy(temp_NameTag, sizeof(temp_NameTag), g_NameTag[client][index]);
-		if ((GetClientTeam(client) == CS_TEAM_CT) && !IsWeaponIndexInOnlyOneTeam(index))
-		{
-			temp_iSkins = g_iSkins_ct[client][index];
-			temp_fFloatValue = g_fFloatValue_ct[client][index];
-			temp_iWeaponSeed = g_iWeaponSeed_ct[client][index];
-			temp_iStatTrak = g_iStatTrak_ct[client][index];
-			temp_iStatTrakCount = g_iStatTrakCount_ct[client][index];
-			strcopy(temp_NameTag, sizeof(temp_NameTag), g_NameTag_ct[client][index]);
-		}
-		SetEntProp(entity, Prop_Send, "m_nFallbackPaintKit", temp_iSkins == -1 ? GetRandomSkin(client, index) : temp_iSkins);
+		SetEntProp(entity, Prop_Send, "m_nFallbackPaintKit", g_iSkins[client][index][team] == -1 ? GetRandomSkin(client, index) : g_iSkins[client][index][team]);
 
-		SetEntPropFloat(entity, Prop_Send, "m_flFallbackWear", !g_bEnableFloat || temp_fFloatValue == 0.0 ? 0.000001 : temp_fFloatValue == 1.0 ? 0.999999 : temp_fFloatValue);
-		if (g_bEnableSeed && temp_iWeaponSeed != -1)
+		SetEntPropFloat(entity, Prop_Send, "m_flFallbackWear", !g_bEnableFloat || g_fFloatValue[client][index][team] == 0.0 ? 0.000001 : g_fFloatValue[client][index][team] == 1.0 ? 0.999999 : g_fFloatValue[client][index][team]);
+		if (g_bEnableSeed && g_iWeaponSeed[client][index][team] != -1)
 		{
-			SetEntProp(entity, Prop_Send, "m_nFallbackSeed", temp_iWeaponSeed);
+			SetEntProp(entity, Prop_Send, "m_nFallbackSeed", g_iWeaponSeed[client][index][team]);
 		}
 		else
 		{
@@ -215,22 +203,23 @@ void SetWeaponProps(int client, int entity)
 		{
 			if(g_bEnableStatTrak)
 			{
-				SetEntProp(entity, Prop_Send, "m_nFallbackStatTrak", temp_iStatTrak == 1 ? temp_iStatTrakCount : -1);
-				SetEntProp(entity, Prop_Send, "m_iEntityQuality", temp_iStatTrak == 1 ? 9 : 0);
+				SetEntProp(entity, Prop_Send, "m_nFallbackStatTrak", g_iStatTrak[client][index][team] == 1 ? g_iStatTrakCount[client][index][team] : -1);
+				SetEntProp(entity, Prop_Send, "m_iEntityQuality", g_iStatTrak[client][index][team] == 1 ? 9 : 0);
 			}
 		}
 		else
 		{
 			if(g_bEnableStatTrak)
 			{
-				SetEntProp(entity, Prop_Send, "m_nFallbackStatTrak", temp_iStatTrak == 0 ? -1 : g_iKnifeStatTrakMode == 0 ? GetTotalKnifeStatTrakCount(client) : temp_iStatTrakCount);
+				SetEntProp(entity, Prop_Send, "m_nFallbackStatTrak", g_iStatTrak[client][index][team] == 0 ? -1 : g_iKnifeStatTrakMode == 0 ? GetTotalKnifeStatTrakCount(client) : g_iStatTrakCount[client][index][team]);
 			}
 			SetEntProp(entity, Prop_Send, "m_iEntityQuality", 3);
 		}
-		if (g_bEnableNameTag && strlen(temp_NameTag) > 0)
+		if (g_bEnableNameTag && strlen(g_NameTag[client][index][team]) > 0)
 		{
-			SetEntDataString(entity, FindSendPropInfo("CBaseAttributableItem", "m_szCustomName"), temp_NameTag, 128);
+			SetEntDataString(entity, FindSendPropInfo("CBaseAttributableItem", "m_szCustomName"), g_NameTag[client][index][team], 128);
 		}
+		
 		SetEntProp(entity, Prop_Send, "m_iAccountID", g_iSteam32[client]);
 		SetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity", client);
 		SetEntPropEnt(entity, Prop_Send, "m_hPrevOwner", -1);
@@ -247,7 +236,7 @@ void RefreshWeapon(int client, int index, bool defaultKnife = false)
 		if (IsValidWeapon(weapon))
 		{
 			bool isKnife = IsKnife(weapon);
-			if ((!defaultKnife && GetWeaponIndex(weapon) == index) || (isKnife && (defaultKnife || IsKnifeClass(g_WeaponClasses[index]))))
+			if ((!defaultKnife && GetWeaponIndex(weapon) == index) || (isKnife && (defaultKnife || index == -1 || IsKnifeClass(g_WeaponClasses[index]))))
 			{
 				if(!g_bOverwriteEnabled)
 				{

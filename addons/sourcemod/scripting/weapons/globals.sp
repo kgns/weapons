@@ -86,19 +86,19 @@ int g_iGracePeriod;
 ConVar g_Cvar_InactiveDays;
 int g_iGraceInactiveDays;
 
-int g_iSkins[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
-int g_iStatTrak[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
-int g_iStatTrakCount[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
-int g_iWeaponSeed[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
-char g_NameTag[MAXPLAYERS+1][sizeof(g_WeaponClasses)][128];
-float g_fFloatValue[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
+int g_iSkins[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
+int g_iStatTrak[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
+int g_iStatTrakCount[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
+int g_iWeaponSeed[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
+char g_NameTag[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4][128];
+float g_fFloatValue[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
 
-int g_iSkins_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
-int g_iStatTrak_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
-int g_iStatTrakCount_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
-int g_iWeaponSeed_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
-char g_NameTag_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][128];
-float g_fFloatValue_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
+// int g_iSkins_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
+// int g_iStatTrak_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
+// int g_iStatTrakCount_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
+// int g_iWeaponSeed_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
+// char g_NameTag_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][128][4];
+// float g_fFloatValue_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 
 int g_iIndex[MAXPLAYERS+1] = { 0, ... };
 Handle g_FloatTimer[MAXPLAYERS+1] = { INVALID_HANDLE, ... };
@@ -108,8 +108,7 @@ bool g_bWaitingForNametag[MAXPLAYERS+1] = { false, ... };
 bool g_bWaitingForSeed[MAXPLAYERS+1] = { false, ... };
 int g_iSeedRandom[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 
-int g_iKnife[MAXPLAYERS+1] = { 0, ... };
-int g_iKnife_ct[MAXPLAYERS+1] = { 0, ... };
+int g_iKnife[MAXPLAYERS+1][4];
 
 int g_iRoundStartTime = 0;
 
@@ -185,6 +184,7 @@ char g_MigrationWeapons[][] = {
 char g_Language[MAX_LANG][32];
 int g_iClientLanguage[MAXPLAYERS+1];
 Menu menuWeapons[MAX_LANG][sizeof(g_WeaponClasses)];
+Menu menuKnife;
 
 StringMap g_smWeaponIndex;
 StringMap g_smWeaponDefIndex;

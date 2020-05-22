@@ -169,12 +169,13 @@ stock void FirstCharUpper(char[] string)
 
 stock int GetTotalKnifeStatTrakCount(int client)
 {
+	int team = IsWeaponIndexInOnlyOneTeam(g_iIndex[client]) ? CS_TEAM_T : GetClientTeam(client);
 	int count = 0;
 	for (int i = 0; i < sizeof(g_WeaponClasses); i++)
 	{
 		if (IsKnifeClass(g_WeaponClasses[i]))
 		{
-			count += g_iStatTrakCount[client][i];
+			count += g_iStatTrakCount[client][i][team];
 		}
 	}
 	return count;

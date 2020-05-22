@@ -80,9 +80,21 @@
 	{
 		"en"	"★ Your own knife"
 	}
+	"RandomKnife"
+	{
+		"en"	"★ Random knife"
+	}
 	"SetSkin"
 	{
 		"en"	"Choose Skin"
+	}
+	"Paints"
+	{
+		"en"	"Use Other Skin"
+	}
+	"Applyother"
+	{
+		"en"	"Apply Other Team"
 	}
 	"SetFloat"
 	{

@@ -32,6 +32,7 @@ public void ReadConfig()
 	
 	int langCount = GetLanguageCount();
 	int langCounter = 0;
+
 	for (int i = 0; i < langCount; i++)
 	{
 		char code[4];
@@ -41,7 +42,7 @@ public void ReadConfig()
 		BuildPath(Path_SM, configPath, sizeof(configPath), "configs/weapons/weapons_%s.cfg", language);
 		
 		if(!FileExists(configPath)) continue;
-		
+
 		g_smLanguageIndex.SetValue(language, langCounter);
 		FirstCharUpper(language);
 		strcopy(g_Language[langCounter], 32, language);
@@ -93,6 +94,59 @@ public void ReadConfig()
 		CloseHandle(kv);
 		
 		langCounter++;
+	}
+
+
+	menuKnife = new Menu(KnifeMenuHandler, MENU_ACTIONS_DEFAULT | MenuAction_DrawItem);
+	menuKnife.SetTitle("%T", "KnifeMenuTitle", LANG_SERVER);
+	
+	char buffer[60];
+	Format(buffer, sizeof(buffer), "%T", "OwnKnife", LANG_SERVER);
+	menuKnife.AddItem("0", buffer);
+	Format(buffer, sizeof(buffer), "%T", "RandomKnife", LANG_SERVER);
+	menuKnife.AddItem("-1", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_cord", LANG_SERVER);
+	menuKnife.AddItem("49", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_canis", LANG_SERVER);
+	menuKnife.AddItem("50", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_outdoor", LANG_SERVER);
+	menuKnife.AddItem("51", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_skeleton", LANG_SERVER);
+	menuKnife.AddItem("52", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_css", LANG_SERVER);
+	menuKnife.AddItem("48", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_ursus", LANG_SERVER);
+	menuKnife.AddItem("43", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_gypsy_jackknife", LANG_SERVER);
+	menuKnife.AddItem("44", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_stiletto", LANG_SERVER);
+	menuKnife.AddItem("45", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_widowmaker", LANG_SERVER);
+	menuKnife.AddItem("46", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_karambit", LANG_SERVER);
+	menuKnife.AddItem("33", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_m9_bayonet", LANG_SERVER);
+	menuKnife.AddItem("34", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_bayonet", LANG_SERVER);
+	menuKnife.AddItem("35", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_survival_bowie", LANG_SERVER);
+	menuKnife.AddItem("36", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_butterfly", LANG_SERVER);
+	menuKnife.AddItem("37", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_flip", LANG_SERVER);
+	menuKnife.AddItem("38", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_push", LANG_SERVER);
+	menuKnife.AddItem("39", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_tactical", LANG_SERVER);
+	menuKnife.AddItem("40", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_falchion", LANG_SERVER);
+	menuKnife.AddItem("41", buffer);
+	Format(buffer, sizeof(buffer), "%T", "weapon_knife_gut", LANG_SERVER);
+	menuKnife.AddItem("42", buffer);
+
+	if(LibraryExists("diy"))
+	{
+		menuKnife.ExitBackButton = true;
 	}
 	
 	if(langCounter == 0)

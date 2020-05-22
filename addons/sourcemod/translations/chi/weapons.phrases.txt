@@ -80,9 +80,21 @@
 	{
 		"chi"	"★ 您自己的刀"
 	}
+	"RandomKnife"
+	{
+		"chi"	"★ 随机选择刀"
+	}
 	"SetSkin"
 	{
 		"chi"	"选择皮肤"
+	}
+	"Paints"
+	{
+		"chi"	"使用其他皮肤"
+	}
+	"Applyother"
+	{
+		"chi"	"应用到对面队伍"
 	}
 	"SetFloat"
 	{
@@ -396,9 +408,9 @@
 	{
 		"chi"	"图案模板编号已保存。"
 	}
-        "Seed"
-        {
-                "chi"   "图案模板编号"
+    "Seed"
+    {
+        "chi"   "图案模板编号"
 	}
 	"SeedDisabled"
 	{

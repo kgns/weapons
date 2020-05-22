@@ -8,5 +8,6 @@
 
 3. 每个“使用其他皮肤”按钮， 武器可以使用其他武器的皮肤
 4. 新增 sm_weapons_enable_paints 这个 convar 用于开关上面那个功能
+5. 新增 随机刀 选项
 
 Modify by Bone;
