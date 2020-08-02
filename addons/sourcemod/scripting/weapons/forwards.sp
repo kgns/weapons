@@ -21,10 +21,9 @@ public void OnConfigsExecuted()
 	GetConVarString(g_Cvar_TablePrefix, g_TablePrefix, sizeof(g_TablePrefix));
 	g_iGraceInactiveDays = g_Cvar_InactiveDays.IntValue;
 	
-	if(g_DBConnectionOld[0] != EOS && strcmp(g_DBConnectionOld, g_DBConnection) != 0 && db != null)
+	if(g_DBConnectionOld[0] != EOS && strcmp(g_DBConnectionOld, g_DBConnection) != 0)
 	{
 		delete db;
-		db = null;
 	}
 	
 	if(db == null)
