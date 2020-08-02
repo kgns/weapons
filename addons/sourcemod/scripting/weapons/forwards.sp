@@ -69,10 +69,17 @@ public void OnClientPutInServer(int client)
 		g_FloatTimer[client] = INVALID_HANDLE;
 		g_bWaitingForNametag[client] = false;
 		g_bWaitingForSeed[client] = false;
-		for (int i = 0; i < sizeof(g_WeaponClasses); i++)
+		for (int i = 0; i < sizeof(g_WeaponClasses); i++) //Thanks to 8guawong
 		{
 			g_iSeedRandom[client][i] = 0;
+			g_iSkins[client][i] = 0;
+			g_iStatTrak[client][i] = 0;
+			g_iStatTrakCount[client][i] = 0;
+			g_NameTag[client][i] = "";
+			g_fFloatValue[client][i] = 0.0;
+			g_iWeaponSeed[client][i] = -1;
 		}
+		g_iKnife[client] = 0;
 		HookPlayer(client);
 	}
 }
