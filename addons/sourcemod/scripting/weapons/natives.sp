@@ -1,4 +1,4 @@
-public int Weapons_GetClientKnife(Handle plugin, int numparams)
+public int Weapons_GetClientKnife_Native(Handle plugin, int numparams)
 {
 	int client = GetNativeCell(1);
 	if (client < 1 || client > MaxClients)
@@ -27,7 +27,7 @@ void GetClientKnife(int client, char[] KnifeName, int Size)
 	}
 }
 
-public int Weapons_SetClientKnife(Handle plugin, int numparams)
+public int Weapons_SetClientKnife_Native(Handle plugin, int numparams)
 {
 	int client = GetNativeCell(1);
 	if (client < 1 || client > MaxClients)
