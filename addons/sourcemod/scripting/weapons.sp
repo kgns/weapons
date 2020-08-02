@@ -47,8 +47,8 @@ public Plugin myinfo =
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
 {
-	CreateNative("Weapons_SetClientKnife", Weapons_SetClientKnife);
-	CreateNative("Weapons_GetClientKnife", Weapons_GetClientKnife);
+	CreateNative("Weapons_SetClientKnife", Weapons_SetClientKnife_Native);
+	CreateNative("Weapons_GetClientKnife", Weapons_GetClientKnife_Native);
 	return APLRes_Success;
 }
 
