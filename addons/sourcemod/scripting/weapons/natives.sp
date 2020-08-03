@@ -15,18 +15,6 @@ public int Weapons_GetClientKnife_Native(Handle plugin, int numparams)
 	return 0;
 }
 
-void GetClientKnife(int client, char[] KnifeName, int Size)
-{
-	if(g_iKnife[client] == 0)
-	{
-		Format(KnifeName, Size, "weapon_knife");
-	}
-	else
-	{
-		Format(KnifeName, Size, g_WeaponClasses[g_iKnife[client]]);
-	}
-}
-
 public int Weapons_SetClientKnife_Native(Handle plugin, int numparams)
 {
 	int client = GetNativeCell(1);
@@ -40,45 +28,7 @@ public int Weapons_SetClientKnife_Native(Handle plugin, int numparams)
 	}
 	char KnifeName[64];
 	GetNativeString(2, KnifeName, 64);
-	SetClientKnife(client, KnifeName, true);
-	return 0;
-}
-
-int SetClientKnife(int client, char[] sKnife, bool Native = false)
-{
-	int knife;
-	if(strcmp(sKnife, "weapon_knife") == 0)
-	{
-		knife = 0;
-	}
-	else
-	{
-		int count = -1;
-		for(int i = 33; i < sizeof(g_WeaponClasses); i++)
-		{
-			if(strcmp(sKnife, g_WeaponClasses[i]) == 0)
-			{
-				count = i;
-				break;
-			}
-		}
-		if(count == -1)
-		{
-			if(Native)
-			{
-				return ThrowNativeError(25, "Knife (%s) is not valid.", sKnife);
-			}
-			else
-			{
-				return -1;
-			}
-		}
-		knife = count;
-	}
-	g_iKnife[client] = knife;
-	char updateFields[16];
-	Format(updateFields, sizeof(updateFields), "knife = %d", knife);
-	UpdatePlayerData(client, updateFields);
-	RefreshWeapon(client, knife, knife == 0);
+	bool update = !!GetNativeCell(3);
+	SetClientKnife(client, KnifeName, true, update);
 	return 0;
 }
