@@ -192,3 +192,57 @@ stock int GetRemainingGracePeriodSeconds(int client)
 		return remaining > 0 ? remaining : -1;
 	}
 }
+
+void GetClientKnife(int client, char[] KnifeName, int Size)
+{
+	if(g_iKnife[client] == 0)
+	{
+		Format(KnifeName, Size, "weapon_knife");
+	}
+	else
+	{
+		Format(KnifeName, Size, g_WeaponClasses[g_iKnife[client]]);
+	}
+}
+
+int SetClientKnife(int client, char[] sKnife, bool Native = false, bool update = true)
+{
+	int knife;
+	if(strcmp(sKnife, "weapon_knife") == 0)
+	{
+		knife = 0;
+	}
+	else
+	{
+		int count = -1;
+		for(int i = 33; i < sizeof(g_WeaponClasses); i++)
+		{
+			if(strcmp(sKnife, g_WeaponClasses[i]) == 0)
+			{
+				count = i;
+				break;
+			}
+		}
+		if(count == -1)
+		{
+			if(Native)
+			{
+				return ThrowNativeError(25, "Knife (%s) is not valid.", sKnife);
+			}
+			else
+			{
+				return -1;
+			}
+		}
+		knife = count;
+	}
+	g_iKnife[client] = knife;
+	if(update)
+	{
+		char updateFields[16];
+		Format(updateFields, sizeof(updateFields), "knife = %d", knife);
+		UpdatePlayerData(client, updateFields);
+	}
+	RefreshWeapon(client, knife, knife == 0);
+	return 0;
+}
