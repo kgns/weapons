@@ -211,7 +211,7 @@ void SetWeaponProps(int client, int entity)
 		{
 			SetEntDataString(entity, FindSendPropInfo("CBaseAttributableItem", "m_szCustomName"), g_NameTag[client][index], 128);
 		}
-		SetEntProp(entity, Prop_Send, "m_iAccountID", g_iSteam32[client]);
+		SetEntProp(entity, Prop_Send, "m_iAccountID", GetSteamAccountID(client));
 		SetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity", client);
 		SetEntPropEnt(entity, Prop_Send, "m_hPrevOwner", -1);
 	}

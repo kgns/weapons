@@ -80,18 +80,6 @@ public void OnClientPostAdminCheck(int client)
 {
 	if(g_iDatabaseState > 1 && IsValidClient(client))
 	{
-		char steam32[20];
-		char temp[20];
-		if(GetClientAuthId(client, AuthId_Steam3, steam32, sizeof(steam32)))
-		{
-			strcopy(temp, sizeof(temp), steam32[5]);
-			int index;
-			if((index = StrContains(temp, "]")) > -1)
-			{
-				temp[index] = '\0';
-			}
-			g_iSteam32[client] = StringToInt(temp);
-		}
 		GetPlayerData(client);
 		QueryClientConVar(client, "cl_language", ConVarCallBack);
 	}
@@ -115,7 +103,6 @@ public void OnClientDisconnect(int client)
 	else if(IsValidClient(client))
 	{
 		UnhookPlayer(client);
-		g_iSteam32[client] = 0;
 	}
 }
 
