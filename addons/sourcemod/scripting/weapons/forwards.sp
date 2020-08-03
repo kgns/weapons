@@ -103,6 +103,16 @@ public void OnClientDisconnect(int client)
 	else if(IsValidClient(client))
 	{
 		UnhookPlayer(client);
+		for(int i = 0; i < sizeof(g_WeaponClasses); i++)
+		{
+			g_iSkins[client][i] = 0;
+			g_iStatTrak[client][i] = 0;
+			g_iStatTrakCount[client][i] = 0;
+			g_NameTag[client][i] = "";
+			g_fFloatValue[client][i] = 0.0;
+			g_iWeaponSeed[client][i] = -1;
+		}
+		g_iKnife[client] = 0;
 	}
 }
 

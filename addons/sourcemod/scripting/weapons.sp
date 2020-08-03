@@ -96,6 +96,14 @@ public void OnPluginStart()
 	AddCommandListener(ChatListener, "say");
 	AddCommandListener(ChatListener, "say2");
 	AddCommandListener(ChatListener, "say_team");
+	
+	for(int i = 0; i < sizeof(g_iWeaponSeed); i++)
+	{
+		for(int j = 0; j < sizeof(g_iWeaponSeed[]); i++)
+		{
+			g_iWeaponSeed[i][j] = -1;
+		}
+	}
 }
 
 public Action CommandWeaponSkins(int client, int args)
