@@ -115,7 +115,7 @@ public void OnPluginStart()
 	
 	for(int i = 0; i < sizeof(g_iWeaponSeed); i++)
 	{
-		for(int j = 0; j < sizeof(g_iWeaponSeed[]); i++)
+		for(int j = 0; j < sizeof(g_iWeaponSeed[]); j++)
 		{
 			g_iWeaponSeed[i][j] = -1;
 		}
