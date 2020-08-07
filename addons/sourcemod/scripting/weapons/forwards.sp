@@ -52,6 +52,15 @@ public void OnConfigsExecuted()
 	{
 		HookEvent("round_start", OnRoundStart, EventHookMode_PostNoCopy);
 	}
+	
+	for (int i = 1; i <= MaxClients; i++)
+	{
+		if (IsClientInGame(i))
+		{
+			OnClientPutInServer(i);
+		}
+	}
+	
 	ReadConfig();
 }
 
