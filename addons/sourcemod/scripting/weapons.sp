@@ -41,7 +41,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns | oyunhost.net",
 	description = "All in one weapon skin management",
-	version = "1.6.0",
+	version = "1.7.0",
 	url = "https://www.oyunhost.net"
 };
 
@@ -118,7 +118,16 @@ public void OnPluginStart()
 	RegAdminCmd("sm_setknife", Command_SetKnife, ADMFLAG_ROOT, "Sets knife of specific player.");
 	RegAdminCmd("sm_getknife", Command_GetClientKnife, ADMFLAG_ROOT, "Gets specific player's knife class name.");
 	#endif
+	
+	for(int i = 0; i < sizeof(g_iWeaponSeed); i++)
+	{
+		for(int j = 0; j < sizeof(g_iWeaponSeed[]); j++)
+		{
+			g_iWeaponSeed[i][j] = -1;
+		}
+	}
 }
+
 #if defined DEBUG
 public Action Command_SetKnife(int client, int args)
 {
@@ -166,6 +175,7 @@ public Action Command_GetClientKnife(int client, int args)
 	return Plugin_Handled;
 }
 #endif
+
 public Action CommandWeaponSkins(int client, int args)
 {
 	if (IsValidClient(client))
@@ -279,7 +289,7 @@ void SetWeaponProps(int client, int entity)
 		{
 			SetEntDataString(entity, FindSendPropInfo("CBaseAttributableItem", "m_szCustomName"), g_NameTag[client][index], 128);
 		}
-		SetEntProp(entity, Prop_Send, "m_iAccountID", g_iSteam32[client]);
+		SetEntProp(entity, Prop_Send, "m_iAccountID", GetSteamAccountID(client));
 		SetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity", client);
 		SetEntPropEnt(entity, Prop_Send, "m_hPrevOwner", -1);
 	}
