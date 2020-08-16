@@ -32,18 +32,3 @@ public int Weapons_SetClientKnife_Native(Handle plugin, int numparams)
 	SetClientKnife(client, KnifeName, true, update);
 	return 0;
 }
-
-public int Weapons_RefreshClient_Native(Handle plugin, int numparams)
-{
-	int client = GetNativeCell(1);
-	if (client < 1 || client > MaxClients)
-	{
-		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index (%d).", client);
-	}
-	if(!IsClientInGame(client))
-	{
-		return ThrowNativeError(SP_ERROR_NATIVE, "Client (%d) is not in game.", client);
-	}
-	GetPlayerData(client);
-	return 0;
-}
