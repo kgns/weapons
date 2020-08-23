@@ -28,6 +28,10 @@
 	{
 		"en"	"Decrease by %d%%"
 	}
+	"NameTagInfo"
+	{
+		"en"	"Use !nametag <tag> to choose a nametag for your current weapon!"
+	}	  
 	"NameTagColor"
 	{
 		"en"	"Set Name Tag Color"
@@ -35,6 +39,14 @@
 	"NameTagDisabled"
 	{
 		"en"	"Name tag usage is disabled at the moment."
+	}
+	"DontSpamNameTag"
+	{
+		"en"	"Wait a while before using !nametag."
+	}
+	"NameTagNeedsParams"
+	{
+		"en"	"Use: !nametag <tag>"
 	}
 	"ChooseLanguage"
 	{
@@ -126,7 +138,7 @@
 	}
 	"weapon_revolver"
 	{
-		"en"	"Revolver"
+		"en"	"R8 Revolver"
 	}
 	"weapon_deagle"
 	{
@@ -410,7 +422,7 @@
 	}
 	"SeedReset"
 	{
-		"en"	"Seed reset."
+		"en"	"Seed reseted."
 	}
 	"ResetSeed"
 	{
