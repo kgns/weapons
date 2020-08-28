@@ -114,11 +114,11 @@
 	}
 	"On"
 	{
-		"pt"	"Ligado"
+		"pt"	"ON"
 	}
 	"Off"
 	{
-		"pt"	"Desligado"
+		"pt"	"OFF"
 	}
 	"weapon_galilar"
 	{
@@ -346,11 +346,11 @@
 	}
 	"NameTagNew"
 	{
-		"pt"	"You can now use !ws menu to set name tag."
+		"pt"	"Agora você pode usar o menu !ws para definir a name tag."
 	}
 	"GracePeriod"
 	{
-		"pt"	"You can only use !ws command if you're dead or in the first %d seconds after every round start."
+		"pt"	"Você só pode usar o comando !ws se estiver morto ou nos primeiros %d segundos após o início de cada round."
 	}
 	"ChangeLang"
 	{
@@ -366,11 +366,11 @@
 	}
 	"NameTagInstruction"
 	{
-		"pt"	"Write your desired name tag into chat. To abort, type !cancel."
+		"pt"	"Escreva a name tag desejada no chat. Para abortar, digite !cancel."
 	}
 	"NameTagSuccess"
 	{
-		"pt"	"Name tag successfully applied"
+		"pt"	"Name tag aplicada com sucesso"
 	}
 	"Seed"
 	{
@@ -398,7 +398,7 @@
 	}
 	"SeedInstruction"
 	{
-		"pt"	"Write your desired seed into chat. To abort, type !cancel."
+		"pt"	"Escreva a seed desejada no chat. Para abortar, digite !cancel."
 	}
 	"SeedSuccess"
 	{
