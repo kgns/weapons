@@ -350,7 +350,7 @@
 	}
 	"GracePeriod"
 	{
-		"en"	"You can only use !ws command if you're dead or in the first %d seconds after every round start."
+		"en"	"You can only use this command if you're dead or in the first %d seconds after every round start."
 	}
 	"ChangeLang"
 	{

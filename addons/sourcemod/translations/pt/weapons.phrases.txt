@@ -350,7 +350,7 @@
 	}
 	"GracePeriod"
 	{
-		"pt"	"Você só pode usar o comando !ws se estiver morto ou nos primeiros %d segundos após o início de cada round."
+		"pt"	"Você só pode usar este comando se estiver morto ou nos primeiros %d segundos após o início de cada round."
 	}
 	"ChangeLang"
 	{
