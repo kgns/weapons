@@ -282,7 +282,7 @@
 	}
 	"weapon_knife_butterfly"
 	{
-		"pt"	"★ Butterfly Knife"
+		"pt"	"★ Butterfly Knifee"
 	}
 	"weapon_knife_falchion"
 	{
