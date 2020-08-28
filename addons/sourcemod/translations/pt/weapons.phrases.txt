@@ -2,7 +2,7 @@
 {
 	"WSMenuTitle"
 	{
-		"pt"	"Weapon Skins Menu"
+		"pt"	"Menu de Skins"
 	}
 	"ChooseKnife"
 	{
