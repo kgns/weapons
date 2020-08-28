@@ -422,7 +422,7 @@
 	}
 	"SeedExplanation"
 	{
-		"pt"	"Você deve usar o menu  !ws para definir a seed para skins."
+		"pt"	"Você deve usar o menu !ws para definir o seed para skins."
 	}
 	"SeedReset"
 	{
