@@ -30,7 +30,7 @@
 	}
 	"NameTagInfo"
 	{
-		"en"	"Use !nametag <tag> to choose a nametag for your current weapon!"
+		"en"	"Use !nametag <tag> to choose a name tag for your current weapon!"
 	}	  
 	"NameTagColor"
 	{
@@ -72,6 +72,10 @@
 	{
 		"en"	"Black"
 	}
+	"Grey"
+	{
+		"en"	"Grey"
+	} 
 	"Red"
 	{
 		"en"	"Red"
@@ -354,7 +358,7 @@
 	}
 	"NameTagCancelled"
 	{
-		"en"	"Nametag operation aborted."
+		"en"	"Name tag operation aborted."
 	}
 	"Yellow"
 	{

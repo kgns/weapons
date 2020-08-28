@@ -2,15 +2,15 @@
 {
 	"WSMenuTitle"
 	{
-		"pt"	"Menu de Skins"
+		"pt"	"Weapon Skins Menu"
 	}
 	"ChooseKnife"
 	{
-		"pt"	"★ Mudar sua Faca ★"
+		"pt"	"★ Mudar Faca ★"
 	}
 	"ConfigAllWeapons"
 	{
-		"pt"	"Configurar Todas as Armas"
+		"pt"	"Configurar todas as armas"
 	}
 	"KnifeMenuTitle"
 	{
@@ -30,15 +30,15 @@
 	}
 	"NameTagInfo"
 	{
-		"pt"	"Use !nametag <tag> para escolher uma nametag para sua arma atual!"
+		"pt"	"Use !nametag <tag> para escolher uma name tag para sua arma atual!"
 	}
 	"NameTagColor"
 	{
-		"pt"	"Escolher cor da nametag"
+		"pt"	"Escolher Cor da Name Tag"
 	}
 	"NameTagDisabled"
 	{
-		"pt"	"O uso da nametag está desabilitado no momento."
+		"pt"	"O uso da name tag está desabilitado no momento."
 	}
 	"DontSpamNameTag"
 	{
@@ -78,7 +78,7 @@
 	}
 	"Red"
 	{
-		"pt"	"Encarnado"
+		"pt"	"Vermelho"
 	}
 	"Green"
 	{
@@ -90,7 +90,7 @@
 	}
 	"DeleteNameTag"
 	{
-		"pt"	"Apagar NameTag"
+		"pt"	"Apagar Name Tag"
 	}
 	"OwnKnife"
 	{
@@ -110,7 +110,7 @@
 	}
 	"SetNameTag"
 	{
-		"pt"	"NameTag"
+		"pt"	"Name Tag"
 	}
 	"On"
 	{
@@ -342,7 +342,7 @@
 	}
 	"ChangeNameTag"
 	{
-		"pt"	"Set Name Tag"
+		"pt"	"Definir Name Tag"
 	}
 	"NameTagNew"
 	{
@@ -354,11 +354,11 @@
 	}
 	"ChangeLang"
 	{
-		"pt"	"Change Language"
+		"pt"	"Mudar Idioma"
 	}
 	"NameTagCancelled"
 	{
-		"pt"	"Nametag operation aborted."
+		"pt"	"Operação da name tag foi abortada."
 	}
 	"Yellow"
 	{
