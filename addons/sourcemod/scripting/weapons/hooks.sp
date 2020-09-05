@@ -63,10 +63,10 @@ void GiveNamedItemPost(int client, const char[] classname, const CEconItemView i
 		int index;
 		if (g_smWeaponIndex.GetValue(classname, index))
 		{
-			if (IsKnifeClass(classname))
-			{
-				EquipPlayerWeapon(client, entity);
-			}
+			// if (IsKnifeClass(classname))
+			// {
+				// EquipPlayerWeapon(client, entity);
+			// }
 			SetWeaponProps(client, entity);
 		}
 	}
@@ -167,7 +167,7 @@ public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float
 		
 	int index = GetWeaponIndex(weapon);
 	
-	int team = IsWeaponIndexInOnlyOneTeam(g_iIndex[attacker]) ? CS_TEAM_T : GetClientTeam(attacker);
+	int team = IsWeaponIndexInOnlyOneTeam(index) ? CS_TEAM_T : GetClientTeam(attacker);
 	if (index != -1 && g_iSkins[attacker][index][team] != 0 && g_iStatTrak[attacker][index][team] != 1)
 		return Plugin_Continue;
 		

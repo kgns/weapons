@@ -35,7 +35,7 @@ public int WeaponsMenuHandler(Menu menu, MenuAction action, int client, int sele
 				char currentWeaponName[32];
 				strcopy(currentWeaponName, sizeof(currentWeaponName), weaponName);
 
-				int team = IsWeaponIndexInOnlyOneTeam(g_iIndex[client]) ? CS_TEAM_T : GetClientTeam(client);
+				int team = IsWeaponIndexInOnlyOneTeam(index) ? CS_TEAM_T : GetClientTeam(client);
 				char teamName[4];
 				teamName = team == CS_TEAM_T ? "" : "ct_";
 				g_iSkins[client][index][team] = skinId;
@@ -823,7 +823,7 @@ Menu CreateWeaponMenu(int client)
 	Format(buffer, sizeof(buffer), "%T", "SetSkin", client);
 	menu.AddItem("skin", buffer);
 
-	int team = IsWeaponIndexInOnlyOneTeam(g_iIndex[client]) ? CS_TEAM_T : GetClientTeam(client);
+	int team = IsWeaponIndexInOnlyOneTeam(index) ? CS_TEAM_T : GetClientTeam(client);
 	bool weaponHasSkin = (g_iSkins[client][index][team] != 0);
 
 	if (g_bEnablePaints)
@@ -832,7 +832,7 @@ Menu CreateWeaponMenu(int client)
 		menu.AddItem("paints", buffer);
 	}
 
-	if (!IsWeaponIndexInOnlyOneTeam(g_iIndex[client]))
+	if (!IsWeaponIndexInOnlyOneTeam(index))
 	{
 		Format(buffer, sizeof(buffer), "%T", "Applyother", client);
 		menu.AddItem("applyother", buffer);

@@ -90,13 +90,14 @@ public void OnPluginStart()
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
 	PTaH(PTaH_GiveNamedItemPost, Hook, GiveNamedItemPost);
 	
-	ConVar g_cvGameType = FindConVar("game_type");
-	ConVar g_cvGameMode = FindConVar("game_mode");
+	// ConVar g_cvGameType = FindConVar("game_type");
+	// ConVar g_cvGameMode = FindConVar("game_mode");
 	
-	if(g_cvGameType.IntValue == 1 && g_cvGameMode.IntValue == 2)
-	{
-		PTaH(PTaH_WeaponCanUsePre, Hook, WeaponCanUsePre);
-	}
+	// if(g_cvGameType.IntValue == 1 && g_cvGameMode.IntValue == 2)
+	// {
+	// 	PTaH(PTaH_WeaponCanUsePre, Hook, WeaponCanUsePre);
+	// }
+	PTaH(PTaH_WeaponCanUsePre, Hook, WeaponCanUsePre);
 	
 	AddCommandListener(ChatListener, "say");
 	AddCommandListener(ChatListener, "say2");
@@ -179,7 +180,7 @@ public Action CommandNameTag(int client, int args)
 void SetWeaponProps(int client, int entity)
 {
 	int index = GetWeaponIndex(entity);
-	int team = IsWeaponIndexInOnlyOneTeam(g_iIndex[client]) ? CS_TEAM_T : GetClientTeam(client);
+	int team = IsWeaponIndexInOnlyOneTeam(index) ? CS_TEAM_T : GetClientTeam(client);
 	if (index > -1 && (g_iSkins[client][index][team] != 0))
 	{
 		static int IDHigh = 16384;
@@ -219,7 +220,6 @@ void SetWeaponProps(int client, int entity)
 		{
 			SetEntDataString(entity, FindSendPropInfo("CBaseAttributableItem", "m_szCustomName"), g_NameTag[client][index][team], 128);
 		}
-		
 		SetEntProp(entity, Prop_Send, "m_iAccountID", g_iSteam32[client]);
 		SetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity", client);
 		SetEntPropEnt(entity, Prop_Send, "m_hPrevOwner", -1);

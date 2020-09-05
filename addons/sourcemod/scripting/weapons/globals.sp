@@ -93,13 +93,6 @@ int g_iWeaponSeed[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
 char g_NameTag[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4][128];
 float g_fFloatValue[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
 
-// int g_iSkins_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
-// int g_iStatTrak_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
-// int g_iStatTrakCount_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
-// int g_iWeaponSeed_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][4];
-// char g_NameTag_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)][128][4];
-// float g_fFloatValue_ct[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
-
 int g_iIndex[MAXPLAYERS+1] = { 0, ... };
 Handle g_FloatTimer[MAXPLAYERS+1] = { INVALID_HANDLE, ... };
 int g_iSteam32[MAXPLAYERS+1] = { 0, ... };
