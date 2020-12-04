@@ -73,7 +73,7 @@ public void ReadConfig()
 		char weaponTemp[20];
 		do {
 			char name[64];
-			char index[4];
+			char index[7];
 			char classes[1024];
 			
 			KvGetSectionName(kv, name, sizeof(name));
