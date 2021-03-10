@@ -221,7 +221,7 @@ Menu CreateFloatMenu(int client) {
   menu.AddItem("decrease", buffer, wear == 0 ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 
   Format(buffer, sizeof(buffer), "%T", "FloatSet", client);
-  menu.AddItem("set", buffer, wear == 0 ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
+  menu.AddItem("set", buffer);
 
   menu.ExitBackButton = true;
 
