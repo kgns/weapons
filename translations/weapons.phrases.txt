@@ -428,4 +428,24 @@
 	{
 		"en"	"Reset Seed"
 	}
+	"FloatSet"
+	{
+		"en"	"Input To Set"
+	}
+	"FloatSetInstruction"
+	{
+		"en"	"Write your desired float into chat. To abort, type !cancel."
+	}
+	"FloatSetSuccess"
+	{
+		"en"	"Float successfully applied."
+	}
+	"FloatSetCancelled"
+	{
+		"en"	"Float operation aborted."
+	}
+	"FloatSetFailed"
+	{
+		"en"	"Invalid Float (0 - 1)"
+	}
 }

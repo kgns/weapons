@@ -428,4 +428,24 @@
 	{
 		"chi"	"重置图案模板"
 	}
+	"FloatSet"
+	{
+		"chi"	"输入指定值"
+	}
+	"FloatSetInstruction"
+	{
+		"chi"	"请将你希望设置的磨损值输入至聊天框。如需取消，请输入 !cancel 。"
+	}
+	"FloatSetSuccess"
+	{
+		"chi"	"磨损值应用成功！"
+	}
+	"FloatSetCancelled"
+	{
+		"chi"	"磨损值设置中断。"
+	}
+	"FloatSetFailed"
+	{
+		"chi"	"磨损值无效 (0 - 1)"
+	}
 }
