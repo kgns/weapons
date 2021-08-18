@@ -21,6 +21,7 @@
 #include <cstrike>
 #include <PTaH>
 #include <weapons>
+#include <multicolors>
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -97,6 +98,7 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_nametag", CommandNameTag);
 	RegConsoleCmd("sm_wslang", CommandWSLang);
 	RegConsoleCmd("sm_seed", CommandSeedMenu);
+	RegConsoleCmd("sm_refresh", CommandRefreshSkins);
 	
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
 	PTaH(PTaH_GiveNamedItemPost, Hook, GiveNamedItemPost);
@@ -200,6 +202,16 @@ public Action CommandSeedMenu(int client, int args)
 		return Plugin_Handled;
 	}
 	ReplyToCommand(client, " %s \x04%T", g_ChatPrefix, "SeedExplanation", client);
+	return Plugin_Handled;
+}
+
+public Action CommandRefreshSkins(int client, int args)
+{
+	if (IsValidClient(client))
+	{
+		GetPlayerData(client);
+		CReplyToCommand(client, "{green}[Jaguares]{default} - Armas e facas atualizadas, você as tera no proximo respawn");
+	}
 	return Plugin_Handled;
 }
 
