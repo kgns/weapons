@@ -52,6 +52,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 
 	CreateNative("Weapons_SetClientKnife", Weapons_SetClientKnife_Native);
 	CreateNative("Weapons_GetClientKnife", Weapons_GetClientKnife_Native);
+	CreateNative("Weapons_SetClientSkin", Weapons_SetClientSkin_Native);
 	
 	g_hOnKnifeSelect_Pre = CreateGlobalForward("Weapons_OnClientKnifeSelectPre", ET_Event, Param_Cell, Param_Cell, Param_String);
 	g_hOnKnifeSelect_Post = CreateGlobalForward("Weapons_OnClientKnifeSelectPost", ET_Ignore, Param_Cell, Param_Cell, Param_String);
