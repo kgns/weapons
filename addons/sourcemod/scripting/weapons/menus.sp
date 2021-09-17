@@ -748,6 +748,20 @@ public int MainMenuHandler(Menu menu, MenuAction action, int client, int selecti
 						CreateLanguageMenu(client).Display(client, menuTime);
 					}
 				}
+				else if(StrEqual(info, "load"))
+				{
+					ShowPressets(client);
+				}
+				else if(StrEqual(info, "save"))
+				{
+					PrintToChat(client, " %s \x04%t", g_ChatPrefix, "WaitingForPresset", client);
+
+					g_bWaitingForPressetName[client] = true;
+				}
+				else if(StrEqual(info, "delete"))
+				{
+					ShowPressets(client, true);
+				}
 				else
 				{
 					g_smWeaponIndex.GetValue(info, g_iIndex[client]);
@@ -795,15 +809,41 @@ Menu CreateMainMenu(int client)
 			}
 		}
 	}
+
+	Format(buffer, sizeof(buffer), "%T", "LoadPresset", client);
+	menu.AddItem("load", buffer);
+
+	switch(g_Cvar_SavePresetAcces.IntValue)
+	{
+		case 1: // Admin only
+		{
+			if(GetUserAdmin(client) != INVALID_ADMIN_ID)
+			{
+				Format(buffer, sizeof(buffer), "%T", "SavePresset", client);
+				menu.AddItem("save", buffer);
+
+				Format(buffer, sizeof(buffer), "%T", "DeletePresset", client);
+				menu.AddItem("delete", buffer);
+			}
+		}
+		case 0: // Everyone
+		{
+			Format(buffer, sizeof(buffer), "%T", "SavePresset", client);
+			menu.AddItem("save", buffer);
+
+			Format(buffer, sizeof(buffer), "%T", "DeletePresset", client);
+			menu.AddItem("delete", buffer);
+		}
+	}
 	
-	for(int i = index; i < 6; i++)
+	for(int i = index; i < 4; i++)
 	{
 		menu.AddItem("", "", ITEMDRAW_SPACER);
 	}
-	
+
 	Format(buffer, sizeof(buffer), "%T", "ChangeLang", client);
 	menu.AddItem("lang", buffer);
-	
+
 	return menu;
 }
 
@@ -958,5 +998,91 @@ public int LanguageMenuHandler(Menu menu, MenuAction action, int client, int sel
 		{
 			delete menu;
 		}
+	}
+}
+
+public int SeePressetsHandler(Menu menu, MenuAction action, int client, int selection)
+{
+	switch(action)
+	{
+		case MenuAction_Select:
+		{
+			if(IsClientInGame(client))
+			{
+				char info[32];
+				menu.GetItem(selection, info, sizeof(info));
+
+				ShowPressetInfo(client, info);
+			}
+		}
+		case MenuAction_End:
+		{
+			delete menu;
+		}
+	}
+
+	if(selection == MenuCancel_ExitBack)
+	{
+		int menuTime;
+		if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+		{
+			CreateMainMenu(client).Display(client, menuTime);
+		}
+	}
+}
+
+public int SeeDeletePressetsHandler(Menu menu, MenuAction action, int client, int selection)
+{
+	switch(action)
+	{
+		case MenuAction_Select:
+		{
+			if(IsClientInGame(client))
+			{
+				char info[64];
+				menu.GetItem(selection, info, sizeof(info));
+
+				DeletePresset(client, info);
+			}
+		}
+		case MenuAction_End:
+		{
+			delete menu;
+		}
+	}
+	
+	if(selection == MenuCancel_ExitBack)
+	{
+		int menuTime;
+		if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+		{
+			CreateMainMenu(client).Display(client, menuTime);
+		}
+	}
+}
+
+public int SeePressetSkinsHandler(Menu menu, MenuAction action, int client, int selection)
+{
+	switch(action)
+	{
+		case MenuAction_Select:
+		{
+			if(IsClientInGame(client))
+			{
+				char item[64];
+				menu.GetItem(selection, item, sizeof(item));
+
+				LoadPresset(client, item);
+			}
+		}
+		case MenuAction_End:
+		{
+			delete menu;
+		}
+	}
+
+	if(selection == MenuCancel_ExitBack)
+	{
+		ShowPressets(client);
 	}
 }

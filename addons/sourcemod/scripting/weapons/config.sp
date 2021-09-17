@@ -23,6 +23,8 @@ public void ReadConfig()
 	g_smWeaponDefIndex = new StringMap();
 	delete g_smLanguageIndex;
 	g_smLanguageIndex = new StringMap();
+	delete g_smSkinsNames;
+	g_smSkinsNames = new StringMap();
 	
 	for (int i = 0; i < sizeof(g_WeaponClasses); i++)
 	{
@@ -79,6 +81,8 @@ public void ReadConfig()
 			KvGetString(kv, "classes", classes, sizeof(classes));
 			KvGetString(kv, "index", index, sizeof(index));
 			
+			g_smSkinsNames.SetString(index, name);
+
 			for (int k = 0; k < sizeof(g_WeaponClasses); k++)
 			{
 				Format(weaponTemp, sizeof(weaponTemp), "%s;", g_WeaponClasses[k]);
@@ -99,4 +103,25 @@ public void ReadConfig()
 	{
 		SetFailState("Could not find a config file for any languages.");
 	}
+	
+	ReadPressets();
+}
+
+void ReadPressets() // We just need a global handle of the KVs
+{
+	delete g_hPresets;
+	g_hPresets = new KeyValues("Skins");
+	
+	File file = null;
+	
+	BuildPath(Path_SM, g_sPressetsFile, sizeof(g_sPressetsFile), "configs/weapons_presets.cfg");
+	file = OpenFile(g_sPressetsFile, "r+"); // "r+": Open an existing file for both reading and writing.
+	
+	if(file == null)
+	{
+		SetFailState("Could not find \"%s\".", g_sPressetsFile);
+	}
+
+	g_hPresets = new KeyValues("Skins");
+	g_hPresets.ImportFromFile(g_sPressetsFile);
 }
