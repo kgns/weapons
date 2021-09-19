@@ -16,4 +16,16 @@ forward Action Weapons_OnClientKnifeSelectPre(int client, int knifeId, char[] kn
 forward void Weapons_OnClientKnifeSelectPost(int client, int knifeId, char[] knifeName);
 
 //Sets client's skins for a weapons.
-native int native int Weapons_SetClientSkin(int client, const char[] weapon, int skin);
+native void Weapons_SetClientSkin(int client, const char[] weapon, int skin);
+
+// Set client's float(wear) for a weapon. 
+native void Weapons_SetClientWear(int client, const char[] weapon, float wear);
+
+// Set client's seed for a weapon. 
+native void Weapons_SetClientSeed(int client, const char[] weapon, int seed);
+
+// Set client's nametag for a weapon
+native void Weapons_SetClientNameTag(int client, const char[] weapon, const char[] name);
+
+// Set client's startrack for a weapon
+native void Weapons_ToggleClientStarTrack(int client, const char[] weapon);
