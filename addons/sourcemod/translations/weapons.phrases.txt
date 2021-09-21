@@ -2,37 +2,37 @@
 {
 	"PressetDeleted"
 	{
-		"en"	"Presset deleted!"
+		"en"	"Preset deleted!"
 	}
 
 	"PressetLoaded"
 	{
-		"en"	"Presset loaded!"
+		"en"	"Preset loaded!"
 	}
 
 	"LoadThisPresset"
 	{
-		"en"	"Load this presset"
+		"en"	"Load this preset"
 	}
 
 	"PressetSaved"
 	{
-		"en"	"Presset created succesfully"
+		"en"	"Preset created succesfully"
 	}
 
 	"WaitingForPresset"
 	{
-		"en"	"Please write the name of this presset"
+		"en"	"Please write the name of this preset"
 	}
 
 	"NoPressetsAvalabile"
 	{
-		"en"	"There are no pressets yet"
+		"en"	"There are no presets yet"
 	}
 
 	"LoadPressetsTitle"
 	{
-		"en"	"Select a presset"
+		"en"	"Select a preset"
 	}
 
 	"DeletePresset"
@@ -42,12 +42,12 @@
 
 	"SavePresset"
 	{
-		"en"	"Create a Skin Teample"
+		"en"	"Create a Skin Preset"
 	}
 
 	"LoadPresset"
 	{
-		"en"	"Pressets"
+		"en"	"Presets"
 	}
 
 	"WSMenuTitle"
