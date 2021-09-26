@@ -42,7 +42,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns | oyunhost.net",
 	description = "All in one weapon skin management",
-	version = "1.7.4",
+	version = "1.7.6",
 	url = "https://www.oyunhost.net"
 };
 
