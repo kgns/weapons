@@ -75,7 +75,18 @@ void ShowPressetInfo(int client, char[] name)
 			
 			Format(key, sizeof(key), "%i", g_hPresets.GetNum(g_WeaponClasses[i]));
 			
-			if(g_smSkinsNames.GetString(key, buffer, sizeof(buffer)))
+			if(StrEqual(key, "0")) // Skip default skins
+			{
+				continue;
+			}
+			
+			if(StrEqual(key, "-1"))
+			{
+				Format(buffer, sizeof(buffer), "%T | %T", g_WeaponClasses[i], client, "RandomSkin", client);		
+				menu.AddItem(name, buffer, ITEMDRAW_DISABLED);
+			}
+			
+			else if(g_smSkinsNames.GetString(key, buffer, sizeof(buffer)))
 			{
 				Format(buffer, sizeof(buffer), "%T | %s", g_WeaponClasses[i], client, buffer);		
 				menu.AddItem(name, buffer, ITEMDRAW_DISABLED);
