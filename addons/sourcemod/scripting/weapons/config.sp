@@ -109,19 +109,12 @@ public void ReadConfig()
 
 void ReadPressets() // We just need a global handle of the KVs
 {
+	BuildPath(Path_SM, g_sPressetsFile, sizeof(g_sPressetsFile), "configs/weapons_presets.cfg");
+	
 	delete g_hPresets;
 	g_hPresets = new KeyValues("Skins");
-	
-	File file = null;
-	
-	BuildPath(Path_SM, g_sPressetsFile, sizeof(g_sPressetsFile), "configs/weapons_presets.cfg");
-	file = OpenFile(g_sPressetsFile, "r+"); // "r+": Open an existing file for both reading and writing.
-	
-	if(file == null)
+	if(!g_hPresets.ImportFromFile(g_sPressetsFile))
 	{
-		SetFailState("Could not find \"%s\".", g_sPressetsFile);
+		LogError("File \"%s\" is missing.", g_sPressetsFile);
 	}
-
-	g_hPresets = new KeyValues("Skins");
-	g_hPresets.ImportFromFile(g_sPressetsFile);
 }
