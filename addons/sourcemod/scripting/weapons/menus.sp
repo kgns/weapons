@@ -819,7 +819,7 @@ Menu CreateMainMenu(int client)
 				dupKnifeCounter++;
 				for (int i = 0; i < dupKnifeCounter; i++) 
 				{
-					if (dupKnifeCounter > 1) {
+					if (dupKnifeCounter >= 1) {
 						menu.RemoveItem(menuItemIndex);
 						return menu;	
 					}
