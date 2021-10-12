@@ -792,6 +792,7 @@ Menu CreateMainMenu(int client)
 				Format(weaponName, sizeof(weaponName), "%T", weaponClass, client);
 				menu.AddItem(weaponClass, weaponName, (IsKnifeClass(weaponClass) && g_iKnife[client] == 0) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 			}
+			// Moved index increment out of if-block
 			index++;
 		}
 	}
@@ -804,6 +805,7 @@ Menu CreateMainMenu(int client)
 	Format(buffer, sizeof(buffer), "%T", "ChangeLang", client);
 	menu.AddItem("lang", buffer);
 
+	// Iterates over main item menu and checks for the knife duplicate (usually appears at bottom half of menu)
 	int menuItems = menu.ItemCount;
 	if (menuItems == 6) 
 	{
