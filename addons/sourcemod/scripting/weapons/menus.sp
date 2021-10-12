@@ -805,7 +805,7 @@ Menu CreateMainMenu(int client)
 	Format(buffer, sizeof(buffer), "%T", "ChangeLang", client);
 	menu.AddItem("lang", buffer);
 
-	// Iterates over main item menu and checks for the knife duplicate (usually appears at bottom half of menu)
+	// Iterates over main item menu and checks for the knife duplicate (usually appears at bottom half of main item menu)
 	int menuItems = menu.ItemCount;
 	if (menuItems == 6) 
 	{
