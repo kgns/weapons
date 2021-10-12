@@ -812,8 +812,8 @@ Menu CreateMainMenu(int client)
 		char dupKnife[32];
 		for (int menuItemIndex = 4; menuItemIndex < menuItems; menuItemIndex++) 
 		{
-			bool dupKnifeFound = menu.GetItem(menuItemIndex, dupKnife, sizeof(dupKnife));
-			if ((dupKnifeFound) && IsKnifeClass(dupKnife))
+			bool menuItemExists = menu.GetItem(menuItemIndex, dupKnife, sizeof(dupKnife));
+			if ((menuItemExists) && IsKnifeClass(dupKnife))
 			{
 				menu.RemoveItem(menuItemIndex);
 				return menu;
