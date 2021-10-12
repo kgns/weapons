@@ -791,8 +791,8 @@ Menu CreateMainMenu(int client)
 			{
 				Format(weaponName, sizeof(weaponName), "%T", weaponClass, client);
 				menu.AddItem(weaponClass, weaponName, (IsKnifeClass(weaponClass) && g_iKnife[client] == 0) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
-				index++;
 			}
+			index++;
 		}
 	}
 	
@@ -803,7 +803,22 @@ Menu CreateMainMenu(int client)
 	
 	Format(buffer, sizeof(buffer), "%T", "ChangeLang", client);
 	menu.AddItem("lang", buffer);
-	
+
+	int menuItems = menu.ItemCount;
+	if (menuItems == 6) 
+	{
+		char dupKnife[32];
+		for (int menuItemIndex = 4; menuItemIndex < menuItems; menuItemIndex++) 
+		{
+			bool dupKnifeFound = menu.GetItem(menuItemIndex, dupKnife, sizeof(dupKnife));
+			if ((dupKnifeFound) && IsKnifeClass(dupKnife))
+			{
+				menu.RemoveItem(menuItemIndex);
+				return menu;
+			}
+		}
+	}	
+
 	return menu;
 }
 
