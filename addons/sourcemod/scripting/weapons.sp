@@ -36,7 +36,7 @@
 #include "weapons/natives.sp"
 
 #if defined _updater_included
-#define UPDATE_URL "https://power-on.ir/autoupdater/weapons/updatefile.txt"
+#define UPDATE_URL "https://raw.githubusercontent.com/alix1383/weapons/master/addons/sourcemod/updatefile.txt"
 #endif
 
 
