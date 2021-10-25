@@ -1,4 +1,4 @@
-# Weapons & Knives for CS:GO Community Servers + Auto Update
+# Weapons & Knives for CS:GO Community Servers
 
 [![](https://img.shields.io/github/license/kgns/weapons.svg?style=flat-square)](https://github.com/kgns/weapons/blob/master/LICENSE)
 [![Build Status](https://build.kgns.dev/job/csgo-weapons/badge/icon?style=flat-square)](https://build.kgns.dev/job/csgo-weapons)
