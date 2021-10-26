@@ -20,7 +20,7 @@
 		"Source"	"Path_SM/scripting/weapons/hooks.sp"
 		"Source"	"Path_SM/scripting/weapons/menus.sp"
 		"Source"	"Path_SM/scripting/weapons/natives.sp"    
-                "Source"	"Path_SM/scripting/include/weapons.inc"
+        "Source"	"Path_SM/scripting/include/weapons.inc"
 
 		"Plugin"	"Path_SM/translations/weapons.phrases.txt"
 		"Plugin"	"Path_SM/translations/chi/weapons.phrases.txt"
