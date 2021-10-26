@@ -5,6 +5,7 @@
 [![GitHub Downloads](https://img.shields.io/github/downloads/kgns/weapons/total.svg?style=flat-square)](https://github.com/kgns/weapons/releases/latest)
 
 CS:GO Custom Weapon Options (Skins, NameTag, StatTrak, Wear/Float, Knives)
+
 ``Required``
 
 dependency to run the plugin:
@@ -16,9 +17,12 @@ files to compile the plugin:
 - https://github.com/komashchenko/PTaH/blob/master/PTaH.inc
 
 ``optional``
+
 Auto Updater
 
 - https://forums.alliedmods.net/showthread.php?p=1570806
+
+--------------------
 
 AlliedModders forum link:
 
