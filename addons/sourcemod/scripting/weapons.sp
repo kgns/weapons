@@ -21,6 +21,7 @@
 #include <cstrike>
 #include <PTaH>
 #include <weapons>
+#tryinclude <updater>
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -33,6 +34,11 @@
 #include "weapons/config.sp"
 #include "weapons/menus.sp"
 #include "weapons/natives.sp"
+
+#if defined _updater_included
+#define UPDATE_URL "https://raw.githubusercontent.com/kgns/weapons/master/addons/sourcemod/updatefile.txt"
+#endif
+
 
 //#define DEBUG
 
@@ -125,7 +131,23 @@ public void OnPluginStart()
 			g_iWeaponSeed[i][j] = -1;
 		}
 	}
+	#if defined _updater_included
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+	#endif
 }
+
+#if defined _updater_included
+public void OnLibraryAdded(const char[] name)
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+#endif
 
 #if defined DEBUG
 public Action Command_SetKnife(int client, int args)
