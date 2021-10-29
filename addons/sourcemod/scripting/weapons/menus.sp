@@ -805,21 +805,39 @@ Menu CreateMainMenu(int client)
 	Format(buffer, sizeof(buffer), "%T", "ChangeLang", client);
 	menu.AddItem("lang", buffer);
 
-	// Iterates over main item menu and then both original and duplicate knife (usually appears at bottom half of !ws menu)
-	// Second for-loop for more consistent knife index in !ws menu
+	// Iterates over main item menu and checks for the knife duplicate (usually appears at bottom half of main !ws menu)
 	int menuItems = menu.ItemCount;
 	if (menuItems == 6) 
 	{
-		char weaponKnife[32];
+		char dupKnife[32];
 		for (int menuItemIndex = 0, dupKnifeCounter = 0; menuItemIndex < menuItems; menuItemIndex++) 
 		{
-			bool menuItemExists = menu.GetItem(menuItemIndex, weaponKnife, sizeof(weaponKnife));
-			if ((menuItemExists) && IsKnifeClass(weaponKnife))
+			bool menuItemExists = menu.GetItem(menuItemIndex, dupKnife, sizeof(dupKnife));
+			if (menuItemExists && IsKnifeClass(dupKnife))
 			{
 				dupKnifeCounter++;
 				for (int i = 0; i < dupKnifeCounter; i++) 
 				{
 					if (dupKnifeCounter >= 1) {
+						menu.RemoveItem(menuItemIndex);
+						return menu;	
+					}
+				}
+			}
+		}
+	}	
+	else if (menuItems == 5) 
+	{
+		char dupKnife_[32];
+		for (int menuItemIndex = 0, dupKnifeCounter = 0; menuItemIndex < menuItems; menuItemIndex++) 
+		{
+			bool menuItemExists = menu.GetItem(menuItemIndex, dupKnife_, sizeof(dupKnife_));
+			if (menuItemExists && IsKnifeClass(dupKnife_))
+			{
+				dupKnifeCounter++;
+				for (int i = 0; i < dupKnifeCounter; i++) 
+				{
+					if (dupKnifeCounter > 1) {
 						menu.RemoveItem(menuItemIndex);
 						return menu;	
 					}
