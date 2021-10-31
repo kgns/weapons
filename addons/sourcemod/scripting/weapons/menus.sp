@@ -857,6 +857,8 @@ Menu CreateKnifeMenu(int client)
 	char buffer[60];
 	Format(buffer, sizeof(buffer), "%T", "OwnKnife", client);
 	menu.AddItem("0", buffer, g_iKnife[client] != 0 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	Format(buffer, sizeof(buffer), "%T", "RandomKnife", client);
+	menu.AddItem("-1", buffer, g_iKnife[client] != -1 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_cord", client);
 	menu.AddItem("49", buffer, g_iKnife[client] != 49 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_canis", client);
@@ -909,6 +911,11 @@ public int KnifeMenuHandler(Menu menu, MenuAction menuaction, int client, int se
 				char knifeIdStr[32];
 				menu.GetItem(selection, knifeIdStr, sizeof(knifeIdStr));
 				int knifeId = StringToInt(knifeIdStr);
+				int knifeDB = knifeId;
+				if (knifeId == -1)
+				{
+					knifeId = GetRandomKnife();
+				}
 				
 				Action action = Plugin_Continue;
 				Call_StartForward(g_hOnKnifeSelect_Pre);
@@ -929,9 +936,9 @@ public int KnifeMenuHandler(Menu menu, MenuAction menuaction, int client, int se
 					return;
 				}
 				
-				g_iKnife[client] = knifeId;
+				g_iKnife[client] = knifeDB;
 				char updateFields[50];
-				Format(updateFields, sizeof(updateFields), "knife = %d", knifeId);
+				Format(updateFields, sizeof(updateFields), "knife = %d", knifeDB);
 				UpdatePlayerData(client, updateFields);
 				
 				RefreshWeapon(client, knifeId, knifeId == 0);

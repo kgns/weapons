@@ -80,6 +80,10 @@
 	{
 		"tr"	"★ Kendi bıçağın"
 	}
+	"RandomKnife"
+	{
+		"tr"	"★ Rastgele bıçak"
+	}
 	"SetSkin"
 	{
 		"tr"	"Skin Seç"

@@ -34,7 +34,14 @@ Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, boo
 		if (g_iKnife[client] != 0 && IsKnifeClass(classname))
 		{
 			ignoredCEconItemView = true;
-			strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
+			if (g_iKnife[client] == -1)
+			{
+				strcopy(classname, sizeof(classname), g_WeaponClasses[GetRandomKnife()]);
+			}
+			else
+			{
+				strcopy(classname, sizeof(classname), g_WeaponClasses[g_iKnife[client]]);
+			}
 			return Plugin_Changed;
 		}
 	}
