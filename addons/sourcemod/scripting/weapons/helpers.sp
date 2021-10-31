@@ -50,7 +50,7 @@ int GetRandomSkin(int client, int index)
 
 int GetRandomKnife()
 {
-	return g_iKnifeIndices[GetRandomInt(0, sizeof(g_iKnifeIndices))];
+	return g_iKnifeIndices[GetRandomInt(0, sizeof(g_iKnifeIndices) - 1)];
 }
 
 bool IsValidClient(int client)
