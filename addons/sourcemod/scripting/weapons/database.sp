@@ -485,7 +485,20 @@ void CreateMainTable(bool mysql, bool recreate = false)
 			knife_skeleton_trak int(1) NOT NULL DEFAULT '0', 				\
 			knife_skeleton_trak_count int(10) NOT NULL DEFAULT '0', 		\
 			knife_skeleton_tag varchar(256) NOT NULL DEFAULT '', 			\
-			knife_skeleton_seed int(10) NOT NULL DEFAULT '-1')");
+			knife_skeleton_seed int(10) NOT NULL DEFAULT '-1', ");
+	index += FormatEx(createQuery[index], sizeof(createQuery) - index, "	\
+			knife_ghost int(4) NOT NULL DEFAULT '0', 						\
+			knife_ghost_float decimal(3,2) NOT NULL DEFAULT '0.0', 			\
+			knife_ghost_trak int(1) NOT NULL DEFAULT '0', 					\
+			knife_ghost_trak_count int(10) NOT NULL DEFAULT '0', 			\
+			knife_ghost_tag varchar(256) NOT NULL DEFAULT '', 				\
+			knife_ghost_seed int(10) NOT NULL DEFAULT '-1',					\
+			knife_gold int(4) NOT NULL DEFAULT '0', 						\
+			knife_gold_float decimal(3,2) NOT NULL DEFAULT '0.0',			\
+			knife_gold_trak int(1) NOT NULL DEFAULT '0', 					\
+			knife_gold_trak_count int(10) NOT NULL DEFAULT '0', 			\
+			knife_gold_tag varchar(256) NOT NULL DEFAULT '', 				\
+			knife_gold_seed int(10) NOT NULL DEFAULT '-1')");
 	
 	if (mysql)
 	{

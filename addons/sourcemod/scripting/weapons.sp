@@ -139,6 +139,11 @@ public void OnPluginStart()
 	}
 }
 
+public void OnMapStart()
+{
+	AddFileToDownloadsTable("materials/panorama/images/icons/equipment/knife_ghost.svg");
+}
+
 public void OnLibraryAdded(const char[] name)
 {
 	if (StrEqual(name, "updater"))

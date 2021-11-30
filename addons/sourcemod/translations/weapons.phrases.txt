@@ -344,6 +344,14 @@
 	{
 		"en"	"Knife"
 	}
+	"weapon_knifegg"
+	{
+		"en"	"★ Golden Knife"
+	}
+	"weapon_knife_ghost"
+	{
+		"en"	"★ Spectral Shiv"
+	}
 	"ChangeNameTag"
 	{
 		"en"	"Set Name Tag"

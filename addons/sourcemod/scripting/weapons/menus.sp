@@ -859,6 +859,16 @@ Menu CreateKnifeMenu(int client)
 	menu.AddItem("0", buffer, g_iKnife[client] != 0 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	Format(buffer, sizeof(buffer), "%T", "RandomKnife", client);
 	menu.AddItem("-1", buffer, g_iKnife[client] != -1 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	if (GetUserFlagBits(client) & (ADMFLAG_CUSTOM2 | ADMFLAG_ROOT | ADMFLAG_KICK))
+	{
+		Format(buffer, sizeof(buffer), "%T", "weapon_knife_ghost", client);
+		menu.AddItem("53", buffer, g_iKnife[client] != 53 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	}
+	if (GetUserFlagBits(client) & (ADMFLAG_CUSTOM1 | ADMFLAG_CUSTOM2 | ADMFLAG_ROOT | ADMFLAG_KICK))
+	{
+		Format(buffer, sizeof(buffer), "%T", "weapon_knifegg", client);
+		menu.AddItem("54", buffer, g_iKnife[client] != 54 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	}
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_cord", client);
 	menu.AddItem("49", buffer, g_iKnife[client] != 49 ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 	Format(buffer, sizeof(buffer), "%T", "weapon_knife_canis", client);
