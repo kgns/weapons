@@ -84,7 +84,14 @@ bool GetWeaponClass(int entity, char[] weaponClass, int size)
 
 bool IsKnifeClass(const char[] classname)
 {
-	if (StrContains(classname, "knife") > -1 || StrContains(classname, "bayonet") > -1)
+	if ((StrContains(classname, "knife") > -1 && strcmp(classname, "weapon_knifegg") != 0 && strcmp(classname, "weapon_knife_ghost") != 0) || StrContains(classname, "bayonet") > -1)
+		return true;
+	return false;
+}
+
+bool IsSpecialKnifeClass(const char[] classname)
+{
+	if (strcmp(classname, "weapon_knifegg") == 0 || strcmp(classname, "weapon_knife_ghost") == 0)
 		return true;
 	return false;
 }
@@ -93,7 +100,7 @@ bool IsKnife(int entity)
 {
 	char classname[32];
 	if(GetWeaponClass(entity, classname, sizeof(classname)))
-		return IsKnifeClass(classname);
+		return IsKnifeClass(classname) || IsSpecialKnifeClass(classname);
 	return false;
 }
 

@@ -363,7 +363,7 @@ void RefreshWeapon(int client, int index, bool defaultKnife = false)
 		if (IsValidWeapon(weapon))
 		{
 			bool isKnife = IsKnife(weapon);
-			if ((!defaultKnife && GetWeaponIndex(weapon) == index) || (isKnife && (defaultKnife || IsKnifeClass(g_WeaponClasses[index]))))
+			if ((!defaultKnife && GetWeaponIndex(weapon) == index) || (isKnife && (defaultKnife || IsKnifeClass(g_WeaponClasses[index]) || IsSpecialKnifeClass(g_WeaponClasses[index]))))
 			{
 				if(!g_bOverwriteEnabled)
 				{

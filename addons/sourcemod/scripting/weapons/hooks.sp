@@ -57,6 +57,10 @@ void GiveNamedItemPost(int client, const char[] classname, const CEconItemView i
 		{
 			if (IsKnifeClass(classname))
 			{
+				EquipPlayerWeapon(client, entity);
+			}
+			else if (IsSpecialKnifeClass(classname))
+			{
 				// Doesn't use EquipPlayerWeapon because server hangs when player spawns
 				FakeClientCommand(client, "use weapon_knife");
 			}
