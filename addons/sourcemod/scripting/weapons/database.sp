@@ -905,7 +905,7 @@ void CreatePlayerData(int client)
 	if(GetClientAuthId(client, AuthId_Steam2, steamid, sizeof(steamid), true))
 	{
 		char query[255];
-		FormatEx(query, sizeof(query), "INSERT INTO %sweapons (steamid) VALUES ('%s')", g_TablePrefix, steamid);
+		FormatEx(query, sizeof(query), "INSERT INTO %sweapons (steamid) VALUES ('%s') ON DUPLICATE KEY UPDATE = steamid = '%s'", g_TablePrefix, steamid);
 		DataPack pack = new DataPack();
 		pack.WriteString(steamid);
 		pack.WriteString(query);
