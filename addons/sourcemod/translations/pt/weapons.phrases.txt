@@ -430,7 +430,7 @@
 	}
 	"SeedReset"
 	{
-		"pt"	"Seed reseted."
+		"pt"	"Seed resetada."
 	}
 	"ResetSeed"
 	{
