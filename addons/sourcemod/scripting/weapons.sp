@@ -33,6 +33,7 @@
 #include "weapons/config.sp"
 #include "weapons/menus.sp"
 #include "weapons/natives.sp"
+#include "weapons/presets.sp"
 
 //#define DEBUG
 
@@ -51,6 +52,11 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 
 	CreateNative("Weapons_SetClientKnife", Weapons_SetClientKnife_Native);
 	CreateNative("Weapons_GetClientKnife", Weapons_GetClientKnife_Native);
+	CreateNative("Weapons_SetClientSkin", Weapons_SetClientSkin_Native);
+	CreateNative("Weapons_SetClientWear", Weapons_SetClientWear_Native);
+	CreateNative("Weapons_SetClientSeed", Weapons_SetClientSeed_Native);
+	CreateNative("Weapons_SetClientNameTag", Weapons_SetClientNameTag_Native);
+	CreateNative("Weapons_ToggleClientStarTrack", Weapons_ToggleClientStarTrack_Native);
 	
 	g_hOnKnifeSelect_Pre = CreateGlobalForward("Weapons_OnClientKnifeSelectPre", ET_Event, Param_Cell, Param_Cell, Param_String);
 	g_hOnKnifeSelect_Post = CreateGlobalForward("Weapons_OnClientKnifeSelectPost", ET_Ignore, Param_Cell, Param_Cell, Param_String);
@@ -87,6 +93,7 @@ public void OnPluginStart()
 	g_Cvar_EnableWeaponOverwrite 	= CreateConVar("sm_weapons_enable_overwrite", 		"1", 				"Enable/Disable players overwriting other players' weapons (picked up from the ground) by using !ws command");
 	g_Cvar_GracePeriod 			= CreateConVar("sm_weapons_grace_period", 			"0", 				"Grace period in terms of seconds counted after round start for allowing the use of !ws command. 0 means no restrictions");
 	g_Cvar_InactiveDays 			= CreateConVar("sm_weapons_inactive_days", 			"30", 				"Number of days before a player (SteamID) is marked as inactive and his data is deleted. (0 or any negative value to disable deleting)");
+	g_Cvar_SavePresetAcces			= CreateConVar("sm_weapons_save_preset_adminsonly", "1", 				"Who have the acces to save a preset of skins? 1 = Admin only | 0 = Everyone", 0, true, 0.0, true, 1.0);
 	
 	AutoExecConfig(true, "weapons");
 	
@@ -97,7 +104,7 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_nametag", CommandNameTag);
 	RegConsoleCmd("sm_wslang", CommandWSLang);
 	RegConsoleCmd("sm_seed", CommandSeedMenu);
-	
+
 	PTaH(PTaH_GiveNamedItemPre, Hook, GiveNamedItemPre);
 	PTaH(PTaH_GiveNamedItemPost, Hook, GiveNamedItemPost);
 	
@@ -189,6 +196,7 @@ public Action CommandWeaponSkins(int client, int args)
 			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "GracePeriod", g_iGracePeriod);
 		}
 	}
+
 	return Plugin_Handled;
 }
 

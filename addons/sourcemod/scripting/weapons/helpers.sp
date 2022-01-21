@@ -71,6 +71,16 @@ int GetWeaponIndex(int entity)
 	return -1;
 }
 
+int GetIndex(const char[] classname)
+{
+	int index;
+	if(g_smWeaponIndex.GetValue(classname, index))
+	{
+		return index;
+	}
+	return -1;
+}
+
 bool GetWeaponClass(int entity, char[] weaponClass, int size)
 {
 	int id = GetEntProp(entity, Prop_Send, "m_iItemDefinitionIndex");

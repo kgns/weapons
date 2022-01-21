@@ -129,6 +129,13 @@ public Action ChatListener(int client, const char[] command, int args)
 		
 		return Plugin_Handled;
 	}
+	else if(g_bWaitingForPressetName[client] && IsValidClient(client) && !IsChatTrigger())
+	{
+		SavePresset(client, msg);
+		g_bWaitingForPressetName[client] = false;
+
+		return Plugin_Handled;
+	}
 	
 	return Plugin_Continue;
 }

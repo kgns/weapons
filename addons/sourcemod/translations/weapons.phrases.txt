@@ -1,5 +1,55 @@
 "Phrases"
 {
+	"PressetDeleted"
+	{
+		"en"	"Preset deleted!"
+	}
+
+	"PressetLoaded"
+	{
+		"en"	"Preset loaded!"
+	}
+
+	"LoadThisPresset"
+	{
+		"en"	"Load this preset"
+	}
+
+	"PressetSaved"
+	{
+		"en"	"Preset created succesfully"
+	}
+
+	"WaitingForPresset"
+	{
+		"en"	"Please write the name of this preset"
+	}
+
+	"NoPressetsAvalabile"
+	{
+		"en"	"There are no presets yet"
+	}
+
+	"LoadPressetsTitle"
+	{
+		"en"	"Select a preset"
+	}
+
+	"DeletePresset"
+	{
+		"en"	"Delete a Skin Teample"
+	}
+
+	"SavePresset"
+	{
+		"en"	"Create a Skin Preset"
+	}
+
+	"LoadPresset"
+	{
+		"en"	"Presets"
+	}
+
 	"WSMenuTitle"
 	{
 		"en"	"Weapon Skins Menu"
