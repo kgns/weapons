@@ -40,9 +40,9 @@ public Plugin myinfo =
 {
 	name = "Weapons & Knives",
 	author = "kgns | oyunhost.net",
-	description = "All in one weapon skin management",
-	version = "1.7.5",
-	url = "https://www.oyunhost.net"
+	description = "All in one CS:GO weapon skin management",
+	version = "1.7.6",
+	url = "https://github.com/kgns"
 };
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
