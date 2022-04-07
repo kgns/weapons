@@ -22,12 +22,12 @@ This plugin allows you to:
   - **[SteamWorks](https://github.com/hexa-core-eu/SteamWorks)** ***(Required if you want to compile)***
 
 ## INSTALLATION
-- Use this without a GSLT token (LAN server), or use a token service for your servers, or your account will be banned from operating game servers, and a month cooldown from playing the game.
-- Edit csgo/addons/sourcemod/configs/core.cfg => Change "FollowCSGOServerGuidelines" "yes" to "no"
-- Install PTaH 1.1.0+ (DOWNLOAD PTaH)
-- Copy the folder structure to your gameserver.
-  - (OPTIONAL) If you want to use MySQL instead of SQLite (storage-local), edit addons/sourcemod/configs/databases.cfg file and add the MySQL db connection details under "weapons" title, then change "sm_weapons_db_connection" cvar inside cfg/sourcemod/weapons.cfg file to "weapons"
-- Restart server.
+- Use this without a GSLT token (LAN server), or use a token service for your servers, or your account will be banned from operating game servers, and a month cooldown from playing the game;
+- Edit **`csgo/addons/sourcemod/configs/core.cfg`** => Change **`"FollowCSGOServerGuidelines" "yes"` to `"no"`**;
+- Install **[PTaH 1.1.0+](https://ptah.zizt.ru/)**;
+- Copy the folder structure to your gameserver;
+  - ***(OPTIONAL)*** If you want to use MySQL instead of SQLite **(storage-local)**, edit **`addons/sourcemod/configs/databases.cfg`** file and add the MySQL db connection details under **"weapons"** title, then change **`"sm_weapons_db_connection"`** cvar inside **`cfg/sourcemod/weapons.cfg`** file to **"weapons"**;
+- Restart server;
 
 ## DONATE
 If you want to donate, I'd appreciate it: https://steamcommunity.com/tradeoffer/new/?partner=37011238&token=yGo05pTn
