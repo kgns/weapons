@@ -36,7 +36,7 @@ Action GiveNamedItemPre(int client, char classname[64], CEconItemView &item, boo
 			ignoredCEconItemView = true;
 			if (g_iKnife[client] == -1)
 			{
-				strcopy(classname, sizeof(classname), g_WeaponClasses[GetRandomKnife()]);
+				strcopy(classname, sizeof(classname), g_WeaponClasses[GetRandomKnife(client)]);
 			}
 			else
 			{

@@ -48,9 +48,20 @@ int GetRandomSkin(int client, int index)
 	return StringToInt(idStr);
 }
 
-int GetRandomKnife()
+int GetRandomKnife(int client)
 {
-	return g_iKnifeIndices[GetRandomInt(0, sizeof(g_iKnifeIndices) - 1)];
+	if (GetUserFlagBits(client) & (ADMFLAG_CUSTOM2 | ADMFLAG_ROOT | ADMFLAG_KICK))
+	{
+		return g_iKnifeIndices[GetRandomInt(0, sizeof(g_iKnifeIndices) - 1)];
+	}
+	else if (GetUserFlagBits(client) & ADMFLAG_CUSTOM1)
+	{
+		return g_iKnifeIndices[GetRandomInt(0, sizeof(g_iKnifeIndices) - 2)];
+	}
+	else 
+	{
+		return g_iKnifeIndices[GetRandomInt(0, sizeof(g_iKnifeIndices) - 3)];
+	}
 }
 
 bool IsValidClient(int client)

@@ -924,7 +924,7 @@ public int KnifeMenuHandler(Menu menu, MenuAction menuaction, int client, int se
 				int knifeDB = knifeId;
 				if (knifeId == -1)
 				{
-					knifeId = GetRandomKnife();
+					knifeId = GetRandomKnife(client);
 				}
 				
 				Action action = Plugin_Continue;
