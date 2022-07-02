@@ -41,7 +41,7 @@ public Plugin myinfo =
 	name = "Weapons & Knives",
 	author = "kgns | oyunhost.net",
 	description = "All in one CS:GO weapon skin management",
-	version = "1.7.6",
+	version = "1.7.7",
 	url = "https://github.com/kgns"
 };
 
