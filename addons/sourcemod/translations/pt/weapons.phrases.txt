@@ -96,13 +96,17 @@
 	{
 		"pt"	"★ Sua própia faca"
 	}
+	"RandomKnife"
+	{
+		"en"	"★ Faca Aleatória"
+	}
 	"SetSkin"
 	{
 		"pt"	"Escolha uma Skin"
 	}
 	"SetFloat"
 	{
-		"pt"	"Condição da Arma: "
+		"pt"	"Desgaste da Arma: "
 	}
 	"StatTrak"
 	{
@@ -426,7 +430,7 @@
 	}
 	"SeedReset"
 	{
-		"pt"	"Seed reseted."
+		"pt"	"Seed resetada."
 	}
 	"ResetSeed"
 	{
