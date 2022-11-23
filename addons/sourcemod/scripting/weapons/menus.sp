@@ -95,6 +95,7 @@ public Action WeaponsMenuTimer(Handle timer, DataPack pack)
 			menu.DisplayAt(clientIndex, menuSelectionPosition, menuTime);
 		}
 	}
+	return Plugin_Continue;
 }
 
 public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selection)
@@ -170,6 +171,7 @@ public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selec
 			delete menu;
 		}
 	}
+	return 0;
 }
 
 public Action StatTrakMenuTimer(Handle timer, int userid)
@@ -183,6 +185,7 @@ public Action StatTrakMenuTimer(Handle timer, int userid)
 			CreateWeaponMenu(clientIndex).Display(clientIndex, menuTime);
 		}
 	}
+	return Plugin_Continue;
 }
 
 Menu CreateFloatMenu(int client)
@@ -279,6 +282,7 @@ public int FloatMenuHandler(Menu menu, MenuAction action, int client, int select
 			delete menu;
 		}
 	}
+	return 0;
 }
 
 public Action FloatTimer(Handle timer, DataPack pack)
@@ -300,6 +304,7 @@ public Action FloatTimer(Handle timer, DataPack pack)
 	}
 	
 	g_FloatTimer[clientIndex] = INVALID_HANDLE;
+	return Plugin_Continue;
 }
 
 Menu CreateSeedMenu(int client)
@@ -410,6 +415,7 @@ public int SeedMenuHandler(Menu menu, MenuAction action, int client, int selecti
 			delete menu;
 		}
 	}
+	return 0;
 }
 
 public Action SeedMenuTimer(Handle timer, int userid)
@@ -423,6 +429,7 @@ public Action SeedMenuTimer(Handle timer, int userid)
 			CreateSeedMenu(clientIndex).Display(clientIndex, menuTime);
 		}
 	}
+	return Plugin_Continue;
 }
 
 Menu CreateNameTagMenu(int client)
@@ -511,6 +518,7 @@ public int NameTagMenuHandler(Menu menu, MenuAction action, int client, int sele
 			delete menu;
 		}
 	}
+	return 0;
 }
 
 /* NAMETAGCOLOR
@@ -668,6 +676,7 @@ public int AllWeaponsMenuHandler(Menu menu, MenuAction action, int client, int s
 			delete menu;
 		}
 	}
+	return 0;
 }
 
 Menu CreateWeaponMenu(int client)
@@ -763,6 +772,7 @@ public int MainMenuHandler(Menu menu, MenuAction action, int client, int selecti
 			delete menu;
 		}
 	}
+	return 0;
 }
 
 Menu CreateMainMenu(int client)
@@ -943,7 +953,7 @@ public int KnifeMenuHandler(Menu menu, MenuAction menuaction, int client, int se
 
 				if(action >= Plugin_Handled)
 				{
-					return;
+					return 0;
 				}
 				
 				g_iKnife[client] = knifeDB;
@@ -978,6 +988,7 @@ public int KnifeMenuHandler(Menu menu, MenuAction menuaction, int client, int se
 			delete menu;
 		}
 	}
+	return 0;
 }
 
 Menu CreateLanguageMenu(int client)
@@ -1018,4 +1029,5 @@ public int LanguageMenuHandler(Menu menu, MenuAction action, int client, int sel
 			delete menu;
 		}
 	}
+	return 0;
 }

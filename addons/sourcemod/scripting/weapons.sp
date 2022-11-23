@@ -142,6 +142,10 @@ public void OnPluginStart()
 public void OnMapStart()
 {
 	AddFileToDownloadsTable("materials/panorama/images/icons/equipment/knife_ghost.svg");
+	AddFileToDownloadsTable("models/weapons/w_knife_ghost_dropped.vvd");
+	AddFileToDownloadsTable("models/weapons/w_knife_ghost_dropped.phy");
+	AddFileToDownloadsTable("models/weapons/w_knife_ghost_dropped.mdl");
+	AddFileToDownloadsTable("models/weapons/w_knife_ghost_dropped.dx90.vtx");
 }
 
 public void OnLibraryAdded(const char[] name)
@@ -431,4 +435,5 @@ public Action ReserveAmmoTimer(Handle timer, DataPack pack)
 	{
 		SetEntData(clientIndex, offset, ammo, 4, true);
 	}
+	return Plugin_Continue;
 }
