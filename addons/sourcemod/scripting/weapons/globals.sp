@@ -95,6 +95,7 @@ Handle g_FloatTimer[MAXPLAYERS+1] = { INVALID_HANDLE, ... };
 
 bool g_bWaitingForNametag[MAXPLAYERS+1] = { false, ... };
 bool g_bWaitingForSeed[MAXPLAYERS+1] = { false, ... };
+bool g_bWaitingForFloat[MAXPLAYERS+1] = { false, ... };
 int g_iSeedRandom[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 
 int g_iKnife[MAXPLAYERS+1] = { 0, ... };

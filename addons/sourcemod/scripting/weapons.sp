@@ -302,6 +302,17 @@ public Action CommandNameTag(int client, int args)
 	return Plugin_Handled;
 }
 
+public Action CommandCustomFloat(int client, int args)
+{
+	if(!g_bEnableFloat)
+	{
+		ReplyToCommand(client, " %s \x02%T", g_ChatPrefix, "FloatDisabled", client);
+		return Plugin_Handled;
+	}
+	ReplyToCommand(client, " %s \x04%T", g_ChatPrefix, "FloatExplanation", client);
+	return Plugin_Handled;
+}
+
 void SetWeaponProps(int client, int entity)
 {
 	int index = GetWeaponIndex(entity);

@@ -202,6 +202,9 @@ Menu CreateFloatMenu(int client)
 	Format(buffer, sizeof(buffer), "%T", "Decrease", client, g_iFloatIncrementPercentage);
 	menu.AddItem("decrease", buffer, wear == 0 ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 	
+	Format(buffer, sizeof(buffer), "%T", "CustomFloat", client);
+	menu.AddItem("custom", buffer, ITEMDRAW_DEFAULT);
+	
 	menu.ExitBackButton = true;
 	
 	return menu;
@@ -260,6 +263,11 @@ public int FloatMenuHandler(Menu menu, MenuAction action, int client, int select
 					{
 						CreateFloatMenu(client).Display(client, menuTime);
 					}
+				}
+				else if(StrEqual(buffer, "custom"))
+				{
+					g_bWaitingForFloat[client] = true;
+					PrintToChat(client, " %s \x04%t", g_ChatPrefix, "CustomFloatInstruction");
 				}
 			}
 		}

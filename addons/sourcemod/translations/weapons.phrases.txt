@@ -28,6 +28,26 @@
 	{
 		"en"	"Decrease by %d%%"
 	}
+	"CustomFloat"
+	{
+		"en"	"Input a custom float"
+	}
+	"CustomFloatInstruction"
+	{
+		"en"	"Write your desired float into chat. To abort, type !cancel."
+	}
+	"CustomFloatCancelled"
+	{
+		"en"	"Custom float operation aborted."
+	}
+	"CustomFloatFailed"
+	{
+		"en"	"Invalid float (0-1)."
+	}
+	"CustomFloatSuccess"
+	{
+		"en"	"Custom float successfully applied"
+	}
 	"NameTagInfo"
 	{
 		"en"	"Use !nametag <tag> to choose a name tag for your current weapon!"
@@ -95,10 +115,6 @@
 	"OwnKnife"
 	{
 		"en"	"★ Your own knife"
-	}
-	"RandomKnife"
-	{
-		"en"	"★ Random knife"
 	}
 	"SetSkin"
 	{
