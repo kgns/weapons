@@ -92,6 +92,7 @@ public void OnClientPostAdminCheck(int client)
 		GetPlayerData(client);
 		QueryClientConVar(client, "cl_language", ConVarCallBack);
 	}
+	SDKHook(client, SDKHook_WeaponEquip, OnWeaponEquip);
 }
 
 public void ConVarCallBack(QueryCookie cookie, int client, ConVarQueryResult result, const char[] cvarName, const char[] cvarValue)
