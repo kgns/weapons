@@ -71,7 +71,7 @@ public Action OnWeaponEquip(int client, int iWeapon)
 		if(g_iKnife[client]!=0){
 			SetEntProp(iWeapon, Prop_Send, "m_iItemDefinitionIndex", g_iWeaponDefIndex[g_iKnife[client]]);
 			SetEntProp(iWeapon, Prop_Send, "m_iItemIDLow", -1);
-			SetEntProp(iWeapon, Prop_Send, "m_nFallbackPaintKit", g_iSkins[client][g_iKnife[client]]);
+			SetEntProp(iWeapon, Prop_Send, "m_nFallbackPaintKit", g_iSkins[client][g_iKnife[client]]==0?1:g_iSkins[client][g_iKnife[client]]);
 		}
 	}
 }
