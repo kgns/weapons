@@ -82,7 +82,7 @@ public void ReadConfig()
 			for (int k = 0; k < sizeof(g_WeaponClasses); k++)
 			{
 				Format(weaponTemp, sizeof(weaponTemp), "%s;", g_WeaponClasses[k]);
-				if(StrContains(classes, weaponTemp) > -1)
+				if(g_bAllSkins || (!g_bAllSkins && StrContains(classes, weaponTemp) > -1))
 				{
 					menuWeapons[langCounter][k].AddItem(index, name);
 				}
