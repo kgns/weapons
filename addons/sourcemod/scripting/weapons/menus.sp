@@ -624,6 +624,7 @@ Menu CreateAllWeaponsMenu(int client)
 	char name[32];
 	for (int i = 0; i < sizeof(g_WeaponClasses); i++)
 	{
+		if (!g_bEnableC4 && StrEqual(g_WeaponClasses[i], "weapon_c4"))	continue;
 		Format(name, sizeof(name), "%T", g_WeaponClasses[i], client);
 		menu.AddItem(g_WeaponClasses[i], name);
 	}
@@ -789,6 +790,7 @@ Menu CreateMainMenu(int client)
 			int weaponEntity = GetEntPropEnt(client, Prop_Send, "m_hMyWeapons", i);
 			if(weaponEntity != -1 && GetWeaponClass(weaponEntity, weaponClass, sizeof(weaponClass)))
 			{
+				if (!g_bEnableC4 && StrEqual(weaponClass, "weapon_c4"))	continue;
 				Format(weaponName, sizeof(weaponName), "%T", weaponClass, client);
 				menu.AddItem(weaponClass, weaponName, (IsKnifeClass(weaponClass) && g_iKnife[client] == 0) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 			}
