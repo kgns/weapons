@@ -63,6 +63,76 @@ public int WeaponsMenuHandler(Menu menu, MenuAction action, int client, int sele
 					Format(display, sizeof(display), "%T", "RandomSkin", client);
 					return RedrawMenuItem(display);
 				}
+				else if (StrEqual(info, "-2"))
+				{
+					Format(display, sizeof(display), "%T", "RandomAllSkin", client);
+					return RedrawMenuItem(display);
+				}
+			}
+		}
+		case MenuAction_Cancel:
+		{
+			if (IsClientInGame(client) && selection == MenuCancel_ExitBack)
+			{
+				int menuTime;
+				if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+				{
+					CreateWeaponMenu(client).Display(client, menuTime);
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+public int WeaponsMenuAllHandler(Menu menu, MenuAction action, int client, int selection)
+{
+	switch(action)
+	{
+		case MenuAction_Select:
+		{
+			if(IsClientInGame(client))
+			{
+				int index = g_iIndex[client];
+				
+				char skinIdStr[32];
+				menu.GetItem(selection, skinIdStr, sizeof(skinIdStr));
+				int skinId = StringToInt(skinIdStr);
+				
+				g_iSkins[client][index] = skinId;
+				char updateFields[256];
+				char weaponName[32];
+				RemoveWeaponPrefix(g_WeaponClasses[index], weaponName, sizeof(weaponName));
+				Format(updateFields, sizeof(updateFields), "%s = %d", weaponName, skinId);
+				UpdatePlayerData(client, updateFields);
+				
+				RefreshWeapon(client, index);
+				
+				DataPack pack;
+				CreateDataTimer(0.5, WeaponsMenuTimer, pack);
+				pack.WriteCell(menu);
+				pack.WriteCell(GetClientUserId(client));
+				pack.WriteCell(GetMenuSelectionPosition());
+			}
+		}
+		case MenuAction_DisplayItem:
+		{
+			if(IsClientInGame(client))
+			{
+				char info[32];
+				char display[64];
+				menu.GetItem(selection, info, sizeof(info));
+				
+				if (StrEqual(info, "0"))
+				{
+					Format(display, sizeof(display), "%T", "DefaultSkin", client);
+					return RedrawMenuItem(display);
+				}
+				else if (StrEqual(info, "-2"))
+				{
+					Format(display, sizeof(display), "%T", "RandomSkin", client);
+					return RedrawMenuItem(display);
+				}
 			}
 		}
 		case MenuAction_Cancel:
@@ -113,6 +183,14 @@ public int WeaponMenuHandler(Menu menu, MenuAction action, int client, int selec
 					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
 					{
 						menuWeapons[g_iClientLanguage[client]][g_iIndex[client]].Display(client, menuTime);
+					}
+				}
+				if(StrEqual(buffer, "skinall"))
+				{
+					int menuTime;
+					if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+					{
+						menuWeaponsAll[g_iClientLanguage[client]][g_iIndex[client]].Display(client, menuTime);
 					}
 				}
 				else if(StrEqual(buffer, "float"))
@@ -682,6 +760,11 @@ Menu CreateWeaponMenu(int client)
 	
 	Format(buffer, sizeof(buffer), "%T", "SetSkin", client);
 	menu.AddItem("skin", buffer);
+
+	if(g_bAllSkins) {
+		Format(buffer, sizeof(buffer), "%T (%T)", "SetSkin", client, "AllSkins", client);
+		menu.AddItem("skinall", buffer);
+	}
 
 	bool weaponHasSkin = (g_iSkins[client][index] != 0);
 	

@@ -125,6 +125,7 @@ char g_MigrationWeapons[][] = {
 char g_Language[MAX_LANG][32];
 int g_iClientLanguage[MAXPLAYERS+1];
 Menu menuWeapons[MAX_LANG][sizeof(g_WeaponClasses)];
+Menu menuWeaponsAll[MAX_LANG][sizeof(g_WeaponClasses)];
 
 StringMap g_smWeaponIndex;
 StringMap g_smWeaponDefIndex;

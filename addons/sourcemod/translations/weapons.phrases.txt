@@ -104,6 +104,10 @@
 	{
 		"en"	"Choose Skin"
 	}
+	"AllSkins"
+	{
+		"en"	"All Skins"
+	}
 	"SetFloat"
 	{
 		"en"	"Weapon Condition: "
