@@ -22,7 +22,7 @@ char g_WeaponClasses[][] = {
 /*28*/ "weapon_ssg08", /*29*/ "weapon_aug", /*30*/ "weapon_sg556", /*31*/ "weapon_scar20", /*32*/ "weapon_g3sg1", /*33*/ "weapon_knife_karambit", /*34*/ "weapon_knife_m9_bayonet", /*35*/ "weapon_bayonet", 
 /*36*/ "weapon_knife_survival_bowie", /*37*/ "weapon_knife_butterfly", /*38*/ "weapon_knife_flip", /*39*/ "weapon_knife_push", /*40*/ "weapon_knife_tactical", /*41*/ "weapon_knife_falchion", /*42*/ "weapon_knife_gut",
 /*43*/ "weapon_knife_ursus", /*44*/ "weapon_knife_gypsy_jackknife", /*45*/ "weapon_knife_stiletto", /*46*/ "weapon_knife_widowmaker", /*47*/ "weapon_mp5sd", /*48*/ "weapon_knife_css", /*49*/ "weapon_knife_cord", 
-/*50*/ "weapon_knife_canis", /*51*/ "weapon_knife_outdoor", /*52*/ "weapon_knife_skeleton"
+/*50*/ "weapon_knife_canis", /*51*/ "weapon_knife_outdoor", /*52*/ "weapon_knife_skeleton", /*53*/ "weapon_c4"
 };
 
 int g_iWeaponDefIndex[] = {
@@ -32,7 +32,7 @@ int g_iWeaponDefIndex[] = {
 /*28*/ 40, /*29*/ 8, /*30*/ 39, /*31*/ 38, /*32*/ 11, /*33*/ 507, /*34*/ 508, /*35*/ 500, 
 /*36*/ 514, /*37*/ 515, /*38*/ 505, /*39*/ 516, /*40*/ 509, /*41*/ 512, /*42*/ 506,
 /*43*/ 519, /*44*/ 520, /*45*/ 522, /*46*/ 523, /*47*/ 23, /*48*/ 503, /*49*/ 517,
-/*50*/ 518, /*51*/ 521, /*52*/ 525
+/*50*/ 518, /*51*/ 521, /*52*/ 525, /*53*/ 49
 };
 
 int g_iKnifeIndices[] = {
@@ -83,6 +83,12 @@ int g_iGracePeriod;
 ConVar g_Cvar_InactiveDays;
 int g_iGraceInactiveDays;
 
+ConVar g_Cvar_EnableC4;
+int g_bEnableC4;
+
+ConVar g_Cvar_EnableAllSkins;
+int g_bAllSkins;
+
 int g_iSkins[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 int g_iStatTrak[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
 int g_iStatTrakCount[MAXPLAYERS+1][sizeof(g_WeaponClasses)];
@@ -120,6 +126,7 @@ char g_MigrationWeapons[][] = {
 char g_Language[MAX_LANG][32];
 int g_iClientLanguage[MAXPLAYERS+1];
 Menu menuWeapons[MAX_LANG][sizeof(g_WeaponClasses)];
+Menu menuWeaponsAll[MAX_LANG][sizeof(g_WeaponClasses)];
 
 StringMap g_smWeaponIndex;
 StringMap g_smWeaponDefIndex;

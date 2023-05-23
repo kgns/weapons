@@ -124,6 +124,10 @@
 	{
 		"en"	"Choose Skin"
 	}
+	"AllSkins"
+	{
+		"en"	"All Skins"
+	}
 	"SetFloat"
 	{
 		"en"	"Weapon Condition: "
@@ -159,6 +163,10 @@
 	"weapon_m4a1_silencer"
 	{
 		"en"	"M4A1-S"
+	}
+	"weapon_c4"
+	{
+		"en"	"C4"
 	}
 	"weapon_cz75a"
 	{

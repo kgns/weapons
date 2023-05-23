@@ -485,7 +485,14 @@ void CreateMainTable(bool mysql, bool recreate = false)
 			knife_skeleton_trak int(1) NOT NULL DEFAULT '0', 				\
 			knife_skeleton_trak_count int(10) NOT NULL DEFAULT '0', 		\
 			knife_skeleton_tag varchar(256) NOT NULL DEFAULT '', 			\
-			knife_skeleton_seed int(10) NOT NULL DEFAULT '-1')");
+			knife_skeleton_seed int(10) NOT NULL DEFAULT '-1', ");
+	index += FormatEx(createQuery[index], sizeof(createQuery) - index, "	\
+			c4 int(4) NOT NULL DEFAULT '0', 						\
+			c4_float decimal(3,2) NOT NULL DEFAULT '0.0',			\
+			c4_trak int(1) NOT NULL DEFAULT '0', 					\
+			c4_trak_count int(10) NOT NULL DEFAULT '0', 			\
+			c4_tag varchar(256) NOT NULL DEFAULT '', 				\
+			c4_seed int(10) NOT NULL DEFAULT '-1')");
 	
 	if (mysql)
 	{
@@ -552,7 +559,10 @@ public void T_ReCreateMainTableCallback(Database database, DBResultSet results, 
 			knife_gypsy_jackknife_trak_count, knife_gypsy_jackknife_tag, knife_stiletto, knife_stiletto_float, knife_stiletto_trak, 		\
 			knife_stiletto_trak_count, knife_stiletto_tag, knife_widowmaker, knife_widowmaker_float, knife_widowmaker_trak, 				\
 			knife_widowmaker_trak_count, knife_widowmaker_tag, mp5sd, mp5sd_float, mp5sd_trak, mp5sd_trak_count, mp5sd_tag, knife_css, 		\
-			knife_css_float, knife_css_trak, knife_css_trak_count, knife_css_tag, knife_css_seed)											\
+			knife_css_float, knife_css_trak, knife_css_trak_count, knife_css_tag, knife_css_seed, ");
+		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, " \
+			c4, 		\
+			c4_float, c4_trak, c4_trak_count, c4_tag, c4_seed) \
 			SELECT * FROM %sweapons_tmp", g_TablePrefix);
 		
 		db.Query(T_MigrateOldDataCallback, migrateQuery, mysql, DBPrio_High);
@@ -609,6 +619,7 @@ public void T_CreateMainTableCallback(Database database, DBResultSet results, co
 	{
 		g_iMigrationStep = 0;
 		AddWeaponColumns(mysql, "knife_ursus", false);
+		AddWeaponColumns(mysql, "c4", true);
 		
 		char createQuery[512];
 		Format(createQuery, sizeof(createQuery), "			\
@@ -695,7 +706,8 @@ public void T_SeedColumnCallback(Database database, DBResultSet results, const c
 					ADD COLUMN knife_gypsy_jackknife_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_gypsy_jackknife_tag,	\
 					ADD COLUMN knife_stiletto_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_stiletto_tag,					\
 					ADD COLUMN knife_widowmaker_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_widowmaker_tag,				\
-					ADD COLUMN mp5sd_seed int(10) NOT NULL DEFAULT '-1' AFTER mp5sd_tag");
+					ADD COLUMN mp5sd_seed int(10) NOT NULL DEFAULT '-1' AFTER mp5sd_tag,				\
+					ADD COLUMN c4_seed int(10) NOT NULL DEFAULT '-1' AFTER c4_tag");
 			
 			db.Query(T_SeedConfirmationCallback, seedColumnsQuery, mysql, DBPrio_High);
 		}
