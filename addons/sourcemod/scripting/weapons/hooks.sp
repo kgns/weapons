@@ -141,6 +141,46 @@ public Action ChatListener(int client, const char[] command, int args)
 		
 		return Plugin_Handled;
 	}
+	else if (g_bWaitingForFloat[client] && IsValidClient(client) && g_iIndex[client] > -1 && !IsChatTrigger())
+	{
+		g_bWaitingForFloat[client] = false;
+		
+		float customFloat;
+		if (StrEqual(msg, "!cancel") || StrEqual(msg, "!iptal") || StrEqual(msg, ""))
+		{
+			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "CustomFloatCancelled");
+			return Plugin_Handled;
+		}
+		else if ((customFloat = StringToFloat(msg)) < 0 || customFloat >= 1)
+		{
+			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "CustomFloatFailed");
+			return Plugin_Handled;
+		}
+		g_fFloatValue[client][g_iIndex[client]] = customFloat;
+		if(g_fFloatValue[client][g_iIndex[client]] < 0.0)
+		{
+			g_fFloatValue[client][g_iIndex[client]] = 0.0;
+		}
+		if(g_FloatTimer[client] != INVALID_HANDLE)
+		{
+			KillTimer(g_FloatTimer[client]);
+			g_FloatTimer[client] = INVALID_HANDLE;
+		}
+		
+		DataPack pack;
+		g_FloatTimer[client] = CreateDataTimer(1.0, FloatTimer, pack);
+		pack.WriteCell(GetClientUserId(client));
+		pack.WriteCell(g_iIndex[client]);
+		int menuTime;
+		if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+		{
+			CreateFloatMenu(client).Display(client, menuTime);
+		}
+		
+		PrintToChat(client, " %s \x04%t: \x01%f", g_ChatPrefix, "CustomFloatSuccess", customFloat);
+		
+		return Plugin_Handled;
+	}
 	
 	return Plugin_Continue;
 }

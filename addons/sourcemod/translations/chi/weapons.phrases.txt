@@ -28,6 +28,26 @@
 	{
 		"chi"	"减少 %d%%"
 	}
+	"CustomFloat"
+	{
+		"chi"	"输入指定磨损"
+	}
+	"CustomFloatInstruction"
+	{
+		"chi"	"请将你希望设置的磨损输入至聊天框。如需取消，请输入 !cancel 。"
+	}
+	"CustomFloatCancelled"
+	{
+		"chi"	"输入磨损已取消。"
+	}
+	"CustomFloatFailed"
+	{
+		"chi"	"无效的磨损 (0-1)。"
+	}
+	"CustomFloatSuccess"
+	{
+		"chi"	"指定磨损已设置"
+	}
 	"NameTagColor"
 	{
 		"chi"	"设置名称标签颜色"
