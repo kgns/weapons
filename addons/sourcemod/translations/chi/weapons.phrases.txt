@@ -56,6 +56,10 @@
 	{
 		"chi"	"名称标签已禁用"
 	}
+	"SearchDisabled"
+	{
+		"chi"	"搜索功能已禁用"
+	}
 	"SearchApplyAll"
 	{
 		"chi"	"应用所有皮肤"

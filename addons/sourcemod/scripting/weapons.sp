@@ -206,14 +206,21 @@ public Action CommandWeaponSkins(int client, int args)
 		{
 			if (args > 0) {
 				
-				char searchSkinName[32];
-				GetCmdArgString(searchSkinName, sizeof(searchSkinName));
-				
-				Menu resultMenu = SearchSkins(client, searchSkinName);
-				menuPlayerSearchTemp[client] = resultMenu;
-				resultMenu.Display(client, menuTime);
-				
+				if (g_bEnableSearch)
+				{
+					char searchSkinName[32];
+					GetCmdArgString(searchSkinName, sizeof(searchSkinName));
+					
+					Menu resultMenu = SearchSkins(client, searchSkinName);
+					menuPlayerSearchTemp[client] = resultMenu;
+					resultMenu.Display(client, menuTime);
+				}
+				else
+				{
+					PrintToChat(client, " %s \x02%T", g_ChatPrefix, "SearchDisabled");
+				}
 				return Plugin_Handled;
+				
 			}
 			
 			CreateMainMenu(client).Display(client, menuTime);

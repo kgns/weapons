@@ -68,6 +68,10 @@
 	{
 		"en"	"Use: !nametag <tag>"
 	}
+	"SearchDisabled"
+	{
+		"en"	"Skin search is disabled at the moment."
+	}
 	"SearchApplyAll"
 	{
 		"en"	"Apply to all"
