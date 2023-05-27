@@ -56,6 +56,18 @@
 	{
 		"chi"	"名称标签已禁用"
 	}
+	"SearchApplyAll"
+	{
+		"chi"	"应用所有皮肤"
+	}
+	"SearchApplyCurrent"
+	{
+		"chi"	"应用到当前武器"
+	}
+	"SearchApplyCurrentFailed"
+	{
+		"chi"	"您的武器没有该皮肤。"
+	}
 	"ChooseLanguage"
 	{
 		"chi"	"请选择皮肤名称显示语言："

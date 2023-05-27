@@ -44,6 +44,7 @@ public void OnConfigsExecuted()
 	g_bEnableNameTag = g_Cvar_EnableNameTag.BoolValue;
 	g_bEnableStatTrak = g_Cvar_EnableStatTrak.BoolValue;
 	g_bEnableSeed = g_Cvar_EnableSeed.BoolValue;
+	g_bEnableSearch = g_Cvar_EnableSearch.BoolValue;
 	g_fFloatIncrementSize = g_Cvar_FloatIncrementSize.FloatValue;
 	g_iFloatIncrementPercentage = RoundFloat(g_fFloatIncrementSize * 100.0);
 	g_bOverwriteEnabled = g_Cvar_EnableWeaponOverwrite.BoolValue;
