@@ -1,17 +1,17 @@
 /*  CS:GO Weapons&Knives SourceMod Plugin
  *
  *  Copyright (C) 2017 Kağan 'kgns' Üstüngel
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option) 
+ * Software Foundation, either version 3 of the License, or (at your option)
  * any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with 
+ * You should have received a copy of the GNU General Public License along with
  * this program. If not, see http://www.gnu.org/licenses/.
  */
 
@@ -43,7 +43,7 @@ public void T_GetPlayerDataCallback(Database database, DBResultSet results, cons
 		{
 			if(results.FetchRow())
 			{
-				for(int i = 2, j = 0; j < sizeof(g_WeaponClasses); i += 6, j++) 
+				for(int i = 2, j = 0; j < sizeof(g_WeaponClasses); i += 6, j++)
 				{
 					g_iSkins[clientIndex][j] = results.FetchInt(i);
 					g_fFloatValue[clientIndex][j] = results.FetchFloat(i + 1);
@@ -136,10 +136,10 @@ public void SQLConnectCallback(Database database, const char[] error, any data)
 	{
 		db = database;
 		char dbIdentifier[10];
-	
+
 		db.Driver.GetIdentifier(dbIdentifier, sizeof(dbIdentifier));
 		bool mysql = StrEqual(dbIdentifier, "mysql");
-		
+
 		CreateMainTable(mysql);
 	}
 }
@@ -147,7 +147,7 @@ public void SQLConnectCallback(Database database, const char[] error, any data)
 void CreateMainTable(bool mysql, bool recreate = false)
 {
 	char createQuery[20480];
-	
+
 	int index = 0;
 
 	index += FormatEx(createQuery[index], sizeof(createQuery) - index, "	\
@@ -486,12 +486,12 @@ void CreateMainTable(bool mysql, bool recreate = false)
 			knife_skeleton_trak_count int(10) NOT NULL DEFAULT '0', 		\
 			knife_skeleton_tag varchar(256) NOT NULL DEFAULT '', 			\
 			knife_skeleton_seed int(10) NOT NULL DEFAULT '-1')");
-	
+
 	if (mysql)
 	{
 		 index += FormatEx(createQuery[index], sizeof(createQuery) - index, " ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
 	}
-	
+
 	if (recreate)
 	{
 		db.Query(T_ReCreateMainTableCallback, createQuery, mysql, DBPrio_High);
@@ -511,7 +511,7 @@ public void T_ReCreateMainTableCallback(Database database, DBResultSet results, 
 	else
 	{
 		int index = 0;
-		
+
 		char migrateQuery[8192];
 
 		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																	\
@@ -554,7 +554,7 @@ public void T_ReCreateMainTableCallback(Database database, DBResultSet results, 
 			knife_widowmaker_trak_count, knife_widowmaker_tag, mp5sd, mp5sd_float, mp5sd_trak, mp5sd_trak_count, mp5sd_tag, knife_css, 		\
 			knife_css_float, knife_css_trak, knife_css_trak_count, knife_css_tag, knife_css_seed)											\
 			SELECT * FROM %sweapons_tmp", g_TablePrefix);
-		
+
 		db.Query(T_MigrateOldDataCallback, migrateQuery, mysql, DBPrio_High);
 	}
 }
@@ -568,7 +568,7 @@ public void T_MigrateOldDataCallback(Database database, DBResultSet results, con
 	else
 	{
 		LogMessage("%s Old data has been migrated successfully", (mysql ? "MySQL" : "SQLite"));
-		
+
 		char dropTableQuery[512];
 		Format(dropTableQuery, sizeof(dropTableQuery), "DROP TABLE %sweapons_tmp", g_TablePrefix);
 		db.Query(T_DropOldTableCallback, dropTableQuery, mysql, DBPrio_High);
@@ -609,18 +609,18 @@ public void T_CreateMainTableCallback(Database database, DBResultSet results, co
 	{
 		g_iMigrationStep = 0;
 		AddWeaponColumns(mysql, "knife_ursus", false);
-		
+
 		char createQuery[512];
 		Format(createQuery, sizeof(createQuery), "			\
 			CREATE TABLE %sweapons_timestamps ( 			\
 				steamid varchar(32) NOT NULL PRIMARY KEY, 	\
 				last_seen int(11) NOT NULL)", g_TablePrefix);
-		
+
 		if (mysql)
 		{
 			 Format(createQuery, sizeof(createQuery), "%s ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;", createQuery);
 		}
-		
+
 		db.Query(T_CreateTimestampTableCallback, createQuery, mysql, DBPrio_High);
 	}
 }
@@ -638,11 +638,11 @@ public void T_SeedColumnCallback(Database database, DBResultSet results, const c
 	if (results == null)
 	{
 		LogMessage("%s Attempting to create seed columns", (mysql ? "MySQL" : "SQLite"));
-		
+
 		char seedColumnsQuery[8192];
-		
+
 		int index = 0;
-		
+
 		if (mysql)
 		{
 			index += FormatEx(seedColumnsQuery[index], sizeof(seedColumnsQuery) - index, "										\
@@ -696,7 +696,7 @@ public void T_SeedColumnCallback(Database database, DBResultSet results, const c
 					ADD COLUMN knife_stiletto_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_stiletto_tag,					\
 					ADD COLUMN knife_widowmaker_seed int(10) NOT NULL DEFAULT '-1' AFTER knife_widowmaker_tag,				\
 					ADD COLUMN mp5sd_seed int(10) NOT NULL DEFAULT '-1' AFTER mp5sd_tag");
-			
+
 			db.Query(T_SeedConfirmationCallback, seedColumnsQuery, mysql, DBPrio_High);
 		}
 		else
@@ -828,7 +828,7 @@ public void T_CreateTimestampTableCallback(Database database, DBResultSet result
 		Format(insertQuery, sizeof(insertQuery), "	\
 			INSERT INTO %sweapons_timestamps  		\
 				SELECT steamid, %d FROM %sweapons", g_TablePrefix, GetTime(), g_TablePrefix);
-		
+
 		db.Query(T_InsertTimestampsCallback, insertQuery, mysql, DBPrio_High);
 	}
 }

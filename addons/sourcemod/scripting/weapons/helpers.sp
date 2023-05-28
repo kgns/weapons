@@ -1,17 +1,17 @@
 /*  CS:GO Weapons&Knives SourceMod Plugin
  *
  *  Copyright (C) 2017 Kağan 'kgns' Üstüngel
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option) 
+ * Software Foundation, either version 3 of the License, or (at your option)
  * any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with 
+ * You should have received a copy of the GNU General Public License along with
  * this program. If not, see http://www.gnu.org/licenses/.
  */
 
@@ -155,14 +155,14 @@ bool IsValidWeapon(int weaponEntity)
 	if (weaponEntity > 4096 && weaponEntity != INVALID_ENT_REFERENCE) {
 		weaponEntity = EntRefToEntIndex(weaponEntity);
 	}
-	
+
 	if (!IsValidEdict(weaponEntity) || !IsValidEntity(weaponEntity) || weaponEntity == -1) {
 		return false;
 	}
-	
+
 	char weaponClass[64];
 	GetEdictClassname(weaponEntity, weaponClass, sizeof(weaponClass));
-	
+
 	return StrContains(weaponClass, "weapon_") == 0;
 }
 
@@ -267,7 +267,7 @@ int GetSkinIdFromSkinMenuDisplay(char display[32])
 {
 	Regex regex = CompileRegex(".+ \\((.+)\\)");
 	regex.Match(display);
-	
+
 	char skinIdStr[32];
 	regex.GetSubString(1, skinIdStr, sizeof(skinIdStr));
 	return StringToInt(skinIdStr);
@@ -278,18 +278,18 @@ Menu SearchSkins(int client, char skinName[32])
 	StringMapSnapshot snapshot = g_smSkinMenuMap[g_iClientLanguage[client]].Snapshot();
 	menuPlayerSearchTemp[client] = null;
 	Menu result = new Menu(SearchMenuHandler, MENU_ACTIONS_DEFAULT);
-	
+
 	for (int i = 0; i < snapshot.Length; i++)
 	{
 		char name[32]
 		snapshot.GetKey(i, name, sizeof(name));
-		
+
 		// if current menu is the menu we searched for
 		if (StrContains(skinName, name, false) > -1 || StrContains(name, skinName, false) > -1)
 		{
 			result.AddItem(name, name);
 		}
 	}
-	
+
 	return result;
 }

@@ -1,17 +1,17 @@
 /*  CS:GO Weapons&Knives SourceMod Plugin
  *
  *  Copyright (C) 2017 Kağan 'kgns' Üstüngel
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option) 
+ * Software Foundation, either version 3 of the License, or (at your option)
  * any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with 
+ * You should have received a copy of the GNU General Public License along with
  * this program. If not, see http://www.gnu.org/licenses/.
  */
 
@@ -70,7 +70,7 @@ public Action ChatListener(int client, const char[] command, int args)
 	{
 		return Plugin_Continue;
 	}
-	
+
 	char msg[128];
 	GetCmdArgString(msg, sizeof(msg));
 	StripQuotes(msg);
@@ -81,19 +81,19 @@ public Action ChatListener(int client, const char[] command, int args)
 	else if (g_bWaitingForNametag[client] && IsValidClient(client) && g_iIndex[client] > -1 && !IsChatTrigger())
 	{
 		CleanNameTag(msg, sizeof(msg));
-		
+
 		g_bWaitingForNametag[client] = false;
-		
+
 		if (StrEqual(msg, "!cancel") || StrEqual(msg, "!iptal"))
 		{
 			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "NameTagCancelled");
 			return Plugin_Handled;
 		}
-		
+
 		g_NameTag[client][g_iIndex[client]] = msg;
-		
+
 		RefreshWeapon(client, g_iIndex[client]);
-		
+
 		char updateFields[1024];
 		char escaped[257];
 		db.Escape(msg, escaped, sizeof(escaped));
@@ -101,9 +101,9 @@ public Action ChatListener(int client, const char[] command, int args)
 		RemoveWeaponPrefix(g_WeaponClasses[g_iIndex[client]], weaponName, sizeof(weaponName));
 		Format(updateFields, sizeof(updateFields), "%s_tag = '%s'", weaponName, escaped);
 		UpdatePlayerData(client, updateFields);
-		
+
 		PrintToChat(client, " %s \x04%t: \x01\"%s\"", g_ChatPrefix, "NameTagSuccess", msg);
-		
+
 		/* NAMETAGCOLOR
 		int menuTime;
 		if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
@@ -111,13 +111,13 @@ public Action ChatListener(int client, const char[] command, int args)
 			CreateColorsMenu(client).Display(client, menuTime);
 		}
 		*/
-		
+
 		return Plugin_Handled;
 	}
 	else if (g_bWaitingForSeed[client] && IsValidClient(client) && g_iIndex[client] > -1 && !IsChatTrigger())
 	{
 		g_bWaitingForSeed[client] = false;
-		
+
 		int seedInt;
 		if (StrEqual(msg, "!cancel") || StrEqual(msg, "!iptal") || StrEqual(msg, ""))
 		{
@@ -129,22 +129,22 @@ public Action ChatListener(int client, const char[] command, int args)
 			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "SeedFailed");
 			return Plugin_Handled;
 		}
-		
+
 		g_iWeaponSeed[client][g_iIndex[client]] = seedInt;
 		g_iSeedRandom[client][g_iIndex[client]] = -1;
-		
+
 		RefreshWeapon(client, g_iIndex[client]);
-		
+
 		CreateTimer(0.1, SeedMenuTimer, GetClientUserId(client));
-		
+
 		PrintToChat(client, " %s \x04%t: \x01%i", g_ChatPrefix, "SeedSuccess", seedInt);
-		
+
 		return Plugin_Handled;
 	}
 	else if (g_bWaitingForFloat[client] && IsValidClient(client) && g_iIndex[client] > -1 && !IsChatTrigger())
 	{
 		g_bWaitingForFloat[client] = false;
-		
+
 		float customFloat;
 		if (StrEqual(msg, "!cancel") || StrEqual(msg, "!iptal") || StrEqual(msg, ""))
 		{
@@ -166,7 +166,7 @@ public Action ChatListener(int client, const char[] command, int args)
 			KillTimer(g_FloatTimer[client]);
 			g_FloatTimer[client] = INVALID_HANDLE;
 		}
-		
+
 		DataPack pack;
 		g_FloatTimer[client] = CreateDataTimer(1.0, FloatTimer, pack);
 		pack.WriteCell(GetClientUserId(client));
@@ -176,12 +176,12 @@ public Action ChatListener(int client, const char[] command, int args)
 		{
 			CreateFloatMenu(client).Display(client, menuTime);
 		}
-		
+
 		PrintToChat(client, " %s \x04%t: \x01%f", g_ChatPrefix, "CustomFloatSuccess", customFloat);
-		
+
 		return Plugin_Handled;
 	}
-	
+
 	return Plugin_Continue;
 }
 
@@ -189,28 +189,28 @@ public Action OnTakeDamageAlive(int victim, int &attacker, int &inflictor, float
 {
 	if (float(GetClientHealth(victim)) - damage > 0.0)
 		return Plugin_Continue;
-		
+
 	if (!(damagetype & DMG_SLASH) && !(damagetype & DMG_BULLET))
 		return Plugin_Continue;
-		
+
 	if (!IsValidClient(attacker))
 		return Plugin_Continue;
-		
+
 	if (!IsValidWeapon(weapon))
 		return Plugin_Continue;
-		
+
 	int index = GetWeaponIndex(weapon);
-	
+
 	if (index != -1 && g_iSkins[attacker][index] != 0 && g_iStatTrak[attacker][index] != 1)
 		return Plugin_Continue;
-		
+
 	if (GetEntProp(weapon, Prop_Send, "m_nFallbackStatTrak") == -1)
 		return Plugin_Continue;
-		
+
 	int previousOwner;
 	if ((previousOwner = GetEntPropEnt(weapon, Prop_Send, "m_hPrevOwner")) != INVALID_ENT_REFERENCE && previousOwner != attacker)
 		return Plugin_Continue;
-	
+
 	g_iStatTrakCount[attacker][index]++;
 	/*
 	if (IsKnife(weapon))
