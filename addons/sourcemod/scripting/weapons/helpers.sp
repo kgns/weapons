@@ -290,6 +290,5 @@ Menu SearchSkins(int client, char skinName[32])
 			result.AddItem(name, name);
 		}
 	}
-
 	return result;
 }

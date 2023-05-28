@@ -853,7 +853,6 @@ Menu CreateMainMenu(int client)
 			}
 		}
 	}
-
 	return menu;
 }
 
@@ -992,7 +991,6 @@ Menu CreateLanguageMenu(int client)
 		IntToString(i, buffer, sizeof(buffer));
 		menu.AddItem(buffer, g_Language[i]);
 	}
-
 	return menu;
 }
 
@@ -1228,5 +1226,4 @@ public int SearchMenuHandler(Menu menu, MenuAction menuaction, int client, int s
 			}
 		}
 	}
-
 }

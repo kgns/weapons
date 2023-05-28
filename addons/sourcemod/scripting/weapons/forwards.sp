@@ -61,7 +61,6 @@ public void OnConfigsExecuted()
 			OnClientPutInServer(i);
 		}
 	}
-
 	ReadConfig();
 }
 

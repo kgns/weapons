@@ -514,14 +514,14 @@ public void T_ReCreateMainTableCallback(Database database, DBResultSet results, 
 
 		char migrateQuery[8192];
 
-		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																	\
+		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																\
 			INSERT INTO %sweapons (steamid, knife, awp, awp_float, awp_trak, awp_trak_count, awp_tag, ak47, ak47_float, 					\
 			ak47_trak, ak47_trak_count, ak47_tag, m4a1, m4a1_float, m4a1_trak, m4a1_trak_count, m4a1_tag, m4a1_silencer, 					\
 			m4a1_silencer_float, m4a1_silencer_trak, m4a1_silencer_trak_count, m4a1_silencer_tag, deagle, deagle_float, 					\
 			deagle_trak, deagle_trak_count, deagle_tag, usp_silencer, usp_silencer_float, usp_silencer_trak, 								\
 			usp_silencer_trak_count, usp_silencer_tag, hkp2000, hkp2000_float, hkp2000_trak, hkp2000_trak_count, 							\
 			hkp2000_tag, glock, glock_float, glock_trak, glock_trak_count, glock_tag, elite, elite_float, elite_trak, ", g_TablePrefix);
-		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																	\
+		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																\
 			elite_trak_count, elite_tag, p250, p250_float, p250_trak, p250_trak_count, p250_tag, cz75a, cz75a_float, 						\
 			cz75a_trak, cz75a_trak_count, cz75a_tag, fiveseven, fiveseven_float, fiveseven_trak, fiveseven_trak_count, 						\
 			fiveseven_tag, tec9, tec9_float, tec9_trak, tec9_trak_count, tec9_tag, revolver, revolver_float, revolver_trak, 				\
@@ -529,7 +529,7 @@ public void T_ReCreateMainTableCallback(Database database, DBResultSet results, 
 			xm1014_trak, xm1014_trak_count, xm1014_tag, mag7, mag7_float, mag7_trak, mag7_trak_count, mag7_tag, sawedoff, 					\
 			sawedoff_float, sawedoff_trak, sawedoff_trak_count, sawedoff_tag, m249, m249_float, m249_trak, m249_trak_count, 				\
 			m249_tag, negev, negev_float, negev_trak, negev_trak_count, negev_tag, mp9, mp9_float, mp9_trak, mp9_trak_count, ");
-		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																	\
+		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																\
 			mp9_tag, mac10, mac10_float, mac10_trak, mac10_trak_count, mac10_tag, mp7, mp7_float, mp7_trak, mp7_trak_count, 				\
 			mp7_tag, ump45, ump45_float, ump45_trak, ump45_trak_count, ump45_tag, p90, p90_float, p90_trak, p90_trak_count, 				\
 			p90_tag, bizon, bizon_float, bizon_trak, bizon_trak_count, bizon_tag, famas, famas_float, famas_trak, 							\
@@ -538,7 +538,7 @@ public void T_ReCreateMainTableCallback(Database database, DBResultSet results, 
 			sg556_float, sg556_trak, sg556_trak_count, sg556_tag, scar20, scar20_float, scar20_trak, scar20_trak_count, 					\
 			scar20_tag, g3sg1, g3sg1_float, g3sg1_trak, g3sg1_trak_count, g3sg1_tag, knife_karambit, knife_karambit_float, 					\
 			knife_karambit_trak, knife_karambit_trak_count, knife_karambit_tag, knife_m9_bayonet, knife_m9_bayonet_float, ");
-		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																	\
+		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																\
 			knife_m9_bayonet_trak, knife_m9_bayonet_trak_count, knife_m9_bayonet_tag, bayonet, bayonet_float, bayonet_trak, 				\
 			bayonet_trak_count, bayonet_tag, knife_survival_bowie, knife_survival_bowie_float, knife_survival_bowie_trak, 					\
 			knife_survival_bowie_trak_count, knife_survival_bowie_tag, knife_butterfly, knife_butterfly_float, knife_butterfly_trak, 		\
@@ -546,7 +546,7 @@ public void T_ReCreateMainTableCallback(Database database, DBResultSet results, 
 			knife_flip_tag, knife_push, knife_push_float, knife_push_trak, knife_push_trak_count, knife_push_tag, knife_tactical, 			\
 			knife_tactical_float, knife_tactical_trak, knife_tactical_trak_count, knife_tactical_tag, knife_falchion, 						\
 			knife_falchion_float, knife_falchion_trak, knife_falchion_trak_count, knife_falchion_tag, knife_gut, knife_gut_float, ");
-		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																	\
+		index += FormatEx(migrateQuery[index], sizeof(migrateQuery) - index, "																\
 			knife_gut_trak, knife_gut_trak_count, knife_gut_tag, knife_ursus, knife_ursus_float, knife_ursus_trak, 							\
 			knife_ursus_trak_count, knife_ursus_tag, knife_gypsy_jackknife, knife_gypsy_jackknife_float, knife_gypsy_jackknife_trak, 		\
 			knife_gypsy_jackknife_trak_count, knife_gypsy_jackknife_tag, knife_stiletto, knife_stiletto_float, knife_stiletto_trak, 		\
@@ -645,7 +645,7 @@ public void T_SeedColumnCallback(Database database, DBResultSet results, const c
 
 		if (mysql)
 		{
-			index += FormatEx(seedColumnsQuery[index], sizeof(seedColumnsQuery) - index, "										\
+			index += FormatEx(seedColumnsQuery[index], sizeof(seedColumnsQuery) - index, "									\
 				ALTER TABLE %sweapons																						\
 					ADD COLUMN awp_seed int(10) NOT NULL DEFAULT '-1' AFTER awp_tag,										\
 					ADD COLUMN ak47_seed int(10) NOT NULL DEFAULT '-1' AFTER ak47_tag,										\
@@ -668,7 +668,7 @@ public void T_SeedColumnCallback(Database database, DBResultSet results, const c
 					ADD COLUMN m249_seed int(10) NOT NULL DEFAULT '-1' AFTER m249_tag,										\
 					ADD COLUMN negev_seed int(10) NOT NULL DEFAULT '-1' AFTER negev_tag,									\
 					ADD COLUMN mp9_seed int(10) NOT NULL DEFAULT '-1' AFTER mp9_tag, ", g_TablePrefix);
-			index += FormatEx(seedColumnsQuery[index], sizeof(seedColumnsQuery) - index, "										\
+			index += FormatEx(seedColumnsQuery[index], sizeof(seedColumnsQuery) - index, "									\
 					ADD COLUMN mac10_seed int(10) NOT NULL DEFAULT '-1' AFTER mac10_tag,									\
 					ADD COLUMN mp7_seed int(10) NOT NULL DEFAULT '-1' AFTER mp7_tag,										\
 					ADD COLUMN ump45_seed int(10) NOT NULL DEFAULT '-1' AFTER ump45_tag,									\
