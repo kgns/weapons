@@ -68,6 +68,22 @@
 	{
 		"en"	"Use: !nametag <tag>"
 	}
+	"SearchDisabled"
+	{
+		"en"	"Skin search is disabled at the moment."
+	}
+	"SearchApplyAll"
+	{
+		"en"	"Apply to all"
+	}
+	"SearchApplyCurrent"
+	{
+		"en"	"Apply to current"
+	}
+	"SearchApplyCurrentFailed"
+	{
+		"en"	"Your weapon doesn't have this skin."
+	}
 	"ChooseLanguage"
 	{
 		"en"	"Select language for skin names:"

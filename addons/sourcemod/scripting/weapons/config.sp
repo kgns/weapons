@@ -55,6 +55,9 @@ public void ReadConfig()
 			CloseHandle(kv);
 		}
 		
+		delete g_smSkinMenuMap[langCounter];
+		g_smSkinMenuMap[langCounter] = new StringMap();
+		
 		for (int k = 0; k < sizeof(g_WeaponClasses); k++)
 		{
 			if(menuWeapons[langCounter][k] != null)
@@ -70,6 +73,7 @@ public void ReadConfig()
 		
 		int counter = 0;
 		char weaponTemp[20];
+		
 		do {
 			char name[64];
 			char index[5];
@@ -79,14 +83,67 @@ public void ReadConfig()
 			KvGetString(kv, "classes", classes, sizeof(classes));
 			KvGetString(kv, "index", index, sizeof(index));
 			
+			Menu menuSkins[MAX_SKIN];
+			
 			for (int k = 0; k < sizeof(g_WeaponClasses); k++)
 			{
 				Format(weaponTemp, sizeof(weaponTemp), "%s;", g_WeaponClasses[k]);
 				if(StrContains(classes, weaponTemp) > -1)
 				{
 					menuWeapons[langCounter][k].AddItem(index, name);
+					
+					if (g_bEnableSearch)
+					{
+						if (menuSkins[counter] == null)
+						{
+							menuSkins[counter] = new Menu(SkinsMenuHandler, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
+							menuSkins[counter].SetTitle(name);
+							menuSkins[counter].AddItem("-1", "Apply all");
+							menuSkins[counter].AddItem("-2", "Apply current");
+							menuSkins[counter].ExitBackButton = true;
+						}
+						
+						char weaponName[32];
+						Format(weaponName, sizeof(weaponName), "%T (%s)", g_WeaponClasses[k], LANG_SERVER, index);
+						char weaponIndexStr[32];
+						Format(weaponIndexStr, sizeof(weaponIndexStr), "%d", k);
+						menuSkins[counter].AddItem(weaponIndexStr, weaponName);
+					}
+					
 				}
 			}
+			
+			if (g_bEnableSearch)
+			{
+				for (int j = 0; j < MAX_SKIN; j++)
+				{
+					Menu currentMenu = menuSkins[j];
+					if (currentMenu == null)continue;
+					
+					char currentMenuName[32];
+					currentMenu.GetTitle(currentMenuName, sizeof(currentMenuName));
+					if (g_smSkinMenuMap[langCounter].ContainsKey(name))
+					{
+						Menu fatherMenu;
+						g_smSkinMenuMap[langCounter].GetValue(name, fatherMenu);
+						for (int l = 2; l < currentMenu.ItemCount; l++)
+						{
+							char info[32];
+							char display[64];
+							int a;
+							currentMenu.GetItem(l, info, sizeof(info), a, display, sizeof(display));
+							fatherMenu.AddItem(info, display);
+						}
+						
+						delete currentMenu;
+					}
+					else
+					{
+						g_smSkinMenuMap[langCounter].SetValue(name, currentMenu);
+					}
+				}
+			}
+			
 			counter++;
 		} while (KvGotoNextKey(kv));
 		

@@ -1017,3 +1017,216 @@ public int LanguageMenuHandler(Menu menu, MenuAction action, int client, int sel
 		}
 	}
 }
+
+public int SkinsMenuHandler(Menu menu, MenuAction action, int client, int selection) 
+{
+	switch(action)
+	{
+		case MenuAction_Select:
+		{
+			if(IsClientInGame(client))
+			{
+				if (selection == 0)
+				{
+					// Apply to all
+					for (int i = 2; i < menu.ItemCount; i++) {
+						char weaponTempIndexStr[32];
+						char display[32];
+						int a;
+						menu.GetItem(i, weaponTempIndexStr, sizeof(weaponTempIndexStr), a, display, sizeof(display));
+						int tempIndex = StringToInt(weaponTempIndexStr);
+						int skinId = GetSkinIdFromSkinMenuDisplay(display);
+						
+						g_iSkins[client][tempIndex] = skinId;
+						
+						char updateFields[256];
+						char weaponName[32];
+						RemoveWeaponPrefix(g_WeaponClasses[tempIndex], weaponName, sizeof(weaponName));
+						Format(updateFields, sizeof(updateFields), "%s = %d", weaponName, skinId);
+						UpdatePlayerData(client, updateFields);
+						
+						RefreshWeapon(client, tempIndex);
+					}
+					
+					DataPack pack;
+					CreateDataTimer(0.5, SkinsMenuTimer, pack);
+					pack.WriteCell(menu);
+					pack.WriteCell(GetClientUserId(client));
+					pack.WriteCell(GetMenuSelectionPosition());
+					
+					return 0;
+				}
+				else if (selection == 1)
+				{
+					// Apply to current
+					
+					int weaponEntity = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon", 0);
+					char weaponClass[32];
+					if (weaponEntity != -1 && GetWeaponClass(weaponEntity, weaponClass, sizeof(weaponClass)))
+					{
+						int index;
+						g_smWeaponIndex.GetValue(weaponClass, index);
+						
+						for (int i = 2; i < menu.ItemCount; i++) {
+						
+							char weaponTempIndexStr[32];
+							char display[32];
+							int a;
+							menu.GetItem(i, weaponTempIndexStr, sizeof(weaponTempIndexStr), a, display, sizeof(display));
+							
+							int tempIndex = StringToInt(weaponTempIndexStr);
+							
+							if (tempIndex == index)
+							{
+								int skinId = GetSkinIdFromSkinMenuDisplay(display);
+								
+								g_iSkins[client][tempIndex] = skinId;
+								
+								char updateFields[256];
+								char weaponName[32];
+								RemoveWeaponPrefix(g_WeaponClasses[tempIndex], weaponName, sizeof(weaponName));
+								Format(updateFields, sizeof(updateFields), "%s = %d", weaponName, skinId);
+								UpdatePlayerData(client, updateFields);
+								
+								RefreshWeapon(client, tempIndex);
+								
+								DataPack pack;
+								CreateDataTimer(0.5, SkinsMenuTimer, pack);
+								pack.WriteCell(menu);
+								pack.WriteCell(GetClientUserId(client));
+								pack.WriteCell(GetMenuSelectionPosition());
+								
+								return 0;
+							}
+						}
+						
+						// if didn't find
+						PrintToChat(client, " %s \x02%t", g_ChatPrefix, "SearchApplyCurrentFailed");
+						
+					}
+				}
+				else {
+					/*
+					TODO:
+					this enable player to apply selected skin to the weapon in player hand
+					the weapon may not originally have this skin,
+					since PR #271 added a cvar "sm_weapons_enable_all_skins",
+					so its necessary to add a check after #271 is merged
+					*/
+					char weaponIndexStr[32];
+					char display[32];
+					int a;
+					menu.GetItem(selection, weaponIndexStr, sizeof(weaponIndexStr), a, display, sizeof(display));
+					
+					int weaponEntity = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon", 0);
+					char weaponClass[32];
+					if (weaponEntity != -1 && GetWeaponClass(weaponEntity, weaponClass, sizeof(weaponClass)))
+					{
+						int index;
+						g_smWeaponIndex.GetValue(weaponClass, index);
+						int skinId = GetSkinIdFromSkinMenuDisplay(display);
+						
+						g_iSkins[client][index] = skinId;
+					
+						char updateFields[256];
+						char weaponName[32];
+						RemoveWeaponPrefix(g_WeaponClasses[index], weaponName, sizeof(weaponName));
+						Format(updateFields, sizeof(updateFields), "%s = %d", weaponName, skinId);
+						UpdatePlayerData(client, updateFields);
+						
+						RefreshWeapon(client, index);
+					}
+				}
+				
+				DataPack pack;
+				CreateDataTimer(0.5, SkinsMenuTimer, pack);
+				pack.WriteCell(menu);
+				pack.WriteCell(GetClientUserId(client));
+				pack.WriteCell(GetMenuSelectionPosition());
+				
+				return 0;
+			}
+		}
+		case MenuAction_DisplayItem:
+		{
+			if(IsClientInGame(client))
+			{
+				char info[32];
+				char display[32];
+				int a;
+				menu.GetItem(selection, info, sizeof(info), a, display, sizeof(display));
+				
+				if (StrEqual(info, "-1"))
+				{
+					Format(display, sizeof(display), "%T", "SearchApplyAll", client);
+					return RedrawMenuItem(display);
+				}
+				else if (StrEqual(info, "-2"))
+				{
+					Format(display, sizeof(display), "%T", "SearchApplyCurrent", client);
+					return RedrawMenuItem(display);
+				}
+				else
+				{
+					// translate weapon name
+					int skinId = GetSkinIdFromSkinMenuDisplay(display);
+					Format(display, sizeof(display), "%T", g_WeaponClasses[StringToInt(info)], client);
+					Format(display, sizeof(display), "%s (%d)", display, skinId);
+					return RedrawMenuItem(display);
+				}
+			}
+		}
+		case MenuAction_Cancel:
+		{
+			int menuTime;
+			if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+			{
+				menuPlayerSearchTemp[client].Display(client, menuTime);
+			}
+		}
+	}
+	
+	return;
+}
+
+public Action SkinsMenuTimer(Handle timer, DataPack pack)
+{
+	ResetPack(pack);
+	Menu menu = pack.ReadCell();
+	int clientIndex = GetClientOfUserId(pack.ReadCell());
+	int menuSelectionPosition = pack.ReadCell();
+	
+	if(IsValidClient(clientIndex))
+	{
+		int menuTime;
+		if((menuTime = GetRemainingGracePeriodSeconds(clientIndex)) >= 0)
+		{
+			menu.DisplayAt(clientIndex, menuSelectionPosition, menuTime);
+		}
+	}
+}
+
+public int SearchMenuHandler(Menu menu, MenuAction menuaction, int client, int selection)
+{
+	switch (menuaction)
+	{
+		case MenuAction_Select:
+		{
+			if(IsClientInGame(client))
+			{
+				char subMenuName[32];
+				menu.GetItem(selection, subMenuName, sizeof(subMenuName));
+				
+				Menu subMenu;
+				g_smSkinMenuMap[g_iClientLanguage[client]].GetValue(subMenuName, subMenu);
+				
+				int menuTime;
+				if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
+				{
+					subMenu.Display(client, menuTime);
+				}
+			}
+		}
+	}
+	
+}

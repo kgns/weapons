@@ -40,6 +40,7 @@ int g_iKnifeIndices[] = {
 };
 
 const int MAX_LANG = 40;
+const int MAX_SKIN = 1255;
 
 Database db = null;
 
@@ -73,6 +74,9 @@ bool g_bEnableStatTrak;
 
 ConVar g_Cvar_EnableSeed;
 bool g_bEnableSeed;
+
+ConVar g_Cvar_EnableSearch;
+bool g_bEnableSearch;
 
 ConVar g_Cvar_EnableWeaponOverwrite;
 bool g_bOverwriteEnabled;
@@ -120,10 +124,12 @@ char g_MigrationWeapons[][] = {
 char g_Language[MAX_LANG][32];
 int g_iClientLanguage[MAXPLAYERS+1];
 Menu menuWeapons[MAX_LANG][sizeof(g_WeaponClasses)];
+Menu menuPlayerSearchTemp[MAXPLAYERS+1];
 
 StringMap g_smWeaponIndex;
 StringMap g_smWeaponDefIndex;
 StringMap g_smLanguageIndex;
+StringMap g_smSkinMenuMap[MAX_LANG];
 
 GlobalForward g_hOnKnifeSelect_Pre;
 GlobalForward g_hOnKnifeSelect_Post;

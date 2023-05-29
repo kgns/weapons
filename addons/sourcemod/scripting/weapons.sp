@@ -23,6 +23,7 @@
 #include <weapons>
 #undef REQUIRE_PLUGIN
 #include <updater>
+#include <regex>
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -88,6 +89,7 @@ public void OnPluginStart()
 	g_Cvar_EnableNameTag 			= CreateConVar("sm_weapons_enable_nametag", 		"1", 				"Enable/Disable name tag options");
 	g_Cvar_EnableStatTrak 			= CreateConVar("sm_weapons_enable_stattrak", 		"1", 				"Enable/Disable StatTrak options");
 	g_Cvar_EnableSeed				= CreateConVar("sm_weapons_enable_seed",			"1",				"Enable/Disable Seed options");
+	g_Cvar_EnableSearch             = CreateConVar("sm_weapons_enable_search",          "1",                "Enable/Disable Search Function");
 	g_Cvar_FloatIncrementSize 		= CreateConVar("sm_weapons_float_increment_size", 	"0.05", 			"Increase/Decrease by value for weapon float");
 	g_Cvar_EnableWeaponOverwrite 	= CreateConVar("sm_weapons_enable_overwrite", 		"1", 				"Enable/Disable players overwriting other players' weapons (picked up from the ground) by using !ws command");
 	g_Cvar_GracePeriod 			= CreateConVar("sm_weapons_grace_period", 			"0", 				"Grace period in terms of seconds counted after round start for allowing the use of !ws command. 0 means no restrictions");
@@ -202,6 +204,25 @@ public Action CommandWeaponSkins(int client, int args)
 		int menuTime;
 		if((menuTime = GetRemainingGracePeriodSeconds(client)) >= 0)
 		{
+			if (args > 0) {
+				
+				if (g_bEnableSearch)
+				{
+					char searchSkinName[32];
+					GetCmdArgString(searchSkinName, sizeof(searchSkinName));
+					
+					Menu resultMenu = SearchSkins(client, searchSkinName);
+					menuPlayerSearchTemp[client] = resultMenu;
+					resultMenu.Display(client, menuTime);
+				}
+				else
+				{
+					PrintToChat(client, " %s \x02%T", g_ChatPrefix, "SearchDisabled");
+				}
+				return Plugin_Handled;
+				
+			}
+			
 			CreateMainMenu(client).Display(client, menuTime);
 		}
 		else
@@ -209,6 +230,7 @@ public Action CommandWeaponSkins(int client, int args)
 			PrintToChat(client, " %s \x02%t", g_ChatPrefix, "GracePeriod", g_iGracePeriod);
 		}
 	}
+	
 	return Plugin_Handled;
 }
 

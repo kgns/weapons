@@ -262,3 +262,34 @@ bool IsWarmUpPeriod()
 {
 	return view_as<bool>(GameRules_GetProp("m_bWarmupPeriod"));
 }
+
+int GetSkinIdFromSkinMenuDisplay(char display[32])
+{
+	Regex regex = CompileRegex(".+ \\((.+)\\)");
+	regex.Match(display);
+	
+	char skinIdStr[32];
+	regex.GetSubString(1, skinIdStr, sizeof(skinIdStr));
+	return StringToInt(skinIdStr);
+}
+
+Menu SearchSkins(int client, char skinName[32])
+{
+	StringMapSnapshot snapshot = g_smSkinMenuMap[g_iClientLanguage[client]].Snapshot();
+	menuPlayerSearchTemp[client] = null;
+	Menu result = new Menu(SearchMenuHandler, MENU_ACTIONS_DEFAULT);
+	
+	for (int i = 0; i < snapshot.Length; i++)
+	{
+		char name[32]
+		snapshot.GetKey(i, name, sizeof(name));
+		
+		// if current menu is the menu we searched for
+		if (StrContains(skinName, name, false) > -1 || StrContains(name, skinName, false) > -1)
+		{
+			result.AddItem(name, name);
+		}
+	}
+	
+	return result;
+}
