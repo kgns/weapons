@@ -98,7 +98,7 @@
 	}
 	"RandomKnife"
 	{
-		"en"	"★ Faca Aleatória"
+		"pt"	"★ Faca Aleatória"
 	}
 	"SetSkin"
 	{
